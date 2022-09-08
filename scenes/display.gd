@@ -3,7 +3,7 @@ extends Node2D
 
 var panning := false
 var zoom := 1.0
-var _zoom_rate := 1.05 #1.05 
+var _zoom_rate := 1.10 #1.05 
 
 export(NodePath) onready var viewport = get_node( viewport )
 

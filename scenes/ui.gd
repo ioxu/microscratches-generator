@@ -29,7 +29,8 @@ func _ready() -> void:
 
 	fps_label = self.find_node("fps_label")
 
-func _process(delta: float) -> void:
+
+func _process(_delta: float) -> void:
 	fps_label.text = "%s fps"%Engine.get_frames_per_second()
 
 
@@ -54,12 +55,14 @@ func _on_display_colour_under_mouse_changed(new_colour) -> void:
 
 
 func _on_Control_mouse_entered() -> void:
+	print("_on_Control_mouse_entered")
 	Input.set_mouse_mode( Input.MOUSE_MODE_HIDDEN )
 	cursor.set_visible(true)
 	custom_draw.draw_vector_debug = true
 
 
 func _on_Control_mouse_exited() -> void:
+	print("_on_Control_mouse_exited")
 	Input.set_mouse_mode( Input.MOUSE_MODE_VISIBLE )
 	cursor.set_visible(false)
 	custom_draw.draw_vector_debug = false
