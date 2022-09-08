@@ -6,8 +6,7 @@
 [ext_resource path="res://scenes/ui.gd" type="Script" id=4]
 [ext_resource path="res://scenes/display.gd" type="Script" id=5]
 
-[sub_resource type="ViewportTexture" id=1]
-flags = 5
+[sub_resource type="ViewportTexture" id=8]
 viewport_path = NodePath("scene/ViewportContainer/Viewport")
 
 [sub_resource type="StyleBoxFlat" id=2]
@@ -60,10 +59,11 @@ viewport = NodePath("../scene/ViewportContainer/Viewport")
 
 [node name="display" type="Sprite" parent="display"]
 position = Vector2( 770.13, 455.485 )
-texture = SubResource( 1 )
+texture = SubResource( 8 )
 
 [node name="ui" type="Node" parent="."]
 script = ExtResource( 4 )
+viewport = NodePath("../scene/ViewportContainer/Viewport")
 
 [node name="Control" type="Control" parent="ui"]
 anchor_right = 1.0
@@ -171,12 +171,20 @@ text = "r : reset camera"
 
 [node name="Control" type="Control" parent="ui/Control/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/HBoxContainer"]
 margin_left = 76.0
-margin_right = 973.0
+margin_right = 912.0
 margin_bottom = 15.0
 size_flags_horizontal = 3
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="resolution_label" type="Label" parent="ui/Control/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/HBoxContainer"]
+margin_left = 916.0
+margin_right = 973.0
+margin_bottom = 15.0
+custom_fonts/font = SubResource( 7 )
+custom_colors/font_color = Color( 0.286275, 0.466667, 0.721569, 1 )
+text = "resolution : "
 
 [node name="zoom_label" type="Label" parent="ui/Control/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/HBoxContainer"]
 margin_left = 977.0
@@ -185,4 +193,5 @@ margin_bottom = 15.0
 custom_fonts/font = SubResource( 7 )
 custom_colors/font_color = Color( 0.286275, 0.721569, 0.498039, 1 )
 text = "zoom : "
+[connection signal="size_changed" from="scene/ViewportContainer/Viewport" to="ui" method="_on_Viewport_size_changed"]
 [connection signal="zoom_changed" from="display" to="ui" method="_on_display_zoom_changed"]
