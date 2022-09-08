@@ -1,11 +1,14 @@
 extends Node2D
+# controls the "camera" transform, and display of the RTT
 
 var panning := false
 var zoom := 1.0
-var _zoom_rate := 1.05 
+var _zoom_rate := 1.05 #1.05 
 
-export var zoom_min := 0.02
-export var zoom_max := 1000
+export(NodePath) onready var viewport = get_node( viewport )
+
+export var zoom_min := 0.1
+export var zoom_max := 30.0
 
 var gtime = 0.0
 
@@ -15,12 +18,15 @@ onready var cam_transform := Transform2D()
 # https://docs.godotengine.org/en/stable/tutorials/math/matrices_and_transforms.html
 
 
-var zoom_centre := Vector2()
-var zoom_centre_c0 := Vector2()
+signal zoom_changed(new_zoom)
 
 
 func _ready() -> void:
 	cam_transform.origin = $display.transform.origin
+	yield(get_tree().create_timer(.05), "timeout")
+	emit_signal("zoom_changed", self.zoom)
+
+	print("[display] viewport dimensions %s"%viewport.get_size())
 
 
 func _input(event):
@@ -42,34 +48,32 @@ func _input(event):
 
 	if event is InputEventMouseMotion:
 		if panning:
-			#$TextureRect.set_position( $TextureRect.get_position() + event.relative )
 			cam_transform.origin += event.relative
 			#print("panning %s"%event.relative)
 
 
 func zoom_at_point(zoom_change, point):
-	var c0 = cam_transform.origin #global_position # camera position
-	var v0 = get_viewport().size # vieport size
-	print("viewport size %s"%v0)
-	var c1 # next camera position
-	var z0 = self.zoom # current zoom value
-	var z1 = z0 * zoom_change # next zoom value
 
-	#c1 = c0 + (-0.5*v0 + point)*(z0 - z1)
-	c1 = c0 + (-0.5*v0 + point) * (z0 - z1)
-	
-	self.zoom = clamp(z1, zoom_min, zoom_max)
-	cam_transform.origin = c1
-	cam_transform.x.x = self.zoom
-	cam_transform.y.y = self.zoom
-	
-	zoom_centre = c1
-	zoom_centre_c0 = c0
+	var zz = zoom_change #2 - zoom_change
+	self.zoom = self.zoom * zz
+	if self.zoom < zoom_min or self.zoom > zoom_max:
+		zz = 1.0
+
+
+	var offset_t = Transform2D().translated( -point)
+	var scaled_t = Transform2D().scaled( Vector2.ONE * zz ) #Vector2(zz, zz) )
+	var reoffset_t = Transform2D().translated( point)
+
+	cam_transform = reoffset_t * scaled_t * offset_t * cam_transform
+
+	emit_signal("zoom_changed", self.zoom)
+
+	self.zoom = clamp(self.zoom, zoom_min, zoom_max)
 
 
 func _draw() -> void:
-	draw_circle(zoom_centre, 20, Color(1.0,0.0,0.0,0.25))
-	draw_circle(zoom_centre_c0, 10, Color(0.0,1.0,0.0,0.25))
+	var vp_size = viewport.get_size()
+	draw_arc( cam_transform.xform( Vector2(vp_size.x/2, vp_size.y/2) ) , 15, 0, 2*PI, 32, Color.white, 3)
 
 
 # warning-ignore:unused_argument
@@ -77,8 +81,9 @@ func _process(delta: float) -> void:
 	$display.transform = cam_transform
 	update()
 
+
 func reset_camera() -> void:
 	cam_transform.x = Vector2.RIGHT
-	cam_transform.y = Vector2.UP
-	cam_transform.origin = Vector2.ZERO
+	cam_transform.y = Vector2.DOWN
+	cam_transform.origin = get_viewport().size * 0.5
 	self.zoom = 1.0
