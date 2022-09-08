@@ -73,7 +73,15 @@ func zoom_at_point(zoom_change, point):
 
 func _draw() -> void:
 	var vp_size = viewport.get_size()
-	draw_arc( cam_transform.xform( Vector2(vp_size.x/2, vp_size.y/2) ) , 15, 0, 2*PI, 32, Color.white, 3)
+	var cc = Color(0.984314, 0.223529, 0.901961, 0.607843)
+	var br = cam_transform.xform(Vector2(vp_size.x/2, -vp_size.y/2))
+	var tr = cam_transform.xform(Vector2(vp_size.x/2, vp_size.y/2))
+	var tl = cam_transform.xform(Vector2(-vp_size.x/2, vp_size.y/2))
+	var bl = cam_transform.xform(Vector2(-vp_size.x/2, -vp_size.y/2))
+	draw_line( tr, br, cc, 3)
+	draw_line( tl, tr, cc, 3)
+	draw_line( tl, bl, cc, 3)
+	draw_line( bl, br, cc, 3)
 
 
 # warning-ignore:unused_argument
