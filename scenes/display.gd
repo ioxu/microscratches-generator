@@ -29,9 +29,11 @@ signal colour_under_mouse_changed( new_colour )
 
 func _ready() -> void:
 	cam_transform.origin = $display.transform.origin
-	yield(get_tree().create_timer(.05), "timeout")
+	
+	# delay and init
+	yield(get_tree().create_timer(.1), "timeout")
 	emit_signal("zoom_changed", self.zoom)
-
+	update_image()
 	print("[display] viewport dimensions %s"%viewport.get_size())
 
 
@@ -41,7 +43,7 @@ func _input(event):
 	
 	if event is InputEventMouseMotion:
 		self.coord_in_viewport = window_to_viewport(event.position)
-		update_image()
+		#update_image()
 		var _vs = viewport.get_size()
 		if self.coord_in_viewport.x < _vs.x and self.coord_in_viewport.x > 0 and\
 			self.coord_in_viewport.y < _vs.y and self.coord_in_viewport.y > 0:
@@ -71,7 +73,6 @@ func _input(event):
 
 
 func zoom_at_point(zoom_change, point):
-
 	var zz = zoom_change #2 - zoom_change
 	self.zoom = self.zoom * zz
 	if self.zoom < zoom_min or self.zoom > zoom_max:
@@ -123,5 +124,6 @@ func window_to_viewport( coords : Vector2 ) -> Vector2:
 	return Vector2( clamp(new_coords.x, 0, _vs.x), clamp(new_coords.y, 0, _vs.y) )
 
 
-func update_image() -> void:
+func update_image() -> void: # TODO: need to find a good pattern inwhich to call this update, like a viewport.dirty thing
+	print("copy viewport to image data")
 	viewport_image = $display.texture.get_data()
