@@ -5,6 +5,12 @@ onready var file_menu_button : MenuButton
 var picked_window_position
 var menu_id := -1
 
+var BORDERLESS_FULLSCREEN = false
+var minimum_size : Vector2 = Vector2(1024,600)
+var window_position := Vector2.ZERO
+var fullscreen : = false
+signal fullscreen(value)
+
 func _ready() -> void:
 	var _vi = Engine.get_version_info()
 	assert(_vi.major == 3 and _vi.minor == 2, "This project must only be developed in engine versions 3.2.3 and earlier")
@@ -64,6 +70,9 @@ func _input(event):
 				print("left mouse up")
 				picked_window_position = null
 
+	if event.is_action_pressed("ui_fullscreen"):
+		go_fullscreen()
+		get_tree().set_input_as_handled()
 
 func on_id_pressed( id, _ignored ) -> void:
 	
@@ -104,3 +113,25 @@ func on_id_pressed( id, _ignored ) -> void:
 func quit()->void:
 	print(".. quitting")
 	get_tree().quit()
+
+
+func go_fullscreen():
+	if not BORDERLESS_FULLSCREEN:
+		OS.window_fullscreen = !OS.window_fullscreen
+		fullscreen = !fullscreen
+		if not OS.window_fullscreen:
+			OS.set_window_size(minimum_size)
+			OS.set_borderless_window(false)
+		else:
+			OS.set_window_position(window_position)
+	else:
+		fullscreen = !fullscreen
+		if fullscreen:
+			OS.set_window_size(OS.get_screen_size())
+			OS.set_borderless_window(true)
+			OS.set_window_position(Vector2(0.0, 0.0))
+		else:
+			OS.set_borderless_window(false)
+			OS.set_window_size(minimum_size)
+			OS.set_window_position(window_position)
+	emit_signal("fullscreen", fullscreen)

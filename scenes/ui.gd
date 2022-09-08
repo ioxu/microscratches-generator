@@ -12,7 +12,7 @@ var pixel_green_label : Label
 var pixel_blue_label : Label
 var pixel_alpha_label : Label
 var swatch_rect : ColorRect
-
+var fps_label : Label
 
 func _ready() -> void:
 	zoom_label = self.find_node("zoom_label")
@@ -26,6 +26,12 @@ func _ready() -> void:
 	pixel_alpha_label = self.find_node("pixelvalues_alpha_label")
 
 	swatch_rect = self.find_node("swatch_rect")
+
+	fps_label = self.find_node("fps_label")
+
+func _process(delta: float) -> void:
+	fps_label.text = "%s fps"%Engine.get_frames_per_second()
+
 
 func _on_display_zoom_changed(new_zoom) -> void:
 	zoom_label.text = "zoom : %0.2f"%new_zoom

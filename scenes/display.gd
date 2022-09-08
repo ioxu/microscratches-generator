@@ -14,6 +14,8 @@ export var zoom_max := 30.0
 
 var gtime = 0.0
 
+var image_dirty := true
+
 onready var cam_transform := Transform2D()
 # https://godotengine.org/qa/25983/camera2d-zoom-position-towards-the-mouse
 # https://docs.godotengine.org/en/stable/classes/class_transform2d.html#class-transform2d-method-scaled
@@ -31,11 +33,12 @@ func _ready() -> void:
 	cam_transform.origin = $display.transform.origin
 	
 	# delay and init
-	yield(get_tree().create_timer(.1), "timeout")
+	yield(get_tree().create_timer(0.1), "timeout")
 	emit_signal("zoom_changed", self.zoom)
-	update_image()
 	print("[display] viewport dimensions %s"%viewport.get_size())
-
+	
+	yield(get_tree().create_timer(0.5), "timeout")
+	update_image(true)
 
 func _input(event):
 	if event.is_action("ui_reset_camera") and event.is_pressed() and not event.is_echo():
@@ -43,7 +46,7 @@ func _input(event):
 	
 	if event is InputEventMouseMotion:
 		self.coord_in_viewport = window_to_viewport(event.position)
-		#update_image()
+		update_image()
 		var _vs = viewport.get_size()
 		if self.coord_in_viewport.x < _vs.x and self.coord_in_viewport.x > 0 and\
 			self.coord_in_viewport.y < _vs.y and self.coord_in_viewport.y > 0:
@@ -124,6 +127,8 @@ func window_to_viewport( coords : Vector2 ) -> Vector2:
 	return Vector2( clamp(new_coords.x, 0, _vs.x), clamp(new_coords.y, 0, _vs.y) )
 
 
-func update_image() -> void: # TODO: need to find a good pattern inwhich to call this update, like a viewport.dirty thing
-	print("copy viewport to image data")
-	viewport_image = $display.texture.get_data()
+func update_image(force:=false) -> void: # TODO: need to find a good pattern inwhich to call this update, like a viewport.dirty thing
+	if image_dirty or force==true:
+		print("copy viewport to image data")
+		viewport_image = $display.texture.get_data()
+		image_dirty = false

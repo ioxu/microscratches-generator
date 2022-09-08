@@ -135,13 +135,21 @@ text = "file"
 
 [node name="Control" type="Control" parent="ui/Control/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer"]
 margin_left = 20.0
-margin_right = 955.0
+margin_right = 934.0
 margin_bottom = 17.0
 mouse_filter = 2
 size_flags_horizontal = 3
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="fps_label" type="Label" parent="ui/Control/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer"]
+margin_left = 938.0
+margin_right = 955.0
+margin_bottom = 17.0
+custom_fonts/font = SubResource( 5 )
+custom_colors/font_color = Color( 0.717647, 0.717647, 0.717647, 0.458824 )
+text = "fps"
 
 [node name="title_label" type="Label" parent="ui/Control/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer"]
 margin_left = 959.0
