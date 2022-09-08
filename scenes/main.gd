@@ -44,10 +44,15 @@ func _ready() -> void:
 	# warning-ignore:return_value_discarded
 	p.connect("id_pressed", self, "on_id_pressed", [menu_id])
 
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+
 
 func _input(event):
 	if event.is_action("ui_cancel") and event.is_pressed() and not event.is_echo():
 		self.quit()
+
+	if event is InputEventMouseMotion:
+		$cursor.set_position( event.position )
 
 	if event is InputEventMouseButton:
 		if event.button_index == BUTTON_LEFT:

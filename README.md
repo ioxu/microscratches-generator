@@ -5,9 +5,10 @@ Generates texture maps for controlling anisotropic rotation on 3d shading models
 
 Written specifically for Godot Engine version 3.2.3.
 
-#### references
+#### references:
 
 https://github.com/cuckon/scratched
 
+#### credits:
 
-
+Some icons by [Kenny Vleugels](https://www.kenney.nl/)

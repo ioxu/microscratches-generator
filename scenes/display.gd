@@ -7,6 +7,8 @@ var _zoom_rate := 1.05 #1.05
 
 export(NodePath) onready var viewport = get_node( viewport )
 
+var viewport_image : Image
+
 export var zoom_min := 0.1
 export var zoom_max := 30.0
 
@@ -17,8 +19,12 @@ onready var cam_transform := Transform2D()
 # https://docs.godotengine.org/en/stable/classes/class_transform2d.html#class-transform2d-method-scaled
 # https://docs.godotengine.org/en/stable/tutorials/math/matrices_and_transforms.html
 
+var coord_in_viewport : Vector2
+var colour_under_cursor : Color
 
 signal zoom_changed(new_zoom)
+signal mouse_coords_in_viewport_changed(new_coords)
+signal colour_under_mouse_changed( new_colour )
 
 
 func _ready() -> void:
@@ -33,6 +39,18 @@ func _input(event):
 	if event.is_action("ui_reset_camera") and event.is_pressed() and not event.is_echo():
 		reset_camera()
 	
+	if event is InputEventMouseMotion:
+		self.coord_in_viewport = window_to_viewport(event.position)
+		update_image()
+		var _vs = viewport.get_size()
+		if self.coord_in_viewport.x < _vs.x and self.coord_in_viewport.x > 0 and\
+			self.coord_in_viewport.y < _vs.y and self.coord_in_viewport.y > 0:
+			self.viewport_image.lock()
+			self.colour_under_cursor = viewport_image.get_pixelv( self.coord_in_viewport )
+			self.viewport_image.unlock()
+		emit_signal( "mouse_coords_in_viewport_changed" , self.coord_in_viewport )
+		emit_signal( "colour_under_mouse_changed", self.colour_under_cursor )
+
 	if event is InputEventMouseButton:
 		if event.button_index == BUTTON_MIDDLE:
 			if event.pressed:
@@ -95,3 +113,15 @@ func reset_camera() -> void:
 	cam_transform.y = Vector2.DOWN
 	cam_transform.origin = get_viewport().size * 0.5
 	self.zoom = 1.0
+
+
+func window_to_viewport( coords : Vector2 ) -> Vector2:
+	var _ai = cam_transform.affine_inverse()
+	var _vs = viewport.get_size()
+	var new_coords = (_vs / 2.0) + _ai * coords#event.position
+	new_coords = new_coords.floor()
+	return Vector2( clamp(new_coords.x, 0, _vs.x), clamp(new_coords.y, 0, _vs.y) )
+
+
+func update_image() -> void:
+	viewport_image = $display.texture.get_data()

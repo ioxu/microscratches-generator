@@ -1,12 +1,15 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://scenes/main.gd" type="Script" id=1]
 [ext_resource path="res://fonts/RobotoCondensed-Light.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://scenes/render_scene.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/ui.gd" type="Script" id=4]
 [ext_resource path="res://scenes/display.gd" type="Script" id=5]
+[ext_resource path="res://textures/stripe_tile_a_inv.png" type="Texture" id=6]
+[ext_resource path="res://textures/crosshair010.png" type="Texture" id=7]
+[ext_resource path="res://scenes/custom_draw.gd" type="Script" id=8]
 
-[sub_resource type="ViewportTexture" id=8]
+[sub_resource type="ViewportTexture" id=1]
 viewport_path = NodePath("scene/ViewportContainer/Viewport")
 
 [sub_resource type="StyleBoxFlat" id=2]
@@ -29,6 +32,11 @@ bg_color = Color( 0.137255, 0.137255, 0.137255, 0.862745 )
 [sub_resource type="DynamicFont" id=7]
 size = 12
 font_data = ExtResource( 2 )
+
+[sub_resource type="StyleBoxTexture" id=8]
+texture = ExtResource( 6 )
+region_rect = Rect2( 0, 0, 17, 15 )
+axis_stretch_horizontal = 1
 
 [node name="main" type="Node2D"]
 script = ExtResource( 1 )
@@ -58,12 +66,14 @@ script = ExtResource( 5 )
 viewport = NodePath("../scene/ViewportContainer/Viewport")
 
 [node name="display" type="Sprite" parent="display"]
-position = Vector2( 770.13, 455.485 )
-texture = SubResource( 8 )
+position = Vector2( 770.484, 455.013 )
+texture = SubResource( 1 )
 
 [node name="ui" type="Node" parent="."]
 script = ExtResource( 4 )
 viewport = NodePath("../scene/ViewportContainer/Viewport")
+cursor = NodePath("../cursor")
+custom_draw = NodePath("../custom_draw")
 
 [node name="Control" type="Control" parent="ui"]
 anchor_right = 1.0
@@ -99,6 +109,7 @@ custom_styles/panel = SubResource( 2 )
 [node name="MarginContainer" type="MarginContainer" parent="ui/Control/MarginContainer/VBoxContainer/PanelContainer"]
 margin_right = 1018.0
 margin_bottom = 23.0
+mouse_filter = 2
 custom_constants/margin_right = 3
 custom_constants/margin_top = 3
 custom_constants/margin_left = 3
@@ -109,6 +120,7 @@ margin_left = 3.0
 margin_top = 3.0
 margin_right = 1015.0
 margin_bottom = 20.0
+mouse_filter = 2
 
 [node name="file_menu_button" type="MenuButton" parent="ui/Control/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer"]
 margin_right = 16.0
@@ -125,6 +137,7 @@ text = "file"
 margin_left = 20.0
 margin_right = 955.0
 margin_bottom = 17.0
+mouse_filter = 2
 size_flags_horizontal = 3
 __meta__ = {
 "_edit_use_anchors_": false
@@ -171,9 +184,76 @@ text = "r : reset camera"
 
 [node name="Control" type="Control" parent="ui/Control/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/HBoxContainer"]
 margin_left = 76.0
-margin_right = 912.0
+margin_right = 812.0
 margin_bottom = 15.0
 size_flags_horizontal = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="coords_label" type="Label" parent="ui/Control/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/HBoxContainer"]
+margin_left = 816.0
+margin_right = 839.0
+margin_bottom = 15.0
+custom_fonts/font = SubResource( 7 )
+custom_colors/font_color = Color( 0.721569, 0.490196, 0.286275, 1 )
+text = "x : y :"
+
+[node name="pixelvalues_red_label" type="Label" parent="ui/Control/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/HBoxContainer"]
+margin_left = 843.0
+margin_right = 847.0
+margin_bottom = 15.0
+custom_fonts/font = SubResource( 7 )
+custom_colors/font_color = Color( 0.945098, 0.14902, 0.129412, 1 )
+text = "r"
+
+[node name="pixelvalues_green_label" type="Label" parent="ui/Control/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/HBoxContainer"]
+margin_left = 851.0
+margin_right = 858.0
+margin_bottom = 15.0
+custom_fonts/font = SubResource( 7 )
+custom_colors/font_color = Color( 0.231373, 0.945098, 0.129412, 1 )
+text = "g"
+
+[node name="pixelvalues_blue_label" type="Label" parent="ui/Control/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/HBoxContainer"]
+margin_left = 862.0
+margin_right = 869.0
+margin_bottom = 15.0
+custom_fonts/font = SubResource( 7 )
+custom_colors/font_color = Color( 0.129412, 0.447059, 0.945098, 1 )
+text = "b"
+
+[node name="pixelvalues_alpha_label" type="Label" parent="ui/Control/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/HBoxContainer"]
+margin_left = 873.0
+margin_right = 878.0
+margin_bottom = 15.0
+custom_fonts/font = SubResource( 7 )
+custom_colors/font_color = Color( 0.494118, 0.513726, 0.545098, 1 )
+text = "a"
+
+[node name="Control2" type="Control" parent="ui/Control/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/HBoxContainer"]
+margin_left = 882.0
+margin_right = 912.0
+margin_bottom = 15.0
+rect_min_size = Vector2( 30, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="swatch_rect_bg" type="PanelContainer" parent="ui/Control/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/HBoxContainer/Control2"]
+modulate = Color( 0.2, 0.2, 0.2, 1 )
+margin_right = 30.0
+margin_bottom = 15.0
+rect_min_size = Vector2( 30, 15 )
+custom_styles/panel = SubResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="swatch_rect" type="ColorRect" parent="ui/Control/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/HBoxContainer/Control2"]
+margin_right = 30.0
+margin_bottom = 15.0
+rect_min_size = Vector2( 30, 0 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -193,5 +273,20 @@ margin_bottom = 15.0
 custom_fonts/font = SubResource( 7 )
 custom_colors/font_color = Color( 0.286275, 0.721569, 0.498039, 1 )
 text = "zoom : "
+
+[node name="custom_draw" type="Node2D" parent="."]
+script = ExtResource( 8 )
+vector_debug_length = 60.0
+
+[node name="cursor" type="Sprite" parent="."]
+modulate = Color( 0.121569, 0.666667, 0.929412, 1 )
+position = Vector2( 163.879, -106.634 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 7 )
 [connection signal="size_changed" from="scene/ViewportContainer/Viewport" to="ui" method="_on_Viewport_size_changed"]
+[connection signal="colour_under_mouse_changed" from="display" to="custom_draw" method="_on_display_colour_under_mouse_changed"]
+[connection signal="colour_under_mouse_changed" from="display" to="ui" method="_on_display_colour_under_mouse_changed"]
+[connection signal="mouse_coords_in_viewport_changed" from="display" to="ui" method="_on_display_mouse_coords_in_viewport_changed"]
 [connection signal="zoom_changed" from="display" to="ui" method="_on_display_zoom_changed"]
+[connection signal="mouse_entered" from="ui/Control/MarginContainer/VBoxContainer/Control" to="ui" method="_on_Control_mouse_entered"]
+[connection signal="mouse_exited" from="ui/Control/MarginContainer/VBoxContainer/Control" to="ui" method="_on_Control_mouse_exited"]
