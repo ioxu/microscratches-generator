@@ -1,0 +1,35 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://textures/grid.exr" type="Texture" id=1]
+
+[sub_resource type="Curve" id=1]
+_data = [ Vector2( 0.00566572, 0.137931 ), 0.0, 0.0, 0, 0, Vector2( 0.526912, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.103448 ), 0.0, 0.0, 0, 0 ]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Sprite" type="Sprite" parent="."]
+modulate = Color( 1, 1, 1, 0.113725 )
+position = Vector2( 512, 510.218 )
+texture = ExtResource( 1 )
+
+[node name="Sprite2" type="Sprite" parent="."]
+modulate = Color( 1, 1, 1, 0.278431 )
+position = Vector2( 512, 510.218 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 1 )
+
+[node name="Sprite3" type="Sprite" parent="."]
+modulate = Color( 1, 1, 1, 0.380392 )
+position = Vector2( 203.749, 383.711 )
+rotation = 0.933751
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 1 )
+
+[node name="Line2D" type="Line2D" parent="."]
+points = PoolVector2Array( 148.659, 97.8493, 202.053, 334.116, 124.632, 626.446, 252.776, 787.961, 395.604, 813.323, 539.767, 559.704, 643.885, 193.958, 817.414, 109.863, 949.563, 209.976, 988.273, 462.261, 868.138, 707.871, 690.604, 937.464, 601.17, 920.111 )
+width = 30.0
+width_curve = SubResource( 1 )
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+round_precision = 16
