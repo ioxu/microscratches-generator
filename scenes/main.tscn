@@ -27,14 +27,14 @@ font_data = ExtResource( 2 )
 size = 14
 font_data = ExtResource( 2 )
 
-[sub_resource type="StyleBoxFlat" id=7]
+[sub_resource type="StyleBoxFlat" id=6]
 bg_color = Color( 0.137255, 0.137255, 0.137255, 0.862745 )
 
-[sub_resource type="DynamicFont" id=8]
+[sub_resource type="DynamicFont" id=7]
 size = 12
 font_data = ExtResource( 2 )
 
-[sub_resource type="StyleBoxTexture" id=9]
+[sub_resource type="StyleBoxTexture" id=8]
 texture = ExtResource( 6 )
 region_rect = Rect2( 0, 0, 17, 15 )
 axis_stretch_horizontal = 1
@@ -173,7 +173,7 @@ margin_top = 573.0
 margin_right = 1018.0
 margin_bottom = 594.0
 mouse_filter = 1
-custom_styles/panel = SubResource( 7 )
+custom_styles/panel = SubResource( 6 )
 
 [node name="MarginContainer" type="MarginContainer" parent="ui/Control/MarginContainer/VBoxContainer/PanelContainer2"]
 margin_right = 1018.0
@@ -192,8 +192,8 @@ margin_bottom = 18.0
 [node name="status_bar_label" type="Label" parent="ui/Control/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/HBoxContainer"]
 margin_right = 72.0
 margin_bottom = 15.0
-custom_fonts/font = SubResource( 8 )
-text = "r : reset camera"
+custom_fonts/font = SubResource( 7 )
+text = "r : reset camera    Alt-Enter : toggle fullscreen"
 
 [node name="Control" type="Control" parent="ui/Control/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/HBoxContainer"]
 margin_left = 76.0
@@ -208,7 +208,7 @@ __meta__ = {
 margin_left = 816.0
 margin_right = 839.0
 margin_bottom = 15.0
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = SubResource( 7 )
 custom_colors/font_color = Color( 0.721569, 0.490196, 0.286275, 1 )
 text = "x : y :"
 
@@ -216,7 +216,7 @@ text = "x : y :"
 margin_left = 843.0
 margin_right = 847.0
 margin_bottom = 15.0
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = SubResource( 7 )
 custom_colors/font_color = Color( 0.945098, 0.14902, 0.129412, 1 )
 text = "r"
 
@@ -224,7 +224,7 @@ text = "r"
 margin_left = 851.0
 margin_right = 858.0
 margin_bottom = 15.0
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = SubResource( 7 )
 custom_colors/font_color = Color( 0.231373, 0.945098, 0.129412, 1 )
 text = "g"
 
@@ -232,7 +232,7 @@ text = "g"
 margin_left = 862.0
 margin_right = 869.0
 margin_bottom = 15.0
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = SubResource( 7 )
 custom_colors/font_color = Color( 0.129412, 0.447059, 0.945098, 1 )
 text = "b"
 
@@ -240,7 +240,7 @@ text = "b"
 margin_left = 873.0
 margin_right = 878.0
 margin_bottom = 15.0
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = SubResource( 7 )
 custom_colors/font_color = Color( 0.494118, 0.513726, 0.545098, 1 )
 text = "a"
 
@@ -258,7 +258,7 @@ modulate = Color( 0.2, 0.2, 0.2, 1 )
 margin_right = 30.0
 margin_bottom = 15.0
 rect_min_size = Vector2( 30, 15 )
-custom_styles/panel = SubResource( 9 )
+custom_styles/panel = SubResource( 8 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -275,7 +275,7 @@ __meta__ = {
 margin_left = 916.0
 margin_right = 973.0
 margin_bottom = 15.0
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = SubResource( 7 )
 custom_colors/font_color = Color( 0.286275, 0.466667, 0.721569, 1 )
 text = "resolution : "
 
@@ -283,7 +283,7 @@ text = "resolution : "
 margin_left = 977.0
 margin_right = 1012.0
 margin_bottom = 15.0
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = SubResource( 7 )
 custom_colors/font_color = Color( 0.286275, 0.721569, 0.498039, 1 )
 text = "zoom : "
 
@@ -333,8 +333,8 @@ position = Vector2( 163.879, -106.634 )
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 7 )
 [connection signal="size_changed" from="scene/ViewportContainer/Viewport" to="ui" method="_on_Viewport_size_changed"]
-[connection signal="colour_under_mouse_changed" from="display" to="ui" method="_on_display_colour_under_mouse_changed"]
 [connection signal="colour_under_mouse_changed" from="display" to="custom_draw" method="_on_display_colour_under_mouse_changed"]
+[connection signal="colour_under_mouse_changed" from="display" to="ui" method="_on_display_colour_under_mouse_changed"]
 [connection signal="mouse_coords_in_viewport_changed" from="display" to="ui" method="_on_display_mouse_coords_in_viewport_changed"]
 [connection signal="zoom_changed" from="display" to="ui" method="_on_display_zoom_changed"]
 [connection signal="mouse_entered" from="ui/Control/MarginContainer/VBoxContainer/Control" to="ui" method="_on_Control_mouse_entered"]
