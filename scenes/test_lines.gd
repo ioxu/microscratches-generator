@@ -23,8 +23,13 @@ func _ready() -> void:
 		la.append(endp)
 
 		var lc = []
-		lc.append(Color(randf(), randf(), randf()))
-		lc.append(Color(randf(), randf(), randf()))
+#		lc.append(Color(randf(), randf(), randf()))
+#		lc.append(Color(randf(), randf(), randf()))
+
+		var cc = (startp - endp).normalized()
+		cc = vec2_to_encoded_colour(cc)
+		lc.append(cc)
+		lc.append(cc)
 
 		lines.append(PoolVector2Array( la ))
 		lines_colours.append( PoolColorArray( lc ) )
@@ -32,6 +37,11 @@ func _ready() -> void:
 
 func _rdomain() -> int:
 	return randi()%mdim - (mdim*0.3333)
+
+
+func vec2_to_encoded_colour( vec : Vector2 ) -> Color:
+	var ev = ( vec + Vector2(1.0, 1.0) ) / Vector2(2.0, 2.0)
+	return Color(ev.x, ev.y, 0.0, 1.0)
 
 
 #func _process(delta: float) -> void:

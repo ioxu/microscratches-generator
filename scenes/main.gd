@@ -51,9 +51,8 @@ func _ready() -> void:
 	p.connect("id_pressed", self, "on_id_pressed", [menu_id])
 
 	#Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
-
-
 	#$scene/ViewportContainer/Viewport.render_target_update_mode = Viewport.UPDATE_ONCE
+
 
 func _input(event):
 	if event.is_action("ui_cancel") and event.is_pressed() and not event.is_echo():
