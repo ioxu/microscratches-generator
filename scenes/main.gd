@@ -11,6 +11,7 @@ var window_position := Vector2.ZERO
 var fullscreen : = false
 signal fullscreen(value)
 
+
 func _ready() -> void:
 	var _vi = Engine.get_version_info()
 	assert(_vi.major == 3 and _vi.minor == 2, "This project must only be developed in engine versions 3.2.3 and earlier")

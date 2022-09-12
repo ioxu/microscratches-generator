@@ -29,6 +29,12 @@ signal mouse_coords_in_viewport_changed(new_coords)
 signal colour_under_mouse_changed( new_colour )
 
 
+# display_mode 
+# 0 = rgb
+# 1 = alpha
+var display_mode := 0
+
+
 func _ready() -> void:
 	cam_transform.origin = $display.transform.origin
 	
@@ -43,7 +49,16 @@ func _ready() -> void:
 func _input(event):
 	if event.is_action("ui_reset_camera") and event.is_pressed() and not event.is_echo():
 		reset_camera()
-	
+
+	if event.is_action("ui_alpha_toggle") and event.is_pressed() and not event.is_echo():
+		print("alpha display toggle")
+		if display_mode == 0:
+			display_mode = 1
+			$display.get_material().set_shader_param("display_mode", display_mode)
+		elif display_mode == 1:
+			display_mode = 0
+			$display.get_material().set_shader_param("display_mode", display_mode)
+
 	if event is InputEventMouseMotion:
 		self.coord_in_viewport = window_to_viewport(event.position)
 		update_image()
