@@ -53,6 +53,8 @@ func _ready() -> void:
 	#Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 
 
+	#$scene/ViewportContainer/Viewport.render_target_update_mode = Viewport.UPDATE_ONCE
+
 func _input(event):
 	if event.is_action("ui_cancel") and event.is_pressed() and not event.is_echo():
 		self.quit()
@@ -73,6 +75,7 @@ func _input(event):
 	if event.is_action_pressed("ui_fullscreen"):
 		go_fullscreen()
 		get_tree().set_input_as_handled()
+
 
 func on_id_pressed( id, _ignored ) -> void:
 	
