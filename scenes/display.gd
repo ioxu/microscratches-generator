@@ -55,7 +55,6 @@ func _input(event):
 
 	# colour channel display #--------------------------------------------------
 	if event.is_action("ui_alpha_channel_toggle") and event.is_pressed() and not event.is_echo():
-		print("alpha channel display toggle")
 		if display_mode !=1 :
 			display_mode = 1
 			$display.get_material().set_shader_param("display_mode", display_mode)
@@ -65,7 +64,6 @@ func _input(event):
 		emit_signal("colour_channel_display_mode_changed", display_mode)
 	
 	if event.is_action("ui_red_channel_toggle") and event.is_pressed() and not event.is_echo():
-		print("red channel display toggle")
 		if display_mode !=2 :
 			display_mode = 2
 			$display.get_material().set_shader_param("display_mode", display_mode)
@@ -75,7 +73,6 @@ func _input(event):
 		emit_signal("colour_channel_display_mode_changed", display_mode)
 
 	if event.is_action("ui_green_channel_toggle") and event.is_pressed() and not event.is_echo():
-		print("green channel display toggle")
 		if display_mode !=3 :
 			display_mode = 3
 			$display.get_material().set_shader_param("display_mode", display_mode)
@@ -85,11 +82,16 @@ func _input(event):
 		emit_signal("colour_channel_display_mode_changed", display_mode)
 
 	if event.is_action("ui_blue_channel_toggle") and event.is_pressed() and not event.is_echo():
-		print("green channel display toggle")
 		if display_mode !=4 :
 			display_mode = 4
 			$display.get_material().set_shader_param("display_mode", display_mode)
 		elif display_mode == 4:
+			display_mode = 0
+			$display.get_material().set_shader_param("display_mode", display_mode)
+		emit_signal("colour_channel_display_mode_changed", display_mode)
+	
+	if event.is_action("ui_rgb_channel_toggle") and event.is_pressed() and not event.is_echo():
+		if display_mode !=0 :
 			display_mode = 0
 			$display.get_material().set_shader_param("display_mode", display_mode)
 		emit_signal("colour_channel_display_mode_changed", display_mode)
@@ -168,6 +170,7 @@ func reset_camera() -> void:
 	cam_transform.y = Vector2.DOWN
 	cam_transform.origin = get_viewport().size * 0.5
 	self.zoom = 1.0
+	emit_signal("zoom_changed", self.zoom)
 
 
 func window_to_viewport( coords : Vector2 ) -> Vector2:

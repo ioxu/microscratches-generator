@@ -19,7 +19,7 @@ shader_param/display_mode = 0
 viewport_path = NodePath("scene/Viewport")
 
 [sub_resource type="StyleBoxFlat" id=3]
-bg_color = Color( 0.329412, 0.329412, 0.329412, 0.862745 )
+bg_color = Color( 0.164706, 0.164706, 0.164706, 0.862745 )
 
 [sub_resource type="StyleBoxFlat" id=4]
 bg_color = Color( 0.105882, 0.105882, 0.105882, 0.67451 )

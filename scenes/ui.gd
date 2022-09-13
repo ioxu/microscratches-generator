@@ -78,5 +78,4 @@ func _on_Control_mouse_exited() -> void:
 
 
 func _on_display_colour_channel_display_mode_changed(new_mode) -> void:
-	print("_on_display_colour_channel_display_mode_changed %s"%new_mode)
 	colour_channel_displayed_label.text = COLOUR_CHANNEL_DISPLAY_MODES_NAMES[new_mode]
