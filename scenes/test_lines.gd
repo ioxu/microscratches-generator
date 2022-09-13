@@ -51,7 +51,7 @@ func vec2_to_encoded_colour( vec : Vector2 ) -> Color:
 func _draw() -> void:
 	#print(self.get_path(), "_draw()")
 	if DRAW_ONCE and not DRAWN:
-		print("drawing once DRAW_ONCE %s DRAWN %s"%[DRAW_ONCE, DRAWN])
+#		print("[test_lines] drawing once DRAW_ONCE %s DRAWN %s"%[DRAW_ONCE, DRAWN])
 		for i in lines.size():
 			draw_polyline_colors( lines[i], lines_colours[i], 0.5, false)
 		DRAWN = true

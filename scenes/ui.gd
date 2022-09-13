@@ -13,13 +13,19 @@ var pixel_blue_label : Label
 var pixel_alpha_label : Label
 var swatch_rect : ColorRect
 var fps_label : Label
+var colour_channel_displayed_label : Label
+
+const COLOUR_CHANNEL_DISPLAY_MODES_NAMES = ["RGB", "ALPHA", "RED", "GREEN", "BLUE"]
+
 
 func _ready() -> void:
+	print("[ui] find labels")
 	zoom_label = self.find_node("zoom_label")
 	resolution_label = self.find_node("resolution_label")
 	resolution_label.text = "resolution : %s"%viewport.get_size()
 	coords_label = self.find_node("coords_label")
 
+	colour_channel_displayed_label = self.find_node("colour_channel_displayed_label")
 	pixel_red_label = self.find_node("pixelvalues_red_label")
 	pixel_green_label = self.find_node("pixelvalues_green_label")
 	pixel_blue_label = self.find_node("pixelvalues_blue_label")
@@ -28,6 +34,9 @@ func _ready() -> void:
 	swatch_rect = self.find_node("swatch_rect")
 
 	fps_label = self.find_node("fps_label")
+
+	print(COLOUR_CHANNEL_DISPLAY_MODES_NAMES)
+	print(COLOUR_CHANNEL_DISPLAY_MODES_NAMES[1])
 
 
 func _process(_delta: float) -> void:
@@ -66,3 +75,8 @@ func _on_Control_mouse_exited() -> void:
 	Input.set_mouse_mode( Input.MOUSE_MODE_VISIBLE )
 	cursor.set_visible(false)
 	custom_draw.draw_vector_debug = false
+
+
+func _on_display_colour_channel_display_mode_changed(new_mode) -> void:
+	print("_on_display_colour_channel_display_mode_changed %s"%new_mode)
+	colour_channel_displayed_label.text = COLOUR_CHANNEL_DISPLAY_MODES_NAMES[new_mode]

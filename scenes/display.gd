@@ -28,11 +28,14 @@ signal zoom_changed(new_zoom)
 signal mouse_coords_in_viewport_changed(new_coords)
 signal colour_under_mouse_changed( new_colour )
 
-
-# display_mode 
+# display_mode, display individual colour channels
 # 0 = rgb
 # 1 = alpha
+# 2 = red
+# 3 = green
+# 4 = blue
 var display_mode := 0
+signal colour_channel_display_mode_changed( new_mode )
 
 
 func _ready() -> void:
@@ -50,14 +53,47 @@ func _input(event):
 	if event.is_action("ui_reset_camera") and event.is_pressed() and not event.is_echo():
 		reset_camera()
 
-	if event.is_action("ui_alpha_toggle") and event.is_pressed() and not event.is_echo():
-		print("alpha display toggle")
-		if display_mode == 0:
+	# colour channel display #--------------------------------------------------
+	if event.is_action("ui_alpha_channel_toggle") and event.is_pressed() and not event.is_echo():
+		print("alpha channel display toggle")
+		if display_mode !=1 :
 			display_mode = 1
 			$display.get_material().set_shader_param("display_mode", display_mode)
 		elif display_mode == 1:
 			display_mode = 0
 			$display.get_material().set_shader_param("display_mode", display_mode)
+		emit_signal("colour_channel_display_mode_changed", display_mode)
+	
+	if event.is_action("ui_red_channel_toggle") and event.is_pressed() and not event.is_echo():
+		print("red channel display toggle")
+		if display_mode !=2 :
+			display_mode = 2
+			$display.get_material().set_shader_param("display_mode", display_mode)
+		elif display_mode == 2:
+			display_mode = 0
+			$display.get_material().set_shader_param("display_mode", display_mode)
+		emit_signal("colour_channel_display_mode_changed", display_mode)
+
+	if event.is_action("ui_green_channel_toggle") and event.is_pressed() and not event.is_echo():
+		print("green channel display toggle")
+		if display_mode !=3 :
+			display_mode = 3
+			$display.get_material().set_shader_param("display_mode", display_mode)
+		elif display_mode == 3:
+			display_mode = 0
+			$display.get_material().set_shader_param("display_mode", display_mode)
+		emit_signal("colour_channel_display_mode_changed", display_mode)
+
+	if event.is_action("ui_blue_channel_toggle") and event.is_pressed() and not event.is_echo():
+		print("green channel display toggle")
+		if display_mode !=4 :
+			display_mode = 4
+			$display.get_material().set_shader_param("display_mode", display_mode)
+		elif display_mode == 4:
+			display_mode = 0
+			$display.get_material().set_shader_param("display_mode", display_mode)
+		emit_signal("colour_channel_display_mode_changed", display_mode)
+	#---------------------------------------------------------------------------
 
 	if event is InputEventMouseMotion:
 		self.coord_in_viewport = window_to_viewport(event.position)
