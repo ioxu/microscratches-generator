@@ -161,6 +161,9 @@ margin_right = 60.1166
 margin_bottom = 131.66
 custom_fonts/font = SubResource( 3 )
 text = "encoded"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="uv_rect_float" type="ColorRect" parent="."]
 visible = false
