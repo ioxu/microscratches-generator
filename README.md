@@ -1,5 +1,8 @@
 # microscratches-generator
-An app made in the Godot Engine
+
+Release name "Aniseed".
+
+An app made in the Godot Engine.
 
 Generates texture maps for controlling anisotropic rotation on 3d shading models, specifically in the style of microscopic scratches.
 
