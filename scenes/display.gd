@@ -54,6 +54,12 @@ func _input(event):
 		reset_camera()
 
 	# colour channel display #--------------------------------------------------
+	if event.is_action("ui_rgb_channel_toggle") and event.is_pressed() and not event.is_echo():
+		if display_mode !=0 :
+			display_mode = 0
+			$display.get_material().set_shader_param("display_mode", display_mode)
+		emit_signal("colour_channel_display_mode_changed", display_mode)
+
 	if event.is_action("ui_alpha_channel_toggle") and event.is_pressed() and not event.is_echo():
 		if display_mode !=1 :
 			display_mode = 1
@@ -89,9 +95,12 @@ func _input(event):
 			display_mode = 0
 			$display.get_material().set_shader_param("display_mode", display_mode)
 		emit_signal("colour_channel_display_mode_changed", display_mode)
-	
-	if event.is_action("ui_rgb_channel_toggle") and event.is_pressed() and not event.is_echo():
-		if display_mode !=0 :
+
+	if event.is_action("ui_colour-to-rotation_channel_toggle") and event.is_pressed() and not event.is_echo():
+		if display_mode !=5 :
+			display_mode = 5
+			$display.get_material().set_shader_param("display_mode", display_mode)
+		elif display_mode == 5:
 			display_mode = 0
 			$display.get_material().set_shader_param("display_mode", display_mode)
 		emit_signal("colour_channel_display_mode_changed", display_mode)
@@ -186,3 +195,5 @@ func update_image(force:=false) -> void: # TODO: need to find a good pattern inw
 		print("copy viewport to image data")
 		viewport_image = $display.texture.get_data()
 		image_dirty = false
+
+

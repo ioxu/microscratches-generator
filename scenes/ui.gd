@@ -15,7 +15,7 @@ var swatch_rect : ColorRect
 var fps_label : Label
 var colour_channel_displayed_label : Label
 
-const COLOUR_CHANNEL_DISPLAY_MODES_NAMES = ["RGB", "ALPHA", "RED", "GREEN", "BLUE"]
+const COLOUR_CHANNEL_DISPLAY_MODES_NAMES = ["RGB", "ALPHA", "RED", "GREEN", "BLUE", "ROTATION"]
 
 
 func _ready() -> void:

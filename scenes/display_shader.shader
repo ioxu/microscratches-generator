@@ -4,8 +4,13 @@ render_mode unshaded;
 // display_mode:
 // 0 = rgb
 // 1 = alpha
-uniform int display_mode : hint_range(0, 4);
+// 2 = red
+// 3 = green
+// 4 = blue
+// 5 = colour-to-rotation (atan)
+uniform int display_mode : hint_range(0, 5);
 
+const float PI = 3.1415926535897932384626433832795;
 
 void fragment(){
 	vec4 t = texture(TEXTURE, UV); 
@@ -26,6 +31,14 @@ void fragment(){
 		case 4: // blue
 			COLOR = vec4(t.b, t.b, t.b, 1.0);
 			break;
+		case 5: // rotation (atan)
+			//float v =  ( ( atan( t.g, t.r )  / PI ) + 1.0 ) / 2.0 ; // for full float vectors (-1.0 to 1.0)
+			float v;
+			t = vec4( vec2(2.0, 2.0) * (vec2(t.r, t.g) - vec2(0.5, 0.5)), t.b, t.a );
+			v =  ((atan( t.g, t.r )  / PI ) + 1.0 ) * 0.5   ; // for encoded colour vectors (0.0 to 1.0)
+			COLOR = vec4(v, v, v, 1.0);
+			break;
+
 
 		default:
 			COLOR = t;
