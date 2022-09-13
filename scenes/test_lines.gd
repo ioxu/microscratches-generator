@@ -40,6 +40,7 @@ func _rdomain() -> int:
 
 
 func vec2_to_encoded_colour( vec : Vector2 ) -> Color:
+	vec *= Vector2(1.0, -1.0) 
 	var ev = ( vec + Vector2(1.0, 1.0) ) / Vector2(2.0, 2.0)
 	return Color(ev.x, ev.y, 0.0, 1.0)
 
