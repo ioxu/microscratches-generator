@@ -27,7 +27,9 @@ func _draw() -> void:
 	if draw_vector_debug:
 		var _to = vector2_to_signed_vector2( vector_debug ).normalized() * vector_debug_length
 		draw_polyline_colors( PoolVector2Array([mouse_location, mouse_location + _to]),\
-			PoolColorArray([Color.white, Color(1.0,1.0,1.0,0.25)] ), 3 )
+			PoolColorArray([Color(0.25,0.25,0.25,0.5), Color(0.25,0.25,0.25,0.15)] ), 5 )
+		draw_polyline_colors( PoolVector2Array([mouse_location, mouse_location + _to]),\
+			PoolColorArray([Color.white, Color(1.0,1.0,1.0,0.25)] ), 2 )
 
 
 func vector2_to_signed_vector2( vec : Vector2 ) -> Vector2:
