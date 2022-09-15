@@ -49,6 +49,7 @@ func _ready() -> void:
 	yield(get_tree().create_timer(0.5), "timeout")
 	update_image(true)
 
+
 func _input(event):
 	if event.is_action("ui_reset_camera") and event.is_pressed() and not event.is_echo():
 		reset_camera()
@@ -185,15 +186,23 @@ func reset_camera() -> void:
 func window_to_viewport( coords : Vector2 ) -> Vector2:
 	var _ai = cam_transform.affine_inverse()
 	var _vs = viewport.get_size()
-	var new_coords = (_vs / 2.0) + _ai * coords#event.position
+	var new_coords = (_vs / 2.0) + _ai * coords
 	new_coords = new_coords.floor()
 	return Vector2( clamp(new_coords.x, 0, _vs.x), clamp(new_coords.y, 0, _vs.y) )
 
 
 func update_image(force:=false) -> void: # TODO: need to find a good pattern inwhich to call this update, like a viewport.dirty thing
 	if image_dirty or force==true:
-		print("copy viewport to image data")
+		print("[display] copy viewport to image data")
 		viewport_image = $display.texture.get_data()
 		image_dirty = false
+		
+		# test
+		# used to copy image data into display_test_image_data Sprite
+		# yield(get_tree(), "idle_frame") was needed to step single updates
+		# down into the display.viewport_image
+#		var texture = ImageTexture.new()
+#		texture.create_from_image(viewport_image)
+#		$display_test_image_data.texture = texture
 
 

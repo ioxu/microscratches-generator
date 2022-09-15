@@ -18,6 +18,10 @@ _global_script_class_icons={
 config/name="aniseed"
 run/main_scene="res://scenes/main.tscn"
 
+[autoload]
+
+Util="*res://scripts/util.gd"
+
 [input]
 
 ui_reset_camera={

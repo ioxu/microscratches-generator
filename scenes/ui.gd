@@ -1,6 +1,7 @@
 extends Node
 
 export(NodePath) onready var viewport = get_node( viewport )
+export(NodePath) onready var display = get_node( display )
 export(NodePath) onready var cursor = get_node( cursor )
 export(NodePath) onready var custom_draw = get_node( custom_draw )
 
@@ -16,6 +17,15 @@ var fps_label : Label
 var colour_channel_displayed_label : Label
 
 const COLOUR_CHANNEL_DISPLAY_MODES_NAMES = ["RGB", "ALPHA", "RED", "GREEN", "BLUE", "ROTATION"]
+
+var resolution_menu_button : MenuButton
+var RESOLUTIONS = [
+	["half (512 x 512)", Vector2(512, 512)],
+	["1k (1024 x 1024)", Vector2(1024, 1024)],
+	["2k (2048 x 2048)", Vector2(2048, 2048)],
+	["4k (4096 x 4096)", Vector2(4096, 4096)]
+]
+var seed_number : SpinBox
 
 
 func _ready() -> void:
@@ -37,6 +47,13 @@ func _ready() -> void:
 
 	print(COLOUR_CHANNEL_DISPLAY_MODES_NAMES)
 	print(COLOUR_CHANNEL_DISPLAY_MODES_NAMES[1])
+
+	# control panel
+	resolution_menu_button = self.find_node("resolution_menu_button")
+	var resolution_menu_button_popup = resolution_menu_button.get_popup()
+	resolution_menu_button_popup.connect("id_pressed", self, "_on_resolution_menu_button_item_pressed")
+
+	seed_number = self.find_node("seed")
 
 
 func _process(_delta: float) -> void:
@@ -79,3 +96,32 @@ func _on_Control_mouse_exited() -> void:
 
 func _on_display_colour_channel_display_mode_changed(new_mode) -> void:
 	colour_channel_displayed_label.text = COLOUR_CHANNEL_DISPLAY_MODES_NAMES[new_mode]
+
+
+# control panel ----------------------------------------------------------------
+func _on_resolution_menu_button_item_pressed( id_pressed ) -> void:
+	print("[ui][control panel] resolution selected: %s"%RESOLUTIONS[id_pressed][0])
+	resolution_menu_button.set_text(RESOLUTIONS[id_pressed][0])
+
+
+func _on_generate_button_pressed() -> void:
+	#RNG.randomize()
+	#RNG.set_seed( seed_number.get_value() )
+	Util.set_rng_seed( seed_number.get_value() )
+
+	################################
+	var test_lines = viewport.find_node("test_lines")
+	test_lines.generate_lines()
+	print(test_lines.lines[0])
+	
+	# chain updates down into image datas
+	# this order, and frame-waits, are important
+	viewport.set_update_mode(Viewport.UPDATE_ALWAYS)
+	yield(get_tree(), "idle_frame")
+	viewport.set_update_mode(Viewport.UPDATE_ONCE)
+	yield(get_tree(), "idle_frame")
+	display.update_image(true)
+	################################
+	
+	
+	

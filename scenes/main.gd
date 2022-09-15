@@ -66,10 +66,10 @@ func _input(event):
 		if event.button_index == BUTTON_LEFT:
 			if event.pressed:
 				picked_window_position = event.position
-				print("pick : window position: %s"%[picked_window_position])
+				#print("pick : window position: %s"%[picked_window_position])
 
 			else:
-				print("left mouse up")
+				#print("left mouse up")
 				picked_window_position = null
 
 	if event.is_action_pressed("ui_fullscreen"):

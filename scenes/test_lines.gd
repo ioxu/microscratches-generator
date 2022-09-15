@@ -3,7 +3,7 @@ extends Node2D
 var lines = []
 var lines_colours = []
 
-var n_lines = 200
+var n_lines = 10000
 
 var idim = 1024
 var mdim = idim * 3
@@ -12,9 +12,15 @@ var DRAW_ONCE = true
 var DRAWN = false
 
 func _ready() -> void:
-	print("[lines] generate")
-	for l in range(n_lines):
+	generate_lines()
+	print("lines.size() %s"%lines.size())
 
+
+func generate_lines() -> void:
+	print("[lines] generate")
+	lines = []
+	lines_colours = []
+	for l in range(n_lines):
 #		var la = []
 #		var startp = Vector2( _rdomain(), _rdomain()  )
 #		var endp = Vector2( _rdomain(), _rdomain()  )
@@ -31,14 +37,16 @@ func _ready() -> void:
 #
 #		lines.append(PoolVector2Array( la ))
 #		lines_colours.append( PoolColorArray( lc ) )
+
 		var line = line_simple( Vector2(_rdomain(), _rdomain()), Vector2(_rdomain(), _rdomain()) )
 		lines.append(line)
 		lines_colours.append( vcolours_simple(line) )
-		
+	DRAWN = false
+	update()
 
 
 func _rdomain() -> int:
-	return randi()%mdim - (mdim*0.3333)
+	return Util.randi()%mdim - mdim * ( float(idim)/float(mdim) )
 
 
 func vec2_to_encoded_colour( vec : Vector2 ) -> Color:
@@ -54,7 +62,7 @@ func vec2_to_encoded_colour( vec : Vector2 ) -> Color:
 func _draw() -> void:
 	#print(self.get_path(), "_draw()")
 	if DRAW_ONCE and not DRAWN:
-#		print("[test_lines] drawing once DRAW_ONCE %s DRAWN %s"%[DRAW_ONCE, DRAWN])
+		print("[test_lines] drawing once DRAW_ONCE %s DRAWN %s"%[DRAW_ONCE, DRAWN])
 		for i in lines.size():
 			draw_polyline_colors( lines[i], lines_colours[i], 2.0, false)
 		DRAWN = true
@@ -67,6 +75,7 @@ func _draw() -> void:
 func line_simple( startp:Vector2, endp:Vector2 ) -> PoolVector2Array:
 	return PoolVector2Array( [ startp, endp ] )
 
+
 #-------------------------------------------------------------------------------
 # colour-at--vertices generators
 
@@ -77,7 +86,6 @@ func vcolours_simple( points : PoolVector2Array ) -> PoolColorArray :
 	var _size = points.size()
 	var colours = []
 	for i in range(_size):
-		print("i %s"%i)
 		var next_i = i+1
 		if next_i > _size-1:
 			next_i = i
