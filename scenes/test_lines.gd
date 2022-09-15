@@ -3,7 +3,7 @@ extends Node2D
 var lines = []
 var lines_colours = []
 
-var n_lines = 10000
+var n_lines = 1000#10000
 
 var idim = 1024
 var mdim = idim * 3
@@ -21,7 +21,12 @@ func generate_lines() -> void:
 	lines = []
 	lines_colours = []
 	for _l in range(n_lines):
-		var line = line_simple( Vector2(_rdomain(), _rdomain()), Vector2(_rdomain(), _rdomain()) )
+		var startp = Vector2(_rdomain(), _rdomain())
+		var endp = Vector2(_rdomain(), _rdomain())
+
+		#var line = line_simple( startp, endp )
+		var line = line_simple_simplex( startp, endp)
+		
 		lines.append(line)
 		lines_colours.append( vcolours_simple(line) )
 	DRAWN = false
@@ -46,7 +51,7 @@ func _draw() -> void:
 	if DRAW_ONCE and not DRAWN:
 		#print("[test_lines] drawing once DRAW_ONCE %s DRAWN %s"%[DRAW_ONCE, DRAWN])
 		for i in lines.size():
-			draw_polyline_colors( lines[i], lines_colours[i], 2.0, false)
+			draw_polyline_colors( lines[i], lines_colours[i], Util.randf_range(0.35, 4.2), false)
 		DRAWN = true
 
 
@@ -58,20 +63,49 @@ func line_simple( startp:Vector2, endp:Vector2 ) -> PoolVector2Array:
 	return PoolVector2Array( [ startp, endp ] )
 
 
+func line_simple_simplex( startp:Vector2,
+	endp:Vector2) -> PoolVector2Array:
+	var noise = OpenSimplexNoise.new()
+
+	# Configure
+	noise.seed = randi()
+	noise.octaves = 5
+	noise.period = 20.0
+	noise.persistence = 0.72
+	
+	var scale = 0.065
+	
+	var points = []
+	var n = 200
+
+	for i in range(n):
+		var r = float(i)/(n-1)
+		var p = lerp(startp, endp, r)
+		#print("r %s p %s"%[r,p])
+		var nn = Vector2( noise.get_noise_2dv( p * scale ) , noise.get_noise_2dv( p * scale + Vector2(-316, 37.5) ) )
+		#print("nn %s"%nn)
+		p += nn * 80
+		points.append( p )
+
+	return PoolVector2Array( points )
+
 #-------------------------------------------------------------------------------
 # colour-at--vertices generators
 
 # loops points,
 # gen colour by delta from this point to next point
 # doubles up last point
+# puts a random value for the whole curve in blue channel
 func vcolours_simple( points : PoolVector2Array ) -> PoolColorArray :
 	var _size = points.size()
 	var colours = []
+	var r_b = randf()
 	for i in range(_size):
 		var next_i = i+1
 		if next_i > _size-1:
 			next_i = i
 		var c = (points[i] - points[next_i]).normalized()
 		c = vec2_to_encoded_colour(c)
+		#c.b = r_b
 		colours.append(c)
 	return PoolColorArray( colours )

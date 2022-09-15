@@ -336,12 +336,14 @@ margin_bottom = 18.0
 size_flags_horizontal = 5
 
 [node name="hint_label" type="Label" parent="ui/Control/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/HBoxContainer"]
+visible = false
 margin_right = 249.0
 margin_bottom = 15.0
 custom_fonts/font = SubResource( 8 )
 text = "Home : reset camera    Alt-Enter : toggle fullscreen   "
 
 [node name="hint_channel_selection_label" type="Label" parent="ui/Control/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/HBoxContainer"]
+visible = false
 margin_left = 253.0
 margin_right = 455.0
 margin_bottom = 15.0
@@ -358,7 +360,6 @@ custom_fonts/font = SubResource( 8 )
 text = "A,R,G,B,T :  toggle colour channel display"
 
 [node name="Control" type="Control" parent="ui/Control/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/HBoxContainer"]
-margin_left = 459.0
 margin_right = 786.0
 margin_bottom = 15.0
 size_flags_horizontal = 3
