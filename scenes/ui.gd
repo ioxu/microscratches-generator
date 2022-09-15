@@ -45,9 +45,6 @@ func _ready() -> void:
 
 	fps_label = self.find_node("fps_label")
 
-	print(COLOUR_CHANNEL_DISPLAY_MODES_NAMES)
-	print(COLOUR_CHANNEL_DISPLAY_MODES_NAMES[1])
-
 	# control panel
 	resolution_menu_button = self.find_node("resolution_menu_button")
 	var resolution_menu_button_popup = resolution_menu_button.get_popup()
@@ -105,15 +102,12 @@ func _on_resolution_menu_button_item_pressed( id_pressed ) -> void:
 
 
 func _on_generate_button_pressed() -> void:
-	#RNG.randomize()
-	#RNG.set_seed( seed_number.get_value() )
-	Util.set_rng_seed( seed_number.get_value() )
-
+	
 	################################
+	Util.set_rng_seed( int(seed_number.get_value()) )
 	var test_lines = viewport.find_node("test_lines")
 	test_lines.generate_lines()
-	print(test_lines.lines[0])
-	
+
 	# chain updates down into image datas
 	# this order, and frame-waits, are important
 	viewport.set_update_mode(Viewport.UPDATE_ALWAYS)

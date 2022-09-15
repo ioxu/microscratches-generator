@@ -13,31 +13,14 @@ var DRAWN = false
 
 func _ready() -> void:
 	generate_lines()
-	print("lines.size() %s"%lines.size())
+	print("[test_lines] .size() %s"%lines.size())
 
 
 func generate_lines() -> void:
-	print("[lines] generate")
+	print("[test_lines] generate")
 	lines = []
 	lines_colours = []
-	for l in range(n_lines):
-#		var la = []
-#		var startp = Vector2( _rdomain(), _rdomain()  )
-#		var endp = Vector2( _rdomain(), _rdomain()  )
-#
-#		la.append(startp)
-#		la.append(endp)
-#
-#		var lc = []
-#
-#		var cc = (startp - endp).normalized()
-#		cc = vec2_to_encoded_colour(cc)
-#		lc.append(cc)
-#		lc.append(cc)
-#
-#		lines.append(PoolVector2Array( la ))
-#		lines_colours.append( PoolColorArray( lc ) )
-
+	for _l in range(n_lines):
 		var line = line_simple( Vector2(_rdomain(), _rdomain()), Vector2(_rdomain(), _rdomain()) )
 		lines.append(line)
 		lines_colours.append( vcolours_simple(line) )
@@ -60,9 +43,8 @@ func vec2_to_encoded_colour( vec : Vector2 ) -> Color:
 
 
 func _draw() -> void:
-	#print(self.get_path(), "_draw()")
 	if DRAW_ONCE and not DRAWN:
-		print("[test_lines] drawing once DRAW_ONCE %s DRAWN %s"%[DRAW_ONCE, DRAWN])
+		#print("[test_lines] drawing once DRAW_ONCE %s DRAWN %s"%[DRAW_ONCE, DRAWN])
 		for i in lines.size():
 			draw_polyline_colors( lines[i], lines_colours[i], 2.0, false)
 		DRAWN = true
