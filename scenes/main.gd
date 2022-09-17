@@ -1,5 +1,10 @@
 extends Node2D
 
+# export hints
+# https://godotengine.org/qa/13967/need-to-generate-and-save-textures-to-disk
+# https://docs.godotengine.org/en/stable/classes/class_file.html
+# https://godotforums.org/d/26767-16bit-vertex-displacement/9
+
 onready var file_menu_button : MenuButton
 
 var picked_window_position
@@ -25,6 +30,7 @@ func _ready() -> void:
 	var dir = Directory.new()
 	var fnames = []
 	var tex_dir = "res://textures/"
+	print("[main] find textures in res://textures")
 	dir.open(tex_dir)
 	dir.list_dir_begin()
 	var f = dir.get_next()
@@ -84,33 +90,39 @@ func on_id_pressed( id, _ignored ) -> void:
 		self.quit()
 
 	# Export
-	# https://godotengine.org/qa/13967/need-to-generate-and-save-textures-to-disk
-	# https://docs.godotengine.org/en/stable/classes/class_file.html
-	# https://godotforums.org/d/26767-16bit-vertex-displacement/9
 	if id == 300:
-		print("exporting texture ..")
-		var tex_data = $display/display.texture.get_data()
-		var image : Image = tex_data
-		# warning-ignore:return_value_discarded
-		image.save_png( "exports/export.png" )
-		image.lock()
-		print("image data %s"%image.data)
-		var width = image.data["width"]
-		var height = image.data["height"]
-		print("w %s h %s"%[width, height])
-		var image_exr : Image = Image.new()
-		image_exr.create( width, height, false, Image.FORMAT_RGBAH )
-		image_exr.lock()
-		for x in range(width):
-			for y in range(height):
-				var c = image.get_pixel( x, y )
-				# A R G B
-				image_exr.set_pixel( x, y, Color( c.g, c.b, c.a, c.r ))
-		image_exr.unlock()
-		image.unlock()
-		print("image_exr data %s"%image_exr.data)
-		# warning-ignore:return_value_discarded
-		image_exr.save_exr( "exports/export.exr", false )
+		print("[main] exporting texture ..")
+
+		var fd = $ui.find_node("file_export_FileDialog")
+		fd.popup_centered()
+
+#		var tex_data = $display/display.texture.get_data()
+#		var image : Image = tex_data
+#		# warning-ignore:return_value_discarded
+#		image.save_png( "exports/export.png" )
+#		image.lock()
+#		print("image data %s"%image.data)
+#		var width = image.data["width"]
+#		var height = image.data["height"]
+#		print("w %s h %s"%[width, height])
+#		var image_exr : Image = Image.new()
+#		image_exr.create( width, height, false, Image.FORMAT_RGBAH )
+#		image_exr.lock()
+#		for x in range(width):
+#			for y in range(height):
+#				var c = image.get_pixel( x, y )
+#				# A R G B
+#				image_exr.set_pixel( x, y, Color( c.g, c.b, c.a, c.r ))
+#		image_exr.unlock()
+#		image.unlock()
+#		print("image_exr data %s"%image_exr.data)
+#		# warning-ignore:return_value_discarded
+#		image_exr.save_exr( "exports/export.exr", false )
+
+
+# export
+func _on_file_export_FileDialog_file_selected(path: String) -> void:
+	Util.export_texture( $display/display.texture, path )
 
 
 func quit()->void:
@@ -138,3 +150,5 @@ func go_fullscreen():
 			OS.set_window_size(minimum_size)
 			OS.set_window_position(window_position)
 	emit_signal("fullscreen", fullscreen)
+
+

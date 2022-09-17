@@ -37,6 +37,8 @@ signal colour_under_mouse_changed( new_colour )
 var display_mode := 0
 signal colour_channel_display_mode_changed( new_mode )
 
+var accept_input = true # switched on modal overlays to not accept keyboard events
+
 
 func _ready() -> void:
 	cam_transform.origin = $display.transform.origin
@@ -51,91 +53,92 @@ func _ready() -> void:
 
 
 func _input(event):
-	if event.is_action("ui_reset_camera") and event.is_pressed() and not event.is_echo():
-		reset_camera()
+	if accept_input:
+		if event.is_action("ui_reset_camera") and event.is_pressed() and not event.is_echo():
+			reset_camera()
 
-	# colour channel display #--------------------------------------------------
-	if event.is_action("ui_rgb_channel_toggle") and event.is_pressed() and not event.is_echo():
-		if display_mode !=0 :
-			display_mode = 0
-			$display.get_material().set_shader_param("display_mode", display_mode)
-		emit_signal("colour_channel_display_mode_changed", display_mode)
+		# colour channel display #--------------------------------------------------
+		if event.is_action("ui_rgb_channel_toggle") and event.is_pressed() and not event.is_echo():
+			if display_mode !=0 :
+				display_mode = 0
+				$display.get_material().set_shader_param("display_mode", display_mode)
+			emit_signal("colour_channel_display_mode_changed", display_mode)
 
-	if event.is_action("ui_alpha_channel_toggle") and event.is_pressed() and not event.is_echo():
-		if display_mode !=1 :
-			display_mode = 1
-			$display.get_material().set_shader_param("display_mode", display_mode)
-		elif display_mode == 1:
-			display_mode = 0
-			$display.get_material().set_shader_param("display_mode", display_mode)
-		emit_signal("colour_channel_display_mode_changed", display_mode)
-	
-	if event.is_action("ui_red_channel_toggle") and event.is_pressed() and not event.is_echo():
-		if display_mode !=2 :
-			display_mode = 2
-			$display.get_material().set_shader_param("display_mode", display_mode)
-		elif display_mode == 2:
-			display_mode = 0
-			$display.get_material().set_shader_param("display_mode", display_mode)
-		emit_signal("colour_channel_display_mode_changed", display_mode)
+		if event.is_action("ui_alpha_channel_toggle") and event.is_pressed() and not event.is_echo():
+			if display_mode !=1 :
+				display_mode = 1
+				$display.get_material().set_shader_param("display_mode", display_mode)
+			elif display_mode == 1:
+				display_mode = 0
+				$display.get_material().set_shader_param("display_mode", display_mode)
+			emit_signal("colour_channel_display_mode_changed", display_mode)
+		
+		if event.is_action("ui_red_channel_toggle") and event.is_pressed() and not event.is_echo():
+			if display_mode !=2 :
+				display_mode = 2
+				$display.get_material().set_shader_param("display_mode", display_mode)
+			elif display_mode == 2:
+				display_mode = 0
+				$display.get_material().set_shader_param("display_mode", display_mode)
+			emit_signal("colour_channel_display_mode_changed", display_mode)
 
-	if event.is_action("ui_green_channel_toggle") and event.is_pressed() and not event.is_echo():
-		if display_mode !=3 :
-			display_mode = 3
-			$display.get_material().set_shader_param("display_mode", display_mode)
-		elif display_mode == 3:
-			display_mode = 0
-			$display.get_material().set_shader_param("display_mode", display_mode)
-		emit_signal("colour_channel_display_mode_changed", display_mode)
+		if event.is_action("ui_green_channel_toggle") and event.is_pressed() and not event.is_echo():
+			if display_mode !=3 :
+				display_mode = 3
+				$display.get_material().set_shader_param("display_mode", display_mode)
+			elif display_mode == 3:
+				display_mode = 0
+				$display.get_material().set_shader_param("display_mode", display_mode)
+			emit_signal("colour_channel_display_mode_changed", display_mode)
 
-	if event.is_action("ui_blue_channel_toggle") and event.is_pressed() and not event.is_echo():
-		if display_mode !=4 :
-			display_mode = 4
-			$display.get_material().set_shader_param("display_mode", display_mode)
-		elif display_mode == 4:
-			display_mode = 0
-			$display.get_material().set_shader_param("display_mode", display_mode)
-		emit_signal("colour_channel_display_mode_changed", display_mode)
+		if event.is_action("ui_blue_channel_toggle") and event.is_pressed() and not event.is_echo():
+			if display_mode !=4 :
+				display_mode = 4
+				$display.get_material().set_shader_param("display_mode", display_mode)
+			elif display_mode == 4:
+				display_mode = 0
+				$display.get_material().set_shader_param("display_mode", display_mode)
+			emit_signal("colour_channel_display_mode_changed", display_mode)
 
-	if event.is_action("ui_colour-to-rotation_channel_toggle") and event.is_pressed() and not event.is_echo():
-		if display_mode !=5 :
-			display_mode = 5
-			$display.get_material().set_shader_param("display_mode", display_mode)
-		elif display_mode == 5:
-			display_mode = 0
-			$display.get_material().set_shader_param("display_mode", display_mode)
-		emit_signal("colour_channel_display_mode_changed", display_mode)
-	#---------------------------------------------------------------------------
+		if event.is_action("ui_colour-to-rotation_channel_toggle") and event.is_pressed() and not event.is_echo():
+			if display_mode !=5 :
+				display_mode = 5
+				$display.get_material().set_shader_param("display_mode", display_mode)
+			elif display_mode == 5:
+				display_mode = 0
+				$display.get_material().set_shader_param("display_mode", display_mode)
+			emit_signal("colour_channel_display_mode_changed", display_mode)
+		#---------------------------------------------------------------------------
 
-	if event is InputEventMouseMotion:
-		self.coord_in_viewport = window_to_viewport(event.position)
-		update_image()
-		var _vs = viewport.get_size()
-		if self.coord_in_viewport.x < _vs.x and self.coord_in_viewport.x > 0 and\
-			self.coord_in_viewport.y < _vs.y and self.coord_in_viewport.y > 0:
-			self.viewport_image.lock()
-			self.colour_under_cursor = viewport_image.get_pixelv( self.coord_in_viewport )
-			self.viewport_image.unlock()
-		emit_signal( "mouse_coords_in_viewport_changed" , self.coord_in_viewport )
-		emit_signal( "colour_under_mouse_changed", self.colour_under_cursor )
+		if event is InputEventMouseMotion:
+			self.coord_in_viewport = window_to_viewport(event.position)
+			update_image()
+			var _vs = viewport.get_size()
+			if self.coord_in_viewport.x < _vs.x and self.coord_in_viewport.x > 0 and\
+				self.coord_in_viewport.y < _vs.y and self.coord_in_viewport.y > 0:
+				self.viewport_image.lock()
+				self.colour_under_cursor = viewport_image.get_pixelv( self.coord_in_viewport )
+				self.viewport_image.unlock()
+			emit_signal( "mouse_coords_in_viewport_changed" , self.coord_in_viewport )
+			emit_signal( "colour_under_mouse_changed", self.colour_under_cursor )
 
-	if event is InputEventMouseButton:
-		if event.button_index == BUTTON_MIDDLE:
-			if event.pressed:
-				panning = true
-			else:
-				panning = false
+		if event is InputEventMouseButton:
+			if event.button_index == BUTTON_MIDDLE:
+				if event.pressed:
+					panning = true
+				else:
+					panning = false
 
-		if event.button_index == BUTTON_WHEEL_UP:
-			zoom_at_point(_zoom_rate, event.position)
+			if event.button_index == BUTTON_WHEEL_UP:
+				zoom_at_point(_zoom_rate, event.position)
 
-		elif event.button_index == BUTTON_WHEEL_DOWN:
-			zoom_at_point(1/_zoom_rate, event.position)
+			elif event.button_index == BUTTON_WHEEL_DOWN:
+				zoom_at_point(1/_zoom_rate, event.position)
 
-	if event is InputEventMouseMotion:
-		if panning:
-			cam_transform.origin += event.relative
-			#print("panning %s"%event.relative)
+		if event is InputEventMouseMotion:
+			if panning:
+				cam_transform.origin += event.relative
+				#print("panning %s"%event.relative)
 
 
 func zoom_at_point(zoom_change, point):

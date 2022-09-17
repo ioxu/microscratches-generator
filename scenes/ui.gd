@@ -27,7 +27,6 @@ var RESOLUTIONS = [
 ]
 var seed_number : SpinBox
 
-
 func _ready() -> void:
 	print("[ui] find labels")
 	zoom_label = self.find_node("zoom_label")
@@ -116,6 +115,11 @@ func _on_generate_button_pressed() -> void:
 	yield(get_tree(), "idle_frame")
 	display.update_image(true)
 	################################
-	
-	
-	
+
+
+func _on_file_export_FileDialog_about_to_show() -> void:
+	display.accept_input = false
+
+
+func _on_file_export_FileDialog_popup_hide() -> void:
+	display.accept_input = true

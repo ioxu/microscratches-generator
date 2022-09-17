@@ -3,7 +3,7 @@ extends Node2D
 var lines = []
 var lines_colours = []
 
-var n_lines = 1000#10000
+var n_lines = 2500#10000
 
 var idim = 1024
 var mdim = idim * 3
@@ -51,7 +51,7 @@ func _draw() -> void:
 	if DRAW_ONCE and not DRAWN:
 		#print("[test_lines] drawing once DRAW_ONCE %s DRAWN %s"%[DRAW_ONCE, DRAWN])
 		for i in lines.size():
-			draw_polyline_colors( lines[i], lines_colours[i], Util.randf_range(0.35, 4.2), false)
+			draw_polyline_colors( lines[i], lines_colours[i], Util.randf_range(0.35, 2.0), false)
 		DRAWN = true
 
 
@@ -76,7 +76,7 @@ func line_simple_simplex( startp:Vector2,
 	var scale = 0.065
 	
 	var points = []
-	var n = 200
+	var n = 300
 
 	for i in range(n):
 		var r = float(i)/(n-1)
@@ -84,7 +84,7 @@ func line_simple_simplex( startp:Vector2,
 		#print("r %s p %s"%[r,p])
 		var nn = Vector2( noise.get_noise_2dv( p * scale ) , noise.get_noise_2dv( p * scale + Vector2(-316, 37.5) ) )
 		#print("nn %s"%nn)
-		p += nn * 80
+		p += nn * 20
 		points.append( p )
 
 	return PoolVector2Array( points )

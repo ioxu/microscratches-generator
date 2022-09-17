@@ -32,14 +32,14 @@ font_data = ExtResource( 2 )
 size = 14
 font_data = ExtResource( 2 )
 
-[sub_resource type="StyleBoxFlat" id=10]
+[sub_resource type="StyleBoxFlat" id=7]
 bg_color = Color( 0.0784314, 0.0901961, 0.129412, 0.803922 )
 corner_radius_top_left = 3
 corner_radius_top_right = 3
 corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
 
-[sub_resource type="StyleBoxFlat" id=11]
+[sub_resource type="StyleBoxFlat" id=8]
 bg_color = Color( 0.6, 0.6, 0.6, 0 )
 border_width_left = 1
 border_width_top = 1
@@ -51,24 +51,24 @@ corner_radius_top_right = 2
 corner_radius_bottom_right = 2
 corner_radius_bottom_left = 2
 
-[sub_resource type="DynamicFont" id=14]
+[sub_resource type="DynamicFont" id=9]
 size = 14
 font_data = ExtResource( 2 )
 
-[sub_resource type="DynamicFont" id=12]
+[sub_resource type="DynamicFont" id=10]
 size = 14
 font_data = ExtResource( 2 )
 
-[sub_resource type="ImageTexture" id=13]
+[sub_resource type="ImageTexture" id=11]
 
-[sub_resource type="StyleBoxFlat" id=7]
+[sub_resource type="StyleBoxFlat" id=12]
 bg_color = Color( 0.137255, 0.137255, 0.137255, 0.862745 )
 
-[sub_resource type="DynamicFont" id=8]
+[sub_resource type="DynamicFont" id=13]
 size = 12
 font_data = ExtResource( 2 )
 
-[sub_resource type="StyleBoxTexture" id=9]
+[sub_resource type="StyleBoxTexture" id=14]
 texture = ExtResource( 6 )
 region_rect = Rect2( 0, 0, 17, 15 )
 axis_stretch_horizontal = 1
@@ -232,7 +232,7 @@ margin_right = 122.0
 margin_bottom = 542.0
 rect_min_size = Vector2( 122, 0 )
 size_flags_vertical = 3
-custom_styles/panel = SubResource( 10 )
+custom_styles/panel = SubResource( 7 )
 
 [node name="MarginContainer" type="MarginContainer" parent="ui/Control/MarginContainer/VBoxContainer/Control/HBoxContainer/VBoxContainer/PanelContainer"]
 margin_right = 122.0
@@ -251,7 +251,7 @@ margin_bottom = 505.0
 [node name="generate_PanelContainer" type="PanelContainer" parent="ui/Control/MarginContainer/VBoxContainer/Control/HBoxContainer/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
 margin_right = 116.0
 margin_bottom = 74.0
-custom_styles/panel = SubResource( 11 )
+custom_styles/panel = SubResource( 8 )
 
 [node name="MarginContainer" type="MarginContainer" parent="ui/Control/MarginContainer/VBoxContainer/Control/HBoxContainer/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/generate_PanelContainer"]
 margin_left = 1.0
@@ -273,7 +273,7 @@ custom_constants/separation = -2
 [node name="resolution_menu_button" type="MenuButton" parent="ui/Control/MarginContainer/VBoxContainer/Control/HBoxContainer/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/generate_PanelContainer/MarginContainer/VBoxContainer"]
 margin_right = 108.0
 margin_bottom = 23.0
-custom_fonts/font = SubResource( 14 )
+custom_fonts/font = SubResource( 9 )
 custom_colors/font_color_disabled = Color( 1, 0.690196, 0.290196, 1 )
 custom_colors/font_color = Color( 1, 0.690196, 0.290196, 1 )
 custom_colors/font_color_hover = Color( 1, 0.690196, 0.290196, 1 )
@@ -291,7 +291,7 @@ margin_top = 3.0
 margin_right = 46.0
 margin_bottom = 20.0
 size_flags_horizontal = 3
-custom_fonts/font = SubResource( 12 )
+custom_fonts/font = SubResource( 10 )
 text = "seed"
 
 [node name="seed" type="SpinBox" parent="ui/Control/MarginContainer/VBoxContainer/Control/HBoxContainer/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/generate_PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
@@ -299,14 +299,15 @@ margin_left = 50.0
 margin_right = 108.0
 margin_bottom = 24.0
 size_flags_horizontal = 3
-custom_icons/updown = SubResource( 13 )
+custom_icons/updown = SubResource( 11 )
 value = 1.0
+align = 2
 
 [node name="generate_button" type="Button" parent="ui/Control/MarginContainer/VBoxContainer/Control/HBoxContainer/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/generate_PanelContainer/MarginContainer/VBoxContainer"]
 margin_top = 43.0
 margin_right = 108.0
 margin_bottom = 66.0
-custom_fonts/font = SubResource( 14 )
+custom_fonts/font = SubResource( 9 )
 custom_colors/font_color_disabled = Color( 1, 0.690196, 0.290196, 1 )
 custom_colors/font_color = Color( 1, 0.690196, 0.290196, 1 )
 custom_colors/font_color_hover = Color( 1, 0.690196, 0.290196, 1 )
@@ -318,7 +319,7 @@ margin_top = 573.0
 margin_right = 1018.0
 margin_bottom = 594.0
 mouse_filter = 1
-custom_styles/panel = SubResource( 7 )
+custom_styles/panel = SubResource( 12 )
 
 [node name="MarginContainer" type="MarginContainer" parent="ui/Control/MarginContainer/VBoxContainer/PanelContainer2"]
 margin_right = 1018.0
@@ -336,14 +337,12 @@ margin_bottom = 18.0
 size_flags_horizontal = 5
 
 [node name="hint_label" type="Label" parent="ui/Control/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/HBoxContainer"]
-visible = false
 margin_right = 249.0
 margin_bottom = 15.0
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = SubResource( 13 )
 text = "Home : reset camera    Alt-Enter : toggle fullscreen   "
 
 [node name="hint_channel_selection_label" type="Label" parent="ui/Control/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/HBoxContainer"]
-visible = false
 margin_left = 253.0
 margin_right = 455.0
 margin_bottom = 15.0
@@ -356,10 +355,11 @@ G: green
 B: blue
 T: rotation ( atan(y, x) of encoded texture vectors)"
 mouse_filter = 1
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = SubResource( 13 )
 text = "A,R,G,B,T :  toggle colour channel display"
 
 [node name="Control" type="Control" parent="ui/Control/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/HBoxContainer"]
+margin_left = 459.0
 margin_right = 786.0
 margin_bottom = 15.0
 size_flags_horizontal = 3
@@ -371,7 +371,7 @@ __meta__ = {
 margin_left = 790.0
 margin_right = 813.0
 margin_bottom = 15.0
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = SubResource( 13 )
 custom_colors/font_color = Color( 0.721569, 0.490196, 0.286275, 1 )
 text = "x : y :"
 
@@ -379,7 +379,7 @@ text = "x : y :"
 margin_left = 817.0
 margin_right = 839.0
 margin_bottom = 15.0
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = SubResource( 13 )
 custom_colors/font_color = Color( 0.996078, 0.996078, 0.996078, 1 )
 text = "RGB"
 
@@ -387,7 +387,7 @@ text = "RGB"
 margin_left = 843.0
 margin_right = 847.0
 margin_bottom = 15.0
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = SubResource( 13 )
 custom_colors/font_color = Color( 0.945098, 0.14902, 0.129412, 1 )
 text = "r"
 
@@ -395,7 +395,7 @@ text = "r"
 margin_left = 851.0
 margin_right = 858.0
 margin_bottom = 15.0
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = SubResource( 13 )
 custom_colors/font_color = Color( 0.231373, 0.945098, 0.129412, 1 )
 text = "g"
 
@@ -403,7 +403,7 @@ text = "g"
 margin_left = 862.0
 margin_right = 869.0
 margin_bottom = 15.0
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = SubResource( 13 )
 custom_colors/font_color = Color( 0.129412, 0.447059, 0.945098, 1 )
 text = "b"
 
@@ -411,7 +411,7 @@ text = "b"
 margin_left = 873.0
 margin_right = 878.0
 margin_bottom = 15.0
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = SubResource( 13 )
 custom_colors/font_color = Color( 0.494118, 0.513726, 0.545098, 1 )
 text = "a"
 
@@ -429,7 +429,7 @@ modulate = Color( 0.2, 0.2, 0.2, 1 )
 margin_right = 30.0
 margin_bottom = 15.0
 rect_min_size = Vector2( 30, 15 )
-custom_styles/panel = SubResource( 9 )
+custom_styles/panel = SubResource( 14 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -446,7 +446,7 @@ __meta__ = {
 margin_left = 916.0
 margin_right = 973.0
 margin_bottom = 15.0
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = SubResource( 13 )
 custom_colors/font_color = Color( 0.286275, 0.466667, 0.721569, 1 )
 text = "resolution : "
 
@@ -454,7 +454,7 @@ text = "resolution : "
 margin_left = 977.0
 margin_right = 1012.0
 margin_bottom = 15.0
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = SubResource( 13 )
 custom_colors/font_color = Color( 0.286275, 0.721569, 0.498039, 1 )
 text = "zoom : "
 
@@ -494,6 +494,24 @@ position = Vector2( -56.1079, 39.2323 )
 scale = Vector2( 0.2, 0.2 )
 texture = ExtResource( 9 )
 
+[node name="file_export_FileDialog" type="FileDialog" parent="ui"]
+visible = true
+margin_left = 22.0
+margin_top = -533.0
+margin_right = 730.0
+margin_bottom = -162.0
+window_title = "Export"
+resizable = true
+access = 2
+filters = PoolStringArray( "*.exr ; EXR Images", "*.png ; PNG Images" )
+show_hidden_files = true
+current_dir = "/projects/godot/microscratches-generator"
+current_file = "export"
+current_path = "/projects/godot/microscratches-generator/export"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="custom_draw" type="Node2D" parent="."]
 script = ExtResource( 8 )
 vector_debug_length = 60.0
@@ -512,3 +530,6 @@ texture = ExtResource( 7 )
 [connection signal="mouse_entered" from="ui/Control/MarginContainer/VBoxContainer/Control" to="ui" method="_on_Control_mouse_entered"]
 [connection signal="mouse_exited" from="ui/Control/MarginContainer/VBoxContainer/Control" to="ui" method="_on_Control_mouse_exited"]
 [connection signal="pressed" from="ui/Control/MarginContainer/VBoxContainer/Control/HBoxContainer/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/generate_PanelContainer/MarginContainer/VBoxContainer/generate_button" to="ui" method="_on_generate_button_pressed"]
+[connection signal="about_to_show" from="ui/file_export_FileDialog" to="ui" method="_on_file_export_FileDialog_about_to_show"]
+[connection signal="file_selected" from="ui/file_export_FileDialog" to="." method="_on_file_export_FileDialog_file_selected"]
+[connection signal="popup_hide" from="ui/file_export_FileDialog" to="ui" method="_on_file_export_FileDialog_popup_hide"]
