@@ -15,6 +15,7 @@ var pixel_alpha_label : Label
 var swatch_rect : ColorRect
 var fps_label : Label
 var colour_channel_displayed_label : Label
+var generation_timing_label : Label
 
 const COLOUR_CHANNEL_DISPLAY_MODES_NAMES = ["RGB", "ALPHA", "RED", "GREEN", "BLUE", "ROTATION"]
 
@@ -50,6 +51,8 @@ func _ready() -> void:
 	resolution_menu_button_popup.connect("id_pressed", self, "_on_resolution_menu_button_item_pressed")
 
 	seed_number = self.find_node("seed")
+
+	generation_timing_label = self.find_node("generation_timing_label")
 
 
 func _process(_delta: float) -> void:
@@ -101,6 +104,7 @@ func _on_resolution_menu_button_item_pressed( id_pressed ) -> void:
 
 
 func _on_generate_button_pressed() -> void:
+	var time_now = OS.get_system_time_msecs() 
 	
 	################################
 	Util.set_rng_seed( int(seed_number.get_value()) )
@@ -116,6 +120,8 @@ func _on_generate_button_pressed() -> void:
 	display.update_image(true)
 	################################
 
+	generation_timing_label.text =  milliseconds_to_pretty_time( OS.get_system_time_msecs()  - time_now )
+
 
 func _on_file_export_FileDialog_about_to_show() -> void:
 	display.accept_input = false
@@ -123,3 +129,12 @@ func _on_file_export_FileDialog_about_to_show() -> void:
 
 func _on_file_export_FileDialog_popup_hide() -> void:
 	display.accept_input = true
+
+
+func milliseconds_to_pretty_time( ms : float ) -> String :
+	var milliseconds = fmod(ms, 1000)
+	ms /= 1000
+	var minutes = ms / 60
+	var seconds = fmod(ms, 60)
+	return "%02d : %02d : %03d" % [minutes, seconds, milliseconds]
+	#return str(ms)

@@ -5,6 +5,10 @@ extends Node2D
 # https://docs.godotengine.org/en/stable/classes/class_file.html
 # https://godotforums.org/d/26767-16bit-vertex-displacement/9
 
+# anisotropic reflection
+# https://www.youtube.com/watch?v=M6tY53LlzSo&ab_channel=Christopher3D
+
+
 onready var file_menu_button : MenuButton
 
 var picked_window_position

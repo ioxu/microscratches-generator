@@ -25,12 +25,28 @@ func randf_range( from : float, to: float) -> float:
 
 # export -----------------------------------------------------------------------
 
+# formats:
+# Godot Spatial Material 
+#	- "Flowmap" parameter - 90 CCW degrees rotated, encoded
+#	- red and green channels define flow vector
+#	- blue channel ignored
+#	- anisotropy effect multiplied by alpha channel
+# cycles
+#	- use:
+#		- Texture Interpolation: closest
+#		- Principled Shader, Tangent node set to UVs plugged into Tangent port.
+# Eevee
+# Arnold
+# Unreal material
+# OSL
+
 func export_texture( tex : Texture, path : String ) -> void:
 	var base = path.get_basename()
 	# asset Texture
 	var tex_data = tex.get_data()
 	var image : Image = tex_data
 	print("[util][export_texture] png: %s"%[base + ".png"])
+# warning-ignore:return_value_discarded
 	image.save_png( base + ".png" )
 	
 	var width = image.data["width"]
@@ -47,6 +63,7 @@ func export_texture( tex : Texture, path : String ) -> void:
 	image_exr.unlock()
 	image.unlock()
 	print("[util][export_texture] exr: %s"%[base + ".exr"])	
+# warning-ignore:return_value_discarded
 	image_exr.save_exr( base + ".exr", false )
 
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://scenes/main.gd" type="Script" id=1]
 [ext_resource path="res://fonts/RobotoCondensed-Light.ttf" type="DynamicFontData" id=2]
@@ -61,14 +61,19 @@ font_data = ExtResource( 2 )
 
 [sub_resource type="ImageTexture" id=11]
 
-[sub_resource type="StyleBoxFlat" id=12]
+[sub_resource type="DynamicFont" id=12]
+size = 10
+use_filter = true
+font_data = ExtResource( 2 )
+
+[sub_resource type="StyleBoxFlat" id=13]
 bg_color = Color( 0.137255, 0.137255, 0.137255, 0.862745 )
 
-[sub_resource type="DynamicFont" id=13]
+[sub_resource type="DynamicFont" id=14]
 size = 12
 font_data = ExtResource( 2 )
 
-[sub_resource type="StyleBoxTexture" id=14]
+[sub_resource type="StyleBoxTexture" id=15]
 texture = ExtResource( 6 )
 region_rect = Rect2( 0, 0, 17, 15 )
 axis_stretch_horizontal = 1
@@ -250,14 +255,14 @@ margin_bottom = 505.0
 
 [node name="generate_PanelContainer" type="PanelContainer" parent="ui/Control/MarginContainer/VBoxContainer/Control/HBoxContainer/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
 margin_right = 116.0
-margin_bottom = 74.0
+margin_bottom = 89.0
 custom_styles/panel = SubResource( 8 )
 
 [node name="MarginContainer" type="MarginContainer" parent="ui/Control/MarginContainer/VBoxContainer/Control/HBoxContainer/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/generate_PanelContainer"]
 margin_left = 1.0
 margin_top = 1.0
 margin_right = 115.0
-margin_bottom = 73.0
+margin_bottom = 88.0
 custom_constants/margin_right = 3
 custom_constants/margin_top = 3
 custom_constants/margin_left = 3
@@ -267,7 +272,7 @@ custom_constants/margin_bottom = 3
 margin_left = 3.0
 margin_top = 3.0
 margin_right = 111.0
-margin_bottom = 69.0
+margin_bottom = 84.0
 custom_constants/separation = -2
 
 [node name="resolution_menu_button" type="MenuButton" parent="ui/Control/MarginContainer/VBoxContainer/Control/HBoxContainer/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/generate_PanelContainer/MarginContainer/VBoxContainer"]
@@ -314,12 +319,30 @@ custom_colors/font_color_hover = Color( 1, 0.690196, 0.290196, 1 )
 custom_colors/font_color_pressed = Color( 1, 0.690196, 0.290196, 1 )
 text = "generate"
 
+[node name="Control" type="Control" parent="ui/Control/MarginContainer/VBoxContainer/Control/HBoxContainer/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/generate_PanelContainer/MarginContainer/VBoxContainer"]
+margin_top = 64.0
+margin_right = 108.0
+margin_bottom = 70.129
+rect_min_size = Vector2( 0, 6.129 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="generation_timing_label" type="Label" parent="ui/Control/MarginContainer/VBoxContainer/Control/HBoxContainer/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/generate_PanelContainer/MarginContainer/VBoxContainer"]
+margin_top = 68.0
+margin_right = 108.0
+margin_bottom = 81.0
+custom_fonts/font = SubResource( 12 )
+custom_colors/font_color = Color( 0.717647, 0.717647, 0.717647, 1 )
+custom_colors/font_outline_modulate = Color( 0.717647, 0.717647, 0.717647, 1 )
+text = "timing"
+
 [node name="PanelContainer2" type="PanelContainer" parent="ui/Control/MarginContainer/VBoxContainer"]
 margin_top = 573.0
 margin_right = 1018.0
 margin_bottom = 594.0
 mouse_filter = 1
-custom_styles/panel = SubResource( 12 )
+custom_styles/panel = SubResource( 13 )
 
 [node name="MarginContainer" type="MarginContainer" parent="ui/Control/MarginContainer/VBoxContainer/PanelContainer2"]
 margin_right = 1018.0
@@ -339,7 +362,7 @@ size_flags_horizontal = 5
 [node name="hint_label" type="Label" parent="ui/Control/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/HBoxContainer"]
 margin_right = 249.0
 margin_bottom = 15.0
-custom_fonts/font = SubResource( 13 )
+custom_fonts/font = SubResource( 14 )
 text = "Home : reset camera    Alt-Enter : toggle fullscreen   "
 
 [node name="hint_channel_selection_label" type="Label" parent="ui/Control/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/HBoxContainer"]
@@ -355,7 +378,7 @@ G: green
 B: blue
 T: rotation ( atan(y, x) of encoded texture vectors)"
 mouse_filter = 1
-custom_fonts/font = SubResource( 13 )
+custom_fonts/font = SubResource( 14 )
 text = "A,R,G,B,T :  toggle colour channel display"
 
 [node name="Control" type="Control" parent="ui/Control/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/HBoxContainer"]
@@ -371,7 +394,7 @@ __meta__ = {
 margin_left = 790.0
 margin_right = 813.0
 margin_bottom = 15.0
-custom_fonts/font = SubResource( 13 )
+custom_fonts/font = SubResource( 14 )
 custom_colors/font_color = Color( 0.721569, 0.490196, 0.286275, 1 )
 text = "x : y :"
 
@@ -379,7 +402,7 @@ text = "x : y :"
 margin_left = 817.0
 margin_right = 839.0
 margin_bottom = 15.0
-custom_fonts/font = SubResource( 13 )
+custom_fonts/font = SubResource( 14 )
 custom_colors/font_color = Color( 0.996078, 0.996078, 0.996078, 1 )
 text = "RGB"
 
@@ -387,7 +410,7 @@ text = "RGB"
 margin_left = 843.0
 margin_right = 847.0
 margin_bottom = 15.0
-custom_fonts/font = SubResource( 13 )
+custom_fonts/font = SubResource( 14 )
 custom_colors/font_color = Color( 0.945098, 0.14902, 0.129412, 1 )
 text = "r"
 
@@ -395,7 +418,7 @@ text = "r"
 margin_left = 851.0
 margin_right = 858.0
 margin_bottom = 15.0
-custom_fonts/font = SubResource( 13 )
+custom_fonts/font = SubResource( 14 )
 custom_colors/font_color = Color( 0.231373, 0.945098, 0.129412, 1 )
 text = "g"
 
@@ -403,7 +426,7 @@ text = "g"
 margin_left = 862.0
 margin_right = 869.0
 margin_bottom = 15.0
-custom_fonts/font = SubResource( 13 )
+custom_fonts/font = SubResource( 14 )
 custom_colors/font_color = Color( 0.129412, 0.447059, 0.945098, 1 )
 text = "b"
 
@@ -411,7 +434,7 @@ text = "b"
 margin_left = 873.0
 margin_right = 878.0
 margin_bottom = 15.0
-custom_fonts/font = SubResource( 13 )
+custom_fonts/font = SubResource( 14 )
 custom_colors/font_color = Color( 0.494118, 0.513726, 0.545098, 1 )
 text = "a"
 
@@ -429,7 +452,7 @@ modulate = Color( 0.2, 0.2, 0.2, 1 )
 margin_right = 30.0
 margin_bottom = 15.0
 rect_min_size = Vector2( 30, 15 )
-custom_styles/panel = SubResource( 14 )
+custom_styles/panel = SubResource( 15 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -446,7 +469,7 @@ __meta__ = {
 margin_left = 916.0
 margin_right = 973.0
 margin_bottom = 15.0
-custom_fonts/font = SubResource( 13 )
+custom_fonts/font = SubResource( 14 )
 custom_colors/font_color = Color( 0.286275, 0.466667, 0.721569, 1 )
 text = "resolution : "
 
@@ -454,7 +477,7 @@ text = "resolution : "
 margin_left = 977.0
 margin_right = 1012.0
 margin_bottom = 15.0
-custom_fonts/font = SubResource( 13 )
+custom_fonts/font = SubResource( 14 )
 custom_colors/font_color = Color( 0.286275, 0.721569, 0.498039, 1 )
 text = "zoom : "
 

@@ -62,7 +62,7 @@ script = ExtResource( 3 )
 
 [node name="9_swatches" type="Node2D" parent="."]
 visible = false
-position = Vector2( 243.165, 112.481 )
+position = Vector2( 207.489, 430.221 )
 
 [node name="ColorRect" type="ColorRect" parent="9_swatches"]
 margin_left = 40.0
@@ -149,11 +149,12 @@ __meta__ = {
 }
 
 [node name="uv_rect_encoded" type="ColorRect" parent="."]
+visible = false
 material = SubResource( 2 )
-margin_left = 94.8627
-margin_top = 36.2669
-margin_right = 222.863
-margin_bottom = 164.267
+margin_left = 427.382
+margin_top = 430.221
+margin_right = 555.382
+margin_bottom = 558.221
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -172,10 +173,10 @@ __meta__ = {
 [node name="uv_rect_float" type="ColorRect" parent="."]
 visible = false
 material = SubResource( 5 )
-margin_left = 94.8627
-margin_top = 175.488
-margin_right = 222.863
-margin_bottom = 303.488
+margin_left = 658.547
+margin_top = 430.221
+margin_right = 786.547
+margin_bottom = 558.221
 __meta__ = {
 "_edit_use_anchors_": false
 }
