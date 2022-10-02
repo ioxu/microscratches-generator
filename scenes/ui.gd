@@ -28,6 +28,13 @@ var RESOLUTIONS = [
 ]
 var seed_number : SpinBox
 
+var vector_direction_menu_button : MenuButton
+var VECTOR_DIRECTIONS = [
+	"tangent",
+	"bitangent"
+]
+
+
 func _ready() -> void:
 	print("[ui] find labels")
 	zoom_label = self.find_node("zoom_label")
@@ -53,7 +60,14 @@ func _ready() -> void:
 	seed_number = self.find_node("seed")
 
 	generation_timing_label = self.find_node("generation_timing_label")
+	
+	vector_direction_menu_button = self.find_node("vector_direction_MenuButton")
+	var vector_direction_menu_button_popup = vector_direction_menu_button.get_popup()
+	vector_direction_menu_button_popup.connect("id_pressed", self, "_on_vector_direction_menu_button_item_pressed")
 
+	# state
+	Global.resolution = RESOLUTIONS[1][1] # TODO : hardcoded
+	Global.vector_direction = VECTOR_DIRECTIONS[VECTOR_DIRECTIONS.find(vector_direction_menu_button.get_text())]
 
 func _process(_delta: float) -> void:
 	fps_label.text = "%s fps"%Engine.get_frames_per_second()
@@ -101,9 +115,18 @@ func _on_display_colour_channel_display_mode_changed(new_mode) -> void:
 func _on_resolution_menu_button_item_pressed( id_pressed ) -> void:
 	print("[ui][control panel] resolution selected: %s"%RESOLUTIONS[id_pressed][0])
 	resolution_menu_button.set_text(RESOLUTIONS[id_pressed][0])
+	Global.resolution = RESOLUTIONS[id_pressed][0]
+
+
+func _on_vector_direction_menu_button_item_pressed( id_pressed ) -> void:
+	print("[ui][control panel] vector direction selected: %s"%VECTOR_DIRECTIONS[id_pressed])
+	vector_direction_menu_button.set_text( VECTOR_DIRECTIONS[id_pressed] )
+	Global.vector_direction = VECTOR_DIRECTIONS[id_pressed]
 
 
 func _on_generate_button_pressed() -> void:
+	Global.report()
+
 	var time_now = OS.get_system_time_msecs() 
 	
 	################################

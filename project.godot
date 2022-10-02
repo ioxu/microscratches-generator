@@ -21,6 +21,7 @@ run/main_scene="res://scenes/main.tscn"
 [autoload]
 
 Util="*res://scripts/util.gd"
+Global="*res://scripts/global.gd"
 
 [input]
 

@@ -28,19 +28,17 @@ func generate_lines() -> void:
 		var line = line_simple_simplex( startp, endp)
 		
 		lines.append(line)
-		lines_colours.append( vcolours_simple(line) )
+		if Global.vector_direction == "tangent":
+			lines_colours.append( vcolours_simple(line, 0.0) )
+		else:
+			lines_colours.append( vcolours_simple(line) )
+		
 	DRAWN = false
 	update()
 
 
 func _rdomain() -> int:
 	return Util.randi()%mdim - mdim * ( float(idim)/float(mdim) )
-
-
-func vec2_to_encoded_colour( vec : Vector2 ) -> Color:
-	vec *= Vector2(1.0, -1.0) 
-	var ev = ( vec + Vector2(1.0, 1.0) ) / Vector2(2.0, 2.0)
-	return Color(ev.x, ev.y, 0.0, 1.0)
 
 
 #func _process(delta: float) -> void:
@@ -84,7 +82,7 @@ func line_simple_simplex( startp:Vector2,
 		#print("r %s p %s"%[r,p])
 		var nn = Vector2( noise.get_noise_2dv( p * scale ) , noise.get_noise_2dv( p * scale + Vector2(-316, 37.5) ) )
 		#print("nn %s"%nn)
-		p += nn * 20
+		p += nn * 35
 		points.append( p )
 
 	return PoolVector2Array( points )
@@ -96,7 +94,8 @@ func line_simple_simplex( startp:Vector2,
 # gen colour by delta from this point to next point
 # doubles up last point
 # puts a random value for the whole curve in blue channel
-func vcolours_simple( points : PoolVector2Array ) -> PoolColorArray :
+# by default, returns bitangent colours - argument 'rotated' (degrees) can be set to 0 to supply tangent colours
+func vcolours_simple( points : PoolVector2Array, rotated : float = 90 ) -> PoolColorArray :
 	var _size = points.size()
 	var colours = []
 	var r_b = randf()
@@ -105,7 +104,8 @@ func vcolours_simple( points : PoolVector2Array ) -> PoolColorArray :
 		if next_i > _size-1:
 			next_i = i
 		var c = (points[i] - points[next_i]).normalized()
-		c = vec2_to_encoded_colour(c)
-		#c.b = r_b
+		c = c.rotated( deg2rad(rotated) )
+		c = Util.vec2_to_encoded_colour(c)
+		c.b = r_b
 		colours.append(c)
 	return PoolColorArray( colours )
