@@ -67,55 +67,49 @@ func _input(event):
 		if event.is_action("ui_alpha_channel_toggle") and event.is_pressed() and not event.is_echo():
 			if display_mode !=1 :
 				display_mode = 1
-				$display.get_material().set_shader_param("display_mode", display_mode)
 			elif display_mode == 1:
 				display_mode = 0
-				$display.get_material().set_shader_param("display_mode", display_mode)
+			$display.get_material().set_shader_param("display_mode", display_mode)
 			emit_signal("colour_channel_display_mode_changed", display_mode)
 		
 		if event.is_action("ui_red_channel_toggle") and event.is_pressed() and not event.is_echo():
 			if display_mode !=2 :
 				display_mode = 2
-				$display.get_material().set_shader_param("display_mode", display_mode)
 			elif display_mode == 2:
 				display_mode = 0
-				$display.get_material().set_shader_param("display_mode", display_mode)
+			$display.get_material().set_shader_param("display_mode", display_mode)
 			emit_signal("colour_channel_display_mode_changed", display_mode)
 
 		if event.is_action("ui_green_channel_toggle") and event.is_pressed() and not event.is_echo():
 			if display_mode !=3 :
 				display_mode = 3
-				$display.get_material().set_shader_param("display_mode", display_mode)
 			elif display_mode == 3:
 				display_mode = 0
-				$display.get_material().set_shader_param("display_mode", display_mode)
+			$display.get_material().set_shader_param("display_mode", display_mode)
 			emit_signal("colour_channel_display_mode_changed", display_mode)
 
 		if event.is_action("ui_blue_channel_toggle") and event.is_pressed() and not event.is_echo():
 			if display_mode !=4 :
 				display_mode = 4
-				$display.get_material().set_shader_param("display_mode", display_mode)
 			elif display_mode == 4:
 				display_mode = 0
-				$display.get_material().set_shader_param("display_mode", display_mode)
+			$display.get_material().set_shader_param("display_mode", display_mode)
 			emit_signal("colour_channel_display_mode_changed", display_mode)
 
 		if event.is_action("ui_colour-to-rotation_channel_toggle") and event.is_pressed() and not event.is_echo():
 			if display_mode !=5 :
 				display_mode = 5
-				$display.get_material().set_shader_param("display_mode", display_mode)
 			elif display_mode == 5:
 				display_mode = 0
-				$display.get_material().set_shader_param("display_mode", display_mode)
+			$display.get_material().set_shader_param("display_mode", display_mode)
 			emit_signal("colour_channel_display_mode_changed", display_mode)
 			
 		if event.is_action("ui_uv_channel_toggle") and event.is_pressed() and not event.is_echo():
 			if display_mode !=6 :
 				display_mode = 6
-				$display.get_material().set_shader_param("display_mode", display_mode)
 			elif display_mode == 6:
 				display_mode = 0
-				$display.get_material().set_shader_param("display_mode", display_mode)
+			$display.get_material().set_shader_param("display_mode", display_mode)
 			emit_signal("colour_channel_display_mode_changed", display_mode)
 		#---------------------------------------------------------------------------
 
