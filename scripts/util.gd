@@ -2,6 +2,7 @@ extends Node
 # utility autoload
 
 var RNG : RandomNumberGenerator
+var rng_seed : int setget set_rng_seed, get_rng_seed
 
 func _ready() -> void:
 	RNG = RandomNumberGenerator.new()
@@ -10,7 +11,12 @@ func _ready() -> void:
 # random -----------------------------------------------------------------------
 
 func set_rng_seed( new_seed : int ) -> void:
+	rng_seed = new_seed
 	RNG.set_seed( new_seed )
+
+
+func get_rng_seed() -> int:
+	return rng_seed
 
 
 func randf() -> float:
