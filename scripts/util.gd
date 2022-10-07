@@ -13,13 +13,17 @@ func set_rng_seed( new_seed : int ) -> void:
 	RNG.set_seed( new_seed )
 
 
+func randf() -> float:
+	return RNG.randf()
+
+
 func randi() -> int:
-	RNG.randomize()
+	#RNG.randomize()
 	return RNG.randi()
 
 
 func randf_range( from : float, to: float) -> float:
-	RNG.randomize()
+	#RNG.randomize()
 	return RNG.randf_range( from , to)
 
 

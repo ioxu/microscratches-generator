@@ -12,7 +12,7 @@ var DRAW_ONCE = true
 var DRAWN = false
 
 func _ready() -> void:
-	generate_lines()
+	#generate_lines()
 	print("[test_lines] .size() %s"%lines.size())
 
 
@@ -66,7 +66,8 @@ func line_simple_simplex( startp:Vector2,
 	var noise = OpenSimplexNoise.new()
 
 	# Configure
-	noise.seed = randi()
+	#noise.seed = randi()
+	noise.seed = 1
 	noise.octaves = 5
 	noise.period = 20.0
 	noise.persistence = 0.72
@@ -98,7 +99,7 @@ func line_simple_simplex( startp:Vector2,
 func vcolours_simple( points : PoolVector2Array, rotated : float = 90 ) -> PoolColorArray :
 	var _size = points.size()
 	var colours = []
-	var r_b = randf()
+	var r_b = Util.randf()
 	for i in range(_size):
 		var next_i = i+1
 		if next_i > _size-1:
