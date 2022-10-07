@@ -17,7 +17,14 @@ var fps_label : Label
 var colour_channel_displayed_label : Label
 var generation_timing_label : Label
 
-const COLOUR_CHANNEL_DISPLAY_MODES_NAMES = ["RGB", "ALPHA", "RED", "GREEN", "BLUE", "ROTATION"]
+const COLOUR_CHANNEL_DISPLAY_MODES_NAMES = [
+	"RGB",
+	"ALPHA",
+	"RED",
+	"GREEN",
+	"BLUE",
+	"ROTATION",
+	"UV"]
 
 var resolution_menu_button : MenuButton
 var RESOLUTIONS = [

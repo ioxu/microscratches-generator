@@ -108,6 +108,15 @@ func _input(event):
 				display_mode = 0
 				$display.get_material().set_shader_param("display_mode", display_mode)
 			emit_signal("colour_channel_display_mode_changed", display_mode)
+			
+		if event.is_action("ui_uv_channel_toggle") and event.is_pressed() and not event.is_echo():
+			if display_mode !=6 :
+				display_mode = 6
+				$display.get_material().set_shader_param("display_mode", display_mode)
+			elif display_mode == 6:
+				display_mode = 0
+				$display.get_material().set_shader_param("display_mode", display_mode)
+			emit_signal("colour_channel_display_mode_changed", display_mode)
 		#---------------------------------------------------------------------------
 
 		if event is InputEventMouseMotion:
