@@ -25,7 +25,7 @@ func generate_lines() -> void:
 		var endp = Vector2(_rdomain(), _rdomain())
 
 		#var line = line_simple( startp, endp )
-		var line = line_simple_simplex( startp, endp)
+		var line = line_simple_simplex( startp, endp, _l)
 		
 		lines.append(line)
 		if Global.vector_direction == "tangent":
@@ -62,17 +62,18 @@ func line_simple( startp:Vector2, endp:Vector2 ) -> PoolVector2Array:
 
 
 func line_simple_simplex( startp:Vector2,
-	endp:Vector2) -> PoolVector2Array:
+	endp:Vector2, n_seed: int = 1) -> PoolVector2Array:
 	var noise = OpenSimplexNoise.new()
 
 	# Configure
 	#noise.seed = randi()
-	noise.seed = 1
+	noise.seed = n_seed
 	noise.octaves = 5
 	noise.period = 20.0
 	noise.persistence = 0.72
 	
 	var scale = 0.065
+	var noise_amplitude = 35
 	
 	var points = []
 	var n = 300
@@ -83,7 +84,7 @@ func line_simple_simplex( startp:Vector2,
 		#print("r %s p %s"%[r,p])
 		var nn = Vector2( noise.get_noise_2dv( p * scale ) , noise.get_noise_2dv( p * scale + Vector2(-316, 37.5) ) )
 		#print("nn %s"%nn)
-		p += nn * 35
+		p += nn * noise_amplitude
 		points.append( p )
 
 	return PoolVector2Array( points )

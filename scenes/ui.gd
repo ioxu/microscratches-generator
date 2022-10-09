@@ -132,7 +132,7 @@ func _on_vector_direction_menu_button_item_pressed( id_pressed ) -> void:
 
 
 func _on_generate_button_pressed() -> void:
-	Util.set_rng_seed( seed_number.get_value() )
+	Util.set_rng_seed( int(seed_number.get_value()) )
 	Global.report()
 
 	var time_now = OS.get_system_time_msecs() 
