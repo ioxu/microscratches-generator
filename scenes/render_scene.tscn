@@ -149,7 +149,6 @@ __meta__ = {
 }
 
 [node name="uv_rect_encoded" type="ColorRect" parent="."]
-visible = false
 material = SubResource( 2 )
 margin_left = 427.382
 margin_top = 430.221
@@ -171,7 +170,6 @@ __meta__ = {
 }
 
 [node name="uv_rect_float" type="ColorRect" parent="."]
-visible = false
 material = SubResource( 5 )
 margin_left = 658.547
 margin_top = 430.221
@@ -202,6 +200,5 @@ begin_cap_mode = 2
 end_cap_mode = 2
 
 [node name="test_line" type="Node2D" parent="."]
-visible = false
 script = ExtResource( 2 )
 line = NodePath("../source_line")

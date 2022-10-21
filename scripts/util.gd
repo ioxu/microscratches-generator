@@ -53,10 +53,12 @@ func vec2_to_encoded_colour( vec : Vector2 ) -> Color:
 #	- use:
 #		- Texture Interpolation: closest
 #		- Principled Shader, Tangent node set to UVs plugged into Tangent port.
-# Eevee
+# Eevee (?)
 # Arnold
 # Unreal material
 # OSL
+# Appleseed
+# LuxRender
 
 func export_texture( tex : Texture, path : String ) -> void:
 	var base = path.get_basename()

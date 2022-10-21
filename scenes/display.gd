@@ -24,8 +24,9 @@ onready var cam_transform := Transform2D()
 var coord_in_viewport : Vector2
 var colour_under_cursor : Color
 
-signal zoom_changed(new_zoom)
-signal mouse_coords_in_viewport_changed(new_coords)
+signal zoom_changed( new_zoom )
+signal cam_transform_changed
+signal mouse_coords_in_viewport_changed( new_coords )
 signal colour_under_mouse_changed( new_colour )
 
 # display_mode, display individual colour channels
@@ -141,7 +142,7 @@ func _input(event):
 		if event is InputEventMouseMotion:
 			if panning:
 				cam_transform.origin += event.relative
-				#print("panning %s"%event.relative)
+				emit_signal("cam_transform_changed")
 
 
 func zoom_at_point(zoom_change, point):
@@ -158,6 +159,7 @@ func zoom_at_point(zoom_change, point):
 	cam_transform = reoffset_t * scaled_t * offset_t * cam_transform
 
 	emit_signal("zoom_changed", self.zoom)
+	emit_signal("cam_transform_changed")
 
 	self.zoom = clamp(self.zoom, zoom_min, zoom_max)
 
@@ -175,8 +177,7 @@ func _draw() -> void:
 	draw_line( bl, br, cc, 3)
 
 
-# warning-ignore:unused_argument
-func _process(delta: float) -> void:
+func _on_display_cam_transform_changed() -> void:
 	$display.transform = cam_transform
 	update()
 
@@ -187,6 +188,7 @@ func reset_camera() -> void:
 	cam_transform.origin = get_viewport().size * 0.5
 	self.zoom = 1.0
 	emit_signal("zoom_changed", self.zoom)
+	emit_signal("cam_transform_changed")
 
 
 func window_to_viewport( coords : Vector2 ) -> Vector2:

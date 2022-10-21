@@ -593,6 +593,7 @@ position = Vector2( 163.879, -106.634 )
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 7 )
 [connection signal="size_changed" from="scene/Viewport" to="ui" method="_on_Viewport_size_changed"]
+[connection signal="cam_transform_changed" from="display" to="display" method="_on_display_cam_transform_changed"]
 [connection signal="colour_channel_display_mode_changed" from="display" to="ui" method="_on_display_colour_channel_display_mode_changed"]
 [connection signal="colour_under_mouse_changed" from="display" to="custom_draw" method="_on_display_colour_under_mouse_changed"]
 [connection signal="colour_under_mouse_changed" from="display" to="ui" method="_on_display_colour_under_mouse_changed"]
