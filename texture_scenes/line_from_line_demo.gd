@@ -1,4 +1,6 @@
 extends Node2D
+# demo scene for showing how to convert a Line2D Node into an immediate-mode 
+# line drawn with draw_polyline_colors
 
 export(NodePath) onready var line = get_node( line )
 

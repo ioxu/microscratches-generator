@@ -209,6 +209,7 @@ func update_image(force:=false) -> void: # TODO: need to find a good pattern inw
 		# used to copy image data into display_test_image_data Sprite
 		# yield(get_tree(), "idle_frame") was needed to step single updates
 		# down into the display.viewport_image
+#		assert( get_node("display_test_image_data"), " this part of the function expects a Sprite Node called 'display_test_image_data' to be present under %s"%self.get_path() )
 #		var texture = ImageTexture.new()
 #		texture.create_from_image(viewport_image)
 #		$display_test_image_data.texture = texture

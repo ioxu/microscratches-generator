@@ -103,11 +103,6 @@ material = SubResource( 1 )
 position = Vector2( 772.071, 455.139 )
 texture = SubResource( 2 )
 
-[node name="display_test_image_data" type="Sprite" parent="display"]
-visible = false
-material = SubResource( 1 )
-position = Vector2( 1796.07, 455.139 )
-
 [node name="ui" type="Node" parent="."]
 script = ExtResource( 4 )
 viewport = NodePath("../scene/Viewport")
