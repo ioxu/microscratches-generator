@@ -1,0 +1,82 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://textures/stripe_tile_a_inv.png" type="Texture" id=1]
+[ext_resource path="res://fonts/RobotoCondensed-Light.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://scenes/layer.gd" type="Script" id=3]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.435294, 0.211765, 0.505882, 0.109804 )
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color( 0.556863, 0.145098, 0.894118, 0.635294 )
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="DynamicFont" id=2]
+size = 14
+font_data = ExtResource( 2 )
+
+[node name="layer_PanelContainer" type="PanelContainer"]
+margin_right = 131.0
+margin_bottom = 23.0
+size_flags_horizontal = 3
+custom_styles/panel = SubResource( 1 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+border_colour_hilight = Color( 0.815686, 0.627451, 0.964706, 0.87451 )
+border_colour_selected = Color( 0.658824, 0.584314, 1, 1 )
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+margin_left = 1.0
+margin_top = 1.0
+margin_right = 130.0
+margin_bottom = 29.0
+mouse_filter = 1
+custom_constants/margin_right = 2
+custom_constants/margin_top = 2
+custom_constants/margin_left = 2
+custom_constants/margin_bottom = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 127.0
+margin_bottom = 26.0
+
+[node name="layerName_Label" type="Label" parent="MarginContainer/HBoxContainer"]
+margin_top = 3.0
+margin_right = 36.0
+margin_bottom = 20.0
+custom_fonts/font = SubResource( 2 )
+text = "layer 1"
+
+[node name="Control" type="Control" parent="MarginContainer/HBoxContainer"]
+margin_left = 40.0
+margin_right = 76.0
+margin_bottom = 24.0
+mouse_filter = 2
+size_flags_horizontal = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CheckBox" type="CheckBox" parent="MarginContainer/HBoxContainer"]
+margin_left = 80.0
+margin_right = 104.0
+margin_bottom = 24.0
+mouse_filter = 1
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer"]
+modulate = Color( 0.811765, 0.192157, 0.192157, 0.419608 )
+margin_left = 108.0
+margin_right = 125.0
+margin_bottom = 24.0
+texture = ExtResource( 1 )
+[connection signal="mouse_entered" from="." to="." method="_on_layer_PanelContainer_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_layer_PanelContainer_mouse_exited"]

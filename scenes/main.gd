@@ -100,29 +100,6 @@ func on_id_pressed( id, _ignored ) -> void:
 		var fd = $ui.find_node("file_export_FileDialog")
 		fd.popup_centered()
 
-#		var tex_data = $display/display.texture.get_data()
-#		var image : Image = tex_data
-#		# warning-ignore:return_value_discarded
-#		image.save_png( "exports/export.png" )
-#		image.lock()
-#		print("image data %s"%image.data)
-#		var width = image.data["width"]
-#		var height = image.data["height"]
-#		print("w %s h %s"%[width, height])
-#		var image_exr : Image = Image.new()
-#		image_exr.create( width, height, false, Image.FORMAT_RGBAH )
-#		image_exr.lock()
-#		for x in range(width):
-#			for y in range(height):
-#				var c = image.get_pixel( x, y )
-#				# A R G B
-#				image_exr.set_pixel( x, y, Color( c.g, c.b, c.a, c.r ))
-#		image_exr.unlock()
-#		image.unlock()
-#		print("image_exr data %s"%image_exr.data)
-#		# warning-ignore:return_value_discarded
-#		image_exr.save_exr( "exports/export.exr", false )
-
 
 # export
 func _on_file_export_FileDialog_file_selected(path: String) -> void:

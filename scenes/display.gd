@@ -39,6 +39,7 @@ var display_mode := 0
 signal colour_channel_display_mode_changed( new_mode )
 
 var accept_input = true # switched on modal overlays to not accept keyboard events
+var accept_mouse_navigation = true # switched when mouse is in modal overlays or out of main workspace (entered parameter panes etc.)
 
 
 func _ready() -> void:
@@ -127,16 +128,16 @@ func _input(event):
 			emit_signal( "colour_under_mouse_changed", self.colour_under_cursor )
 
 		if event is InputEventMouseButton:
-			if event.button_index == BUTTON_MIDDLE:
+			if event.button_index == BUTTON_MIDDLE and accept_mouse_navigation == true:
 				if event.pressed:
 					panning = true
 				else:
 					panning = false
 
-			if event.button_index == BUTTON_WHEEL_UP:
+			if event.button_index == BUTTON_WHEEL_UP and accept_mouse_navigation == true:
 				zoom_at_point(_zoom_rate, event.position)
 
-			elif event.button_index == BUTTON_WHEEL_DOWN:
+			elif event.button_index == BUTTON_WHEEL_DOWN and accept_mouse_navigation == true:
 				zoom_at_point(1/_zoom_rate, event.position)
 
 		if event is InputEventMouseMotion:
@@ -215,3 +216,9 @@ func update_image(force:=false) -> void: # TODO: need to find a good pattern inw
 #		$display_test_image_data.texture = texture
 
 
+func _on_Control_mouse_entered() -> void:
+	accept_mouse_navigation = true
+
+
+func _on_Control_mouse_exited() -> void:
+	accept_mouse_navigation = false

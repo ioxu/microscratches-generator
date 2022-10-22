@@ -17,6 +17,8 @@ var fps_label : Label
 var colour_channel_displayed_label : Label
 var generation_timing_label : Label
 
+var layerListContainer : VBoxContainer
+
 const COLOUR_CHANNEL_DISPLAY_MODES_NAMES = [
 	"RGB",
 	"ALPHA",
@@ -40,6 +42,9 @@ var VECTOR_DIRECTIONS = [
 	"tangent",
 	"bitangent"
 ]
+
+# layers
+const layer = preload("res://scenes/layer.tscn")
 
 
 func _ready() -> void:
@@ -76,6 +81,10 @@ func _ready() -> void:
 	Global.resolution = RESOLUTIONS[1][1] # TODO : hardcoded
 	Global.vector_direction = VECTOR_DIRECTIONS[VECTOR_DIRECTIONS.find(vector_direction_menu_button.get_text())]
 
+	# layers 
+	layerListContainer = self.find_node("layerListContainer")
+	
+
 func _process(_delta: float) -> void:
 	fps_label.text = "%s fps"%Engine.get_frames_per_second()
 
@@ -101,14 +110,12 @@ func _on_display_colour_under_mouse_changed(new_colour) -> void:
 
 
 func _on_Control_mouse_entered() -> void:
-	#print("_on_Control_mouse_entered")
 	Input.set_mouse_mode( Input.MOUSE_MODE_HIDDEN )
 	cursor.set_visible(true)
 	custom_draw.draw_vector_debug = true
 
 
 func _on_Control_mouse_exited() -> void:
-	#print("_on_Control_mouse_exited")
 	Input.set_mouse_mode( Input.MOUSE_MODE_VISIBLE )
 	cursor.set_visible(false)
 	custom_draw.draw_vector_debug = false
@@ -167,5 +174,27 @@ func milliseconds_to_pretty_time( ms : float ) -> String :
 	ms /= 1000
 	var minutes = ms / 60
 	var seconds = fmod(ms, 60)
-	return "%02d : %02d : %03d" % [minutes, seconds, milliseconds]
+	return "%02d' %02d\" %03d" % [minutes, seconds, milliseconds]
 	#return str(ms)
+
+
+# layers -----------------------------------------------------------------------
+func _on_addLayer_TextureButton_pressed() -> void:
+	print("[ui][layers] add layer")
+	var l = layer.instance()
+	layerListContainer.add_child(l)
+
+
+func _on_removeLayer_TextureButton_pressed() -> void:
+	print("[ui][layers] remove layer")
+	if layerListContainer.get_child_count() > 0:
+		var l = layerListContainer.get_child(0)
+		l.queue_free()
+
+
+func _on_moveLayerUp_TextureButton_pressed() -> void:
+	print("[ui][layers] move layer up")
+
+
+func _on_moveLayerDown_TextureButton_pressed() -> void:
+	print("[ui][layers] move layer down")
