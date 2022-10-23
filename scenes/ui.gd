@@ -43,9 +43,6 @@ var VECTOR_DIRECTIONS = [
 	"bitangent"
 ]
 
-# layers
-const layer = preload("res://scenes/layer.tscn")
-
 
 func _ready() -> void:
 	print("[ui] find labels")
@@ -81,9 +78,6 @@ func _ready() -> void:
 	Global.resolution = RESOLUTIONS[1][1] # TODO : hardcoded
 	Global.vector_direction = VECTOR_DIRECTIONS[VECTOR_DIRECTIONS.find(vector_direction_menu_button.get_text())]
 
-	# layers 
-	layerListContainer = self.find_node("layerListContainer")
-	
 
 func _process(_delta: float) -> void:
 	fps_label.text = "%s fps"%Engine.get_frames_per_second()
@@ -181,15 +175,14 @@ func milliseconds_to_pretty_time( ms : float ) -> String :
 # layers -----------------------------------------------------------------------
 func _on_addLayer_TextureButton_pressed() -> void:
 	print("[ui][layers] add layer")
-	var l = layer.instance()
-	layerListContainer.add_child(l)
+	$layerManager.add_layer()
 
 
 func _on_removeLayer_TextureButton_pressed() -> void:
 	print("[ui][layers] remove layer")
-	if layerListContainer.get_child_count() > 0:
-		var l = layerListContainer.get_child(0)
-		l.queue_free()
+#	if layerListContainer.get_child_count() > 0:
+#		var l = layerListContainer.get_child(0)
+#		l.queue_free()
 
 
 func _on_moveLayerUp_TextureButton_pressed() -> void:

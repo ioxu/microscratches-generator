@@ -15,6 +15,7 @@ corner_radius_top_left = 2
 corner_radius_top_right = 2
 corner_radius_bottom_right = 2
 corner_radius_bottom_left = 2
+corner_detail = 3
 
 [sub_resource type="DynamicFont" id=2]
 size = 14
@@ -31,6 +32,8 @@ __meta__ = {
 }
 border_colour_hilight = Color( 0.815686, 0.627451, 0.964706, 0.87451 )
 border_colour_selected = Color( 0.658824, 0.584314, 1, 1 )
+background_colour = Color( 0.435294, 0.211765, 0.505882, 0.109804 )
+background_colour_hilight = Color( 0.537255, 0.298039, 0.611765, 0.376471 )
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 margin_left = 1.0
