@@ -12,7 +12,7 @@ export var background_colour_hilight := Color(0.435294, 0.211765, 0.505882, 0.10
 var selected = false
 var hilighted = false
 
-var layer_name_label : Label
+var layer_name_label : Label setget set_layer_name
 var style_panel : StyleBox
 
 # select-action:
@@ -81,7 +81,8 @@ func _on_layer_PanelContainer_mouse_exited() -> void:
 func _to_string() -> String:
 	# "[ClassName:RID]"
 	# "[%s:%s]"%[self.get_class(), self.get_instance_id()]
-	return "Layer [%s:%s] (%s)"%[self.get_class(), self.get_instance_id(), self.layer_name]
+	#return "Layer [%s:%s] (%s)"%[self.get_class(), self.get_instance_id(), self.layer_name]
+	return "Layer \"%s\" (%s)"%[self.layer_name, "test_lines.tcsn"]
 
 
 

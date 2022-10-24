@@ -72,7 +72,6 @@ __meta__ = {
 margin_left = 80.0
 margin_right = 104.0
 margin_bottom = 24.0
-mouse_filter = 1
 
 [node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer"]
 modulate = Color( 0.811765, 0.192157, 0.192157, 0.419608 )

@@ -5,6 +5,8 @@ export(NodePath) onready var ui_root = get_node( ui_root )
 var layers : Array
 var selected_layers : Array
 var layerListContainer : VBoxContainer
+var layerParametersListContainer : VBoxContainer
+var layerNameParameter : LineEdit
 
 var _layers_count = 0
 
@@ -14,6 +16,9 @@ const ui_layer = preload("res://scenes/layer.tscn")
 
 func _ready() -> void:
 	layerListContainer = ui_root.find_node("layerListContainer")
+	layerParametersListContainer = ui_root.find_node("layerParametersListContainer")
+	layerNameParameter = layerParametersListContainer.find_node("layerName_LineEdit")
+
 	pprint("existing layers:")
 	for l in layerListContainer.get_children():
 		connect_layer_signals(l)
@@ -43,7 +48,7 @@ func remove_selected_layers() -> void:
 		layers.remove( layers.find(l) )
 		pprint("removing layer: %s"%l)
 		l.queue_free()
-
+	refresh_layers()
 
 func move_selected_layers_up() -> void:
 	if len(selected_layers) > 0:
@@ -76,7 +81,7 @@ func _on_layer_selected( selected_layer : Object, append_select : bool )->void:
 	if !append_select:
 		selected_layers.clear()
 	selected_layers.append(selected_layer)
-	layers_update_selection_status()
+	refresh_layers()
 
 
 func _on_layer_deselected( deselected_layer : Object, append_select : bool )->void:
@@ -92,16 +97,18 @@ func _on_layer_deselected( deselected_layer : Object, append_select : bool )->vo
 			selected_layers.clear()
 	else:
 		selected_layers.remove( selected_layers.find(deselected_layer) )
-	layers_update_selection_status()
+	refresh_layers()
 
 
-func layers_update_selection_status() -> void:
-	pprint("updating selection status")
+func refresh_layers() -> void:
+	# refresh all layer things
+	pprint("refresh layers")
 	for l in layers:
 		if selected_layers.find(l) != -1:
 			l.set_selected()
 		else:
 			l.set_deselected()
+	display_layer_parameters()
 
 
 func print_layers() -> void:
@@ -118,5 +125,31 @@ func connect_layer_signals(layer)->void:
 	layer.connect( "deselected", self, "_on_layer_deselected" )
 
 
+# parameters -------------------------------------------------------------------
+
+
+func display_layer_parameters() -> void:
+	if len(selected_layers) == 0:
+		# clear parameter pane
+		layerNameParameter.text = ""
+	
+	else:
+		# display 1st selected layer
+		var l = selected_layers[0]
+		pprint("displaying parameters for %s"%l)
+		layerNameParameter.text = l.layer_name
+
+
+func _on_layerName_LineEdit_text_entered(new_text: String) -> void:
+	var l = selected_layers[0]
+	l.set_layer_name( new_text )
+	layerNameParameter.release_focus()
+
+
+# ------------------------------------------------------------------------------
+
+
 func pprint(thing) -> void:
 	print("[layerManager] %s"%str(thing))
+
+

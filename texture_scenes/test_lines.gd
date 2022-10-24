@@ -3,7 +3,7 @@ extends Node2D
 var lines = []
 var lines_colours = []
 
-var n_lines = 3000#10000
+export var n_lines := 3000#10000
 
 var idim = 1024
 var mdim = idim * 3
