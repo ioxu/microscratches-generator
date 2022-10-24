@@ -16,8 +16,9 @@ var layer_name_label : Label
 var style_panel : StyleBox
 
 # select-action:
-signal selected( selected_layer )
-signal deselected( deselected_layer )
+#	'append_select' : Bool - add to selection or replace selection
+signal selected( selected_layer, append_select )
+signal deselected( deselected_layer, append_select )
 
 
 func _ready() -> void:
@@ -38,23 +39,26 @@ func _input(event: InputEvent) -> void:
 		if event is InputEventMouseButton:
 			if event.button_index == BUTTON_LEFT:
 				if event.pressed:
-					selected = !selected
-					update_selected()
-					if selected:
-						emit_signal("selected", self)
-					else:
-						emit_signal("deselected", self)
+					if !selected:
+						emit_signal("selected", self, Input.is_key_pressed(KEY_SHIFT))
+					elif selected:
+						emit_signal("deselected", self, Input.is_key_pressed(KEY_SHIFT))
 
 
-func update_selected() -> void:
-	if selected:
+func set_selected() -> void:
+	if !selected:
+		selected = true
 		style_panel.border_color = border_colour_hilight
 		style_panel.bg_color = background_colour_hilight
 		style_panel.border_width_left = 1.5
 		style_panel.border_width_right = 1.5
 		style_panel.border_width_top = 1.5
 		style_panel.border_width_bottom = 1.5
-	else:
+
+
+func set_deselected() -> void:
+	if selected:
+		selected = false
 		style_panel.border_color = border_colour
 		style_panel.bg_color = background_colour
 		style_panel.border_width_left = 1
