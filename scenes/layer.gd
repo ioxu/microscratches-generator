@@ -64,3 +64,8 @@ func _on_layer_PanelContainer_mouse_exited() -> void:
 	if not selected:
 		style_panel.border_color = border_colour
 
+#func _to_string() -> String:
+#	return "thingo"#"%s"%str(self)
+
+
+

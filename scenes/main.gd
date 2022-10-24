@@ -29,30 +29,7 @@ func _ready() -> void:
 	file_menu_button = self.find_node("file_menu_button")
 	var p := file_menu_button.get_popup()
 	p.rect_min_size = Vector2(200, 0)
-	p.add_separator("textures")
 
-	var dir = Directory.new()
-	var fnames = []
-	var tex_dir = "res://textures/"
-	print("[main] find textures in res://textures")
-	dir.open(tex_dir)
-	dir.list_dir_begin()
-	var f = dir.get_next()
-	while f!= "":
-		if dir.current_is_dir():
-			print("  found directory %s"%f)
-		else:
-			print("  found file %s"%f)
-			if not f.ends_with(".import"):
-				fnames.append(f)
-		f = dir.get_next()
-		
-	dir.list_dir_end()
-
-	for fn in fnames:
-		p.add_item( fn )
-
-	p.add_separator()
 	p.add_item("Load .. ", 200)
 	p.add_item("Export .. ", 300)
 	p.add_separator()
@@ -60,9 +37,6 @@ func _ready() -> void:
 
 	# warning-ignore:return_value_discarded
 	p.connect("id_pressed", self, "on_id_pressed", [menu_id])
-
-	#Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
-	#$scene/ViewportContainer/Viewport.render_target_update_mode = Viewport.UPDATE_ONCE
 
 
 func _input(event):

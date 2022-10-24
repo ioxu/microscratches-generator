@@ -3,6 +3,7 @@ extends Node
 export(NodePath) onready var ui_root = get_node( ui_root )
 
 var layers : Array
+var selected_layers : Array
 var layerListContainer : VBoxContainer
 
 # layers
@@ -26,6 +27,7 @@ func add_layer()->void:
 
 func _on_layer_selected( selected_layer )->void:
 	pprint("layer selected %s"%selected_layer)
+	
 
 
 func _on_layer_deselected( deselected_layer )->void:
