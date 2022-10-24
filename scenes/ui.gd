@@ -180,6 +180,7 @@ func _on_addLayer_TextureButton_pressed() -> void:
 
 func _on_removeLayer_TextureButton_pressed() -> void:
 	print("[ui][layers] remove layer")
+	$layerManager.remove_selected_layers()
 #	if layerListContainer.get_child_count() > 0:
 #		var l = layerListContainer.get_child(0)
 #		l.queue_free()
@@ -187,7 +188,13 @@ func _on_removeLayer_TextureButton_pressed() -> void:
 
 func _on_moveLayerUp_TextureButton_pressed() -> void:
 	print("[ui][layers] move layer up")
+	$layerManager.move_selected_layers_up()
 
 
 func _on_moveLayerDown_TextureButton_pressed() -> void:
 	print("[ui][layers] move layer down")
+	$layerManager.move_selected_layers_down()
+	
+
+func _on_layersInformation_TextureButton_pressed() -> void:
+	$layerManager.print_layers()

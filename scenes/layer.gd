@@ -1,5 +1,7 @@
 extends PanelContainer
 
+export var layer_name = "Layer" setget set_layer_name
+
 export var border_colour := Color(0.56, 0.15, 0.89, 0.64)
 export var border_colour_hilight := Color(0.56, 0.15, 0.89, 0.64)
 export var border_colour_selected := Color(0.56, 0.15, 0.89, 0.64)
@@ -10,8 +12,10 @@ export var background_colour_hilight := Color(0.435294, 0.211765, 0.505882, 0.10
 var selected = false
 var hilighted = false
 
+var layer_name_label : Label
 var style_panel : StyleBox
 
+# select-action:
 signal selected( selected_layer )
 signal deselected( deselected_layer )
 
@@ -21,6 +25,12 @@ func _ready() -> void:
 	style_panel = get("custom_styles/panel")
 	style_panel.border_color = border_colour
 	style_panel.bg_color = background_colour
+	layer_name_label = find_node("layerName_Label")
+
+
+func set_layer_name(new_name) -> void:
+	layer_name = new_name
+	layer_name_label.text = layer_name
 
 
 func _input(event: InputEvent) -> void:
@@ -64,8 +74,10 @@ func _on_layer_PanelContainer_mouse_exited() -> void:
 	if not selected:
 		style_panel.border_color = border_colour
 
-#func _to_string() -> String:
-#	return "thingo"#"%s"%str(self)
+func _to_string() -> String:
+	# "[ClassName:RID]"
+	# "[%s:%s]"%[self.get_class(), self.get_instance_id()]
+	return "Layer [%s:%s] (%s)"%[self.get_class(), self.get_instance_id(), self.layer_name]
 
 
 

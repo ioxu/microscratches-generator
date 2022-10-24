@@ -26,3 +26,4 @@ Some icons by [Kenny Vleugels](https://www.kenney.nl/)
 
 <a href="https://www.flaticon.com/free-icons/sign-lenguage" title="sign lenguage icons">Sign lenguage icons created by reussy - Flaticon</a>
 
+<a href="https://www.flaticon.com/free-icons/alert" title="alert icons">Alert icons created by reussy - Flaticon</a>

@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=2]
+[gd_scene load_steps=38 format=2]
 
 [ext_resource path="res://scenes/main.gd" type="Script" id=1]
 [ext_resource path="res://fonts/RobotoCondensed-Light.ttf" type="DynamicFontData" id=2]
@@ -17,6 +17,7 @@
 [ext_resource path="res://textures/down.png" type="Texture" id=15]
 [ext_resource path="res://scenes/layer.tscn" type="PackedScene" id=16]
 [ext_resource path="res://scenes/layerManager.gd" type="Script" id=17]
+[ext_resource path="res://textures/alert.png" type="Texture" id=18]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 10 )
@@ -517,21 +518,21 @@ margin_left = 18.0
 margin_right = 34.0
 margin_bottom = 16.0
 rect_min_size = Vector2( 16, 16 )
-hint_tooltip = "remove layer"
+hint_tooltip = "remove selected layers"
 texture_normal = ExtResource( 13 )
 expand = true
 stretch_mode = 4
 
 [node name="Control" type="Control" parent="ui/Control/MarginContainer/VBoxContainer/Control/HBoxContainer/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/VSplitContainer/layersPanel_PanelContainer/MarginContainer/VBoxContainer/layersControl_PanelContainer/MarginContainer/HBoxContainer"]
 margin_left = 36.0
-margin_right = 89.0
+margin_right = 65.0
 margin_bottom = 16.0
 size_flags_horizontal = 3
 
 [node name="moveLayerUp_TextureButton" type="TextureButton" parent="ui/Control/MarginContainer/VBoxContainer/Control/HBoxContainer/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/VSplitContainer/layersPanel_PanelContainer/MarginContainer/VBoxContainer/layersControl_PanelContainer/MarginContainer/HBoxContainer"]
 modulate = Color( 1, 1, 1, 0.482353 )
-margin_left = 91.0
-margin_right = 107.0
+margin_left = 67.0
+margin_right = 83.0
 margin_bottom = 16.0
 rect_min_size = Vector2( 16, 16 )
 hint_tooltip = "move layer up"
@@ -541,12 +542,31 @@ stretch_mode = 4
 
 [node name="moveLayerDown_TextureButton" type="TextureButton" parent="ui/Control/MarginContainer/VBoxContainer/Control/HBoxContainer/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/VSplitContainer/layersPanel_PanelContainer/MarginContainer/VBoxContainer/layersControl_PanelContainer/MarginContainer/HBoxContainer"]
 modulate = Color( 1, 1, 1, 0.482353 )
+margin_left = 85.0
+margin_right = 101.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 16, 16 )
+hint_tooltip = "move layer down"
+texture_normal = ExtResource( 15 )
+expand = true
+stretch_mode = 4
+
+[node name="VSeparator" type="VSeparator" parent="ui/Control/MarginContainer/VBoxContainer/Control/HBoxContainer/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/VSplitContainer/layersPanel_PanelContainer/MarginContainer/VBoxContainer/layersControl_PanelContainer/MarginContainer/HBoxContainer"]
+margin_left = 103.0
+margin_right = 107.0
+margin_bottom = 16.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="layersInformation_TextureButton" type="TextureButton" parent="ui/Control/MarginContainer/VBoxContainer/Control/HBoxContainer/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/VSplitContainer/layersPanel_PanelContainer/MarginContainer/VBoxContainer/layersControl_PanelContainer/MarginContainer/HBoxContainer"]
+modulate = Color( 0.152941, 0.854902, 0.411765, 1 )
 margin_left = 109.0
 margin_right = 125.0
 margin_bottom = 16.0
 rect_min_size = Vector2( 16, 16 )
 hint_tooltip = "move layer down"
-texture_normal = ExtResource( 15 )
+texture_normal = ExtResource( 18 )
 expand = true
 stretch_mode = 4
 
@@ -833,6 +853,7 @@ texture = ExtResource( 7 )
 [connection signal="pressed" from="ui/Control/MarginContainer/VBoxContainer/Control/HBoxContainer/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/VSplitContainer/layersPanel_PanelContainer/MarginContainer/VBoxContainer/layersControl_PanelContainer/MarginContainer/HBoxContainer/removeLayer_TextureButton" to="ui" method="_on_removeLayer_TextureButton_pressed"]
 [connection signal="pressed" from="ui/Control/MarginContainer/VBoxContainer/Control/HBoxContainer/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/VSplitContainer/layersPanel_PanelContainer/MarginContainer/VBoxContainer/layersControl_PanelContainer/MarginContainer/HBoxContainer/moveLayerUp_TextureButton" to="ui" method="_on_moveLayerUp_TextureButton_pressed"]
 [connection signal="pressed" from="ui/Control/MarginContainer/VBoxContainer/Control/HBoxContainer/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/VSplitContainer/layersPanel_PanelContainer/MarginContainer/VBoxContainer/layersControl_PanelContainer/MarginContainer/HBoxContainer/moveLayerDown_TextureButton" to="ui" method="_on_moveLayerDown_TextureButton_pressed"]
+[connection signal="pressed" from="ui/Control/MarginContainer/VBoxContainer/Control/HBoxContainer/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/VSplitContainer/layersPanel_PanelContainer/MarginContainer/VBoxContainer/layersControl_PanelContainer/MarginContainer/HBoxContainer/layersInformation_TextureButton" to="ui" method="_on_layersInformation_TextureButton_pressed"]
 [connection signal="about_to_show" from="ui/file_export_FileDialog" to="ui" method="_on_file_export_FileDialog_about_to_show"]
 [connection signal="file_selected" from="ui/file_export_FileDialog" to="." method="_on_file_export_FileDialog_file_selected"]
 [connection signal="popup_hide" from="ui/file_export_FileDialog" to="ui" method="_on_file_export_FileDialog_popup_hide"]
