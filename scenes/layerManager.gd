@@ -38,7 +38,6 @@ func remove_selected_layers() -> void:
 		for l in layerListContainer.get_children():
 			if selected_layers.find(l) != -1:
 				layers_to_free.append(l)
-	
 	for l in layers_to_free:
 		selected_layers.remove( selected_layers.find(l) )
 		layers.remove( layers.find(l) )
@@ -52,18 +51,24 @@ func move_selected_layers_up() -> void:
 			var new_position = l.get_index() -1
 			if new_position != -1:
 				l.get_parent().move_child( l, l.get_index() -1 )
-		update_layers_order_from_ui()
+		sync_layers_from_ui()
 
 
 func move_selected_layers_down() -> void:
 	if len(selected_layers) > 0:
 		for l in selected_layers:
 			l.get_parent().move_child( l, l.get_index() +1 )
-		update_layers_order_from_ui()
+		sync_layers_from_ui()
 
 
-func update_layers_order_from_ui() -> void:
-	pprint("update layers order from ui")
+func sync_layers_from_ui() -> void:
+	# rebuilds internal layer list from the layer list in the UI
+	# (moving layers in UI list needs sycing back to layers list)
+	pprint("sync layers from ui")
+	var redordered_layers = []
+	for l in layerListContainer.get_children():
+		redordered_layers.append(l)
+	layers = redordered_layers
 
 
 func _on_layer_selected( selected_layer : Object, append_select : bool )->void:
@@ -78,6 +83,9 @@ func _on_layer_deselected( deselected_layer : Object, append_select : bool )->vo
 	pprint("layer deselected %s"%deselected_layer)
 	if !append_select:
 		if len(selected_layers) > 1:
+			# if not SHIFT-deselecting a layer,
+			# leave the single layer that was clicked, selected, 
+			# and de-select others
 			selected_layers.clear()
 			selected_layers.append(deselected_layer)
 		else:
