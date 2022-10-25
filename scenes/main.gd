@@ -8,6 +8,7 @@ extends Node2D
 # anisotropic reflection
 # https://www.youtube.com/watch?v=M6tY53LlzSo&ab_channel=Christopher3D
 
+export(NodePath) onready var layer_manager = (get_node( layer_manager ) as LayerManager)
 
 onready var file_menu_button : MenuButton
 
@@ -38,6 +39,12 @@ func _ready() -> void:
 	# warning-ignore:return_value_discarded
 	p.connect("id_pressed", self, "on_id_pressed", [menu_id])
 
+	pprint("create default texture layer:")
+	var default_texture_layer_resource : PackedScene = load("res://texture_scenes/test_lines.tscn")
+	var default_texture_layer_instance = default_texture_layer_resource.instance()
+	pprint("   %s (%s)"%[default_texture_layer_instance, default_texture_layer_instance.get_name()])
+	layer_manager.add_layer( default_texture_layer_instance )
+	
 
 func _input(event):
 	if event.is_action("ui_cancel") and event.is_pressed() and not event.is_echo():
@@ -107,3 +114,5 @@ func go_fullscreen():
 	emit_signal("fullscreen", fullscreen)
 
 
+func pprint(thing) -> void:
+	print("[main] %s"%str(thing))

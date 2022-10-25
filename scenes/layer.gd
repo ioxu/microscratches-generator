@@ -1,6 +1,7 @@
 extends PanelContainer
+class_name Layer
 
-export var layer_name = "Layer" setget set_layer_name
+export var layer_name : String = "Layer" setget set_layer_name
 
 export var border_colour := Color(0.56, 0.15, 0.89, 0.64)
 export var border_colour_hilight := Color(0.56, 0.15, 0.89, 0.64)
@@ -14,6 +15,8 @@ var hilighted = false
 
 var layer_name_label : Label setget set_layer_name
 var style_panel : StyleBox
+
+var scene_name : String = "" # stores an identifier for the texture scene name
 
 # select-action:
 #	'append_select' : Bool - add to selection or replace selection

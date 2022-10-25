@@ -1,24 +1,29 @@
 extends Node
+class_name LayerManager
 
 export(NodePath) onready var ui_root = get_node( ui_root )
+export(NodePath) onready var render_scene_root = get_node( render_scene_root )
 
 var layers : Array
 var selected_layers : Array
 var layerListContainer : VBoxContainer
 var layerParametersListContainer : VBoxContainer
 var layerNameParameter : LineEdit
+var texture_scene_name_parameter : Label
 
-var _layers_count = 0
+var _layers_count : int = 0
 
 # layers
-const ui_layer = preload("res://scenes/layer.tscn")
+const ui_layer : PackedScene = preload("res://scenes/layer.tscn")
 
 
 func _ready() -> void:
 	layerListContainer = ui_root.find_node("layerListContainer")
 	layerParametersListContainer = ui_root.find_node("layerParametersListContainer")
 	layerNameParameter = layerParametersListContainer.find_node("layerName_LineEdit")
+	texture_scene_name_parameter = layerParametersListContainer.find_node("texture_scene_name_Label")
 
+	# layers temp --------------------------------------------------------------
 	pprint("existing layers:")
 	for l in layerListContainer.get_children():
 		connect_layer_signals(l)
@@ -26,16 +31,43 @@ func _ready() -> void:
 		layers.append( l )
 		_layers_count += 1
 
+#	pprint("scene stuff")
+#	var scene = "res://texture_scenes/test_lines.tscn"
+#	var scene_resource = load(scene)
+#	pprint("scene resource: %s"%scene_resource)
+#	pprint("  class %s"%scene_resource.get_class())
+#	var scene_instance = scene_resource.instance()
+#	pprint("  instance %s"%scene_instance)
+#	pprint("  instance class %s"%scene_instance.get_class())
+#	render_scene_root.add_child( scene_instance )
+#	[layerManager] scene stuff
+#	[layerManager] scene resource: [PackedScene:1532]
+#	[layerManager]   class PackedScene
+#	[layerManager]   instance [Node2D:1534]
+#	[layerManager]   instance class Node2D
+	# layers temp --------------------------------------------------------------
 
-func add_layer(select_new : bool = true)->void:
-	pprint("add layer")
-	var l = ui_layer.instance()
+
+func add_layer(new_texture_node : Node2D = null, select_new : bool = true)->void:
+	# adds a new layer to the GUI,
+	# and a node heirarchy (with a Node2D root) to the rendering viewport
+	# (it is intended that new_texture_node is an instanced PackedScene loaded from a .tcsn)
+	# but concievably a hierarchy could be scripted and passed in instead.
+
+
+	var l : Layer = ui_layer.instance()
 	layerListContainer.add_child(l)
 	# move to top
 	l.get_parent().move_child(l, 0)
 	_layers_count +=1
-	l.layer_name = "Layer%s"%_layers_count
+	l.layer_name = "Layer%s"%str(_layers_count)
 	layers.append( l )
+
+	if new_texture_node != null:
+		render_scene_root.add_child( new_texture_node )
+		new_texture_node.set_owner( render_scene_root )
+		l.scene_name = new_texture_node.get_name()
+
 	if select_new:
 		# select only the new layer
 		selected_layers.clear()
@@ -57,6 +89,7 @@ func remove_selected_layers() -> void:
 		pprint("removing layer: %s"%l)
 		l.queue_free()
 	refresh_layers()
+
 
 func move_selected_layers_up() -> void:
 	if len(selected_layers) > 0:
@@ -140,11 +173,13 @@ func display_layer_parameters() -> void:
 	if len(selected_layers) == 0:
 		# clear parameter pane
 		layerNameParameter.text = ""
+		texture_scene_name_parameter.text = ""
 	else:
 		# display 1st selected layer
-		var l = selected_layers[0]
+		var l : Layer = selected_layers[0]
 		pprint("displaying parameters for %s"%l)
 		layerNameParameter.text = l.layer_name
+		texture_scene_name_parameter.text = l.scene_name
 
 
 func _on_layerName_LineEdit_text_entered(new_text: String) -> void:

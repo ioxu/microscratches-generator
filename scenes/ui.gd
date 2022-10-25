@@ -140,7 +140,13 @@ func _on_generate_button_pressed() -> void:
 	
 	################################
 	Util.set_rng_seed( int(seed_number.get_value()) )
+	
+	print("VIEWPORT children:")
+	for c in viewport.get_node("render_scene").get_children():
+		print("    %s (%s)"%[c.get_path(),c.get_class()])
+	
 	var test_lines = viewport.find_node("test_lines")
+	print(test_lines)
 	test_lines.generate_lines()
 
 	# chain updates down into image datas
@@ -177,7 +183,7 @@ func _on_addLayer_TextureButton_pressed() -> void:
 	print("[ui][layers] add layer")
 	$layerManager.add_layer()
 
-
+ 
 func _on_removeLayer_TextureButton_pressed() -> void:
 	print("[ui][layers] remove layer")
 	$layerManager.remove_selected_layers()

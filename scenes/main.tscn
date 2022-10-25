@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=2]
+[gd_scene load_steps=37 format=2]
 
 [ext_resource path="res://scenes/main.gd" type="Script" id=1]
 [ext_resource path="res://fonts/RobotoCondensed-Light.ttf" type="DynamicFontData" id=2]
@@ -15,7 +15,6 @@
 [ext_resource path="res://textures/less.png" type="Texture" id=13]
 [ext_resource path="res://textures/up-arrow.png" type="Texture" id=14]
 [ext_resource path="res://textures/down.png" type="Texture" id=15]
-[ext_resource path="res://scenes/layer.tscn" type="PackedScene" id=16]
 [ext_resource path="res://scenes/layerManager.gd" type="Script" id=17]
 [ext_resource path="res://textures/alert.png" type="Texture" id=18]
 
@@ -129,6 +128,7 @@ axis_stretch_horizontal = 1
 
 [node name="main" type="Node2D"]
 script = ExtResource( 1 )
+layer_manager = NodePath("ui/layerManager")
 
 [node name="scene" type="Node2D" parent="."]
 position = Vector2( -1674.38, -256.276 )
@@ -162,6 +162,7 @@ custom_draw = NodePath("../custom_draw")
 [node name="layerManager" type="Node" parent="ui"]
 script = ExtResource( 17 )
 ui_root = NodePath("..")
+render_scene_root = NodePath("../../scene/Viewport/render_scene")
 
 [node name="Control" type="Control" parent="ui"]
 anchor_right = 1.0
@@ -353,6 +354,8 @@ margin_right = 131.0
 margin_bottom = 24.0
 size_flags_horizontal = 3
 custom_icons/updown = SubResource( 11 )
+min_value = -10000.0
+max_value = 10000.0
 value = 1.0
 align = 2
 
@@ -475,10 +478,6 @@ margin_right = 131.0
 margin_bottom = 207.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-
-[node name="layer_PanelContainer" parent="ui/Control/MarginContainer/VBoxContainer/Control/HBoxContainer/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/VSplitContainer/layersPanel_PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/layerListContainer" instance=ExtResource( 16 )]
-margin_bottom = 30.0
-background_colour_hilight = Color( 0.556863, 0.321569, 0.627451, 0.388235 )
 
 [node name="layersControl_PanelContainer" type="PanelContainer" parent="ui/Control/MarginContainer/VBoxContainer/Control/HBoxContainer/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/VSplitContainer/layersPanel_PanelContainer/MarginContainer/VBoxContainer"]
 margin_top = 211.0

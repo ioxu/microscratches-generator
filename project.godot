@@ -8,9 +8,20 @@
 
 config_version=4
 
-_global_script_classes=[  ]
+_global_script_classes=[ {
+"base": "PanelContainer",
+"class": "Layer",
+"language": "GDScript",
+"path": "res://scenes/layer.gd"
+}, {
+"base": "Node",
+"class": "LayerManager",
+"language": "GDScript",
+"path": "res://scenes/layerManager.gd"
+} ]
 _global_script_class_icons={
-
+"Layer": "",
+"LayerManager": ""
 }
 
 [application]
