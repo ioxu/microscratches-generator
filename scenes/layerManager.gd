@@ -27,14 +27,22 @@ func _ready() -> void:
 		_layers_count += 1
 
 
-func add_layer()->void:
+func add_layer(select_new : bool = true)->void:
 	pprint("add layer")
 	var l = ui_layer.instance()
 	layerListContainer.add_child(l)
+	# move to top
+	l.get_parent().move_child(l, 0)
 	_layers_count +=1
 	l.layer_name = "Layer%s"%_layers_count
 	layers.append( l )
+	if select_new:
+		# select only the new layer
+		selected_layers.clear()
+		selected_layers.append(l)
 	connect_layer_signals(l)
+	sync_layers_from_ui()
+	refresh_layers()
 
 
 func remove_selected_layers() -> void:
@@ -132,7 +140,6 @@ func display_layer_parameters() -> void:
 	if len(selected_layers) == 0:
 		# clear parameter pane
 		layerNameParameter.text = ""
-	
 	else:
 		# display 1st selected layer
 		var l = selected_layers[0]

@@ -123,7 +123,7 @@ func _on_display_colour_channel_display_mode_changed(new_mode) -> void:
 func _on_resolution_menu_button_item_pressed( id_pressed ) -> void:
 	print("[ui][control panel] resolution selected: %s"%RESOLUTIONS[id_pressed][0])
 	resolution_menu_button.set_text(RESOLUTIONS[id_pressed][0])
-	Global.resolution = RESOLUTIONS[id_pressed][0]
+	Global.resolution = RESOLUTIONS[id_pressed][1]
 
 
 func _on_vector_direction_menu_button_item_pressed( id_pressed ) -> void:
