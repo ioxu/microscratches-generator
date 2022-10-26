@@ -478,6 +478,9 @@ margin_right = 131.0
 margin_bottom = 207.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+__meta__ = {
+"_editor_description_": "Layer objects are instanced under here!"
+}
 
 [node name="layersControl_PanelContainer" type="PanelContainer" parent="ui/Control/MarginContainer/VBoxContainer/Control/HBoxContainer/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/VSplitContainer/layersPanel_PanelContainer/MarginContainer/VBoxContainer"]
 margin_top = 211.0
@@ -608,7 +611,7 @@ __meta__ = {
 }
 
 [node name="TextureRect" type="TextureRect" parent="ui/Control/MarginContainer/VBoxContainer/Control/HBoxContainer/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/VSplitContainer/layerParameters_PanelContainer/MarginContainer/VBoxContainer/layerParametersTitle_HBoxContainer"]
-modulate = Color( 0.266667, 0.933333, 0.415686, 1 )
+modulate = Color( 0.266667, 0.933333, 0.415686, 0.403922 )
 margin_left = 115.0
 margin_right = 131.0
 margin_bottom = 16.0

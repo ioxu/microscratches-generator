@@ -35,7 +35,7 @@ signal colour_under_mouse_changed( new_colour )
 # 2 = red
 # 3 = green
 # 4 = blue
-var display_mode := 0
+var display_mode : int = 0
 signal colour_channel_display_mode_changed( new_mode )
 
 var accept_input = true # switched on modal overlays to not accept keyboard events
@@ -43,18 +43,17 @@ var accept_mouse_navigation = true # switched when mouse is in modal overlays or
 
 
 func _ready() -> void:
-	cam_transform.origin = $display.transform.origin
+	cam_transform.origin = ($display as Sprite).transform.origin
 	
 	# delay and init
 	yield(get_tree().create_timer(0.1), "timeout")
 	emit_signal("zoom_changed", self.zoom)
-	print("[display] viewport dimensions %s"%viewport.get_size())
-	
+	print("[display] viewport dimensions %s"%viewport.get_size() )
 	yield(get_tree().create_timer(0.5), "timeout")
 	update_image(true)
 
 
-func _input(event):
+func _input(event : InputEvent):
 	if accept_input:
 		if event.is_action("ui_reset_camera") and event.is_pressed() and not event.is_echo():
 			reset_camera()

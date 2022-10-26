@@ -10,6 +10,7 @@ var layerListContainer : VBoxContainer
 var layerParametersListContainer : VBoxContainer
 var layerNameParameter : LineEdit
 var texture_scene_name_parameter : Label
+var texture_scene_name_parameter_colour : Color
 
 var _layers_count : int = 0
 
@@ -22,7 +23,7 @@ func _ready() -> void:
 	layerParametersListContainer = ui_root.find_node("layerParametersListContainer")
 	layerNameParameter = layerParametersListContainer.find_node("layerName_LineEdit")
 	texture_scene_name_parameter = layerParametersListContainer.find_node("texture_scene_name_Label")
-
+	texture_scene_name_parameter_colour = texture_scene_name_parameter.get_modulate()
 	# layers temp --------------------------------------------------------------
 	pprint("existing layers:")
 	for l in layerListContainer.get_children():
@@ -30,21 +31,6 @@ func _ready() -> void:
 		pprint("   %s"%l)
 		layers.append( l )
 		_layers_count += 1
-
-#	pprint("scene stuff")
-#	var scene = "res://texture_scenes/test_lines.tscn"
-#	var scene_resource = load(scene)
-#	pprint("scene resource: %s"%scene_resource)
-#	pprint("  class %s"%scene_resource.get_class())
-#	var scene_instance = scene_resource.instance()
-#	pprint("  instance %s"%scene_instance)
-#	pprint("  instance class %s"%scene_instance.get_class())
-#	render_scene_root.add_child( scene_instance )
-#	[layerManager] scene stuff
-#	[layerManager] scene resource: [PackedScene:1532]
-#	[layerManager]   class PackedScene
-#	[layerManager]   instance [Node2D:1534]
-#	[layerManager]   instance class Node2D
 	# layers temp --------------------------------------------------------------
 
 
@@ -53,8 +39,6 @@ func add_layer(new_texture_node : Node2D = null, select_new : bool = true)->void
 	# and a node heirarchy (with a Node2D root) to the rendering viewport
 	# (it is intended that new_texture_node is an instanced PackedScene loaded from a .tcsn)
 	# but concievably a hierarchy could be scripted and passed in instead.
-
-
 	var l : Layer = ui_layer.instance()
 	layerListContainer.add_child(l)
 	# move to top
@@ -66,7 +50,7 @@ func add_layer(new_texture_node : Node2D = null, select_new : bool = true)->void
 	if new_texture_node != null:
 		render_scene_root.add_child( new_texture_node )
 		new_texture_node.set_owner( render_scene_root )
-		l.scene_name = new_texture_node.get_name()
+		l.texture_scene = new_texture_node
 
 	if select_new:
 		# select only the new layer
@@ -152,15 +136,6 @@ func refresh_layers() -> void:
 	display_layer_parameters()
 
 
-func print_layers() -> void:
-	pprint("layers: (n:%s, %s selected)"%[len(layers), len(selected_layers)])
-	for l in layers:
-		var ss = ""
-		if selected_layers.find(l) != -1:
-			ss = "(selected)" 
-		print("  %s %s"%[l, ss])
-
-
 func connect_layer_signals(layer)->void:
 	layer.connect( "selected", self, "_on_layer_selected" )
 	layer.connect( "deselected", self, "_on_layer_deselected" )
@@ -179,7 +154,14 @@ func display_layer_parameters() -> void:
 		var l : Layer = selected_layers[0]
 		pprint("displaying parameters for %s"%l)
 		layerNameParameter.text = l.layer_name
-		texture_scene_name_parameter.text = l.scene_name
+		var scene_name : String
+		if l.texture_scene:
+			texture_scene_name_parameter.set_modulate(texture_scene_name_parameter_colour)
+			scene_name = l.texture_scene.get_name()
+		else:
+			texture_scene_name_parameter.set_modulate(Color(0.90625, 0.441067, 0.392944, 0.854902))
+			scene_name = "NULL"
+		texture_scene_name_parameter.text = scene_name
 
 
 func _on_layerName_LineEdit_text_entered(new_text: String) -> void:
@@ -189,6 +171,14 @@ func _on_layerName_LineEdit_text_entered(new_text: String) -> void:
 
 
 # ------------------------------------------------------------------------------
+
+func print_layers() -> void:
+	pprint("layers: (n:%s, %s selected)"%[len(layers), len(selected_layers)])
+	for l in layers:
+		var ss = ""
+		if selected_layers.find(l) != -1:
+			ss = "(selected)" 
+		print("  %s %s"%[l, ss])
 
 
 func pprint(thing) -> void:
