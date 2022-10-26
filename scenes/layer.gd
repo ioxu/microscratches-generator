@@ -16,7 +16,7 @@ var hilighted = false
 var layer_name_label : Label setget set_layer_name
 var style_panel : StyleBox
 
-var texture_scene : Node2D # stores a reference for the texture scene
+var texture_scene : CanvasItem #: Node2D # stores a reference for the texture scene
 
 # select-action:
 #	'append_select' : Bool - add to selection or replace selection
@@ -84,7 +84,6 @@ func _on_layer_PanelContainer_mouse_exited() -> void:
 func _to_string() -> String:
 	# "[ClassName:RID]"
 	# "[%s:%s]"%[self.get_class(), self.get_instance_id()]
-	#return "Layer [%s:%s] (%s)"%[self.get_class(), self.get_instance_id(), self.layer_name]
 	var scene_name : String
 	if self.texture_scene:
 		scene_name = self.texture_scene.get_name()

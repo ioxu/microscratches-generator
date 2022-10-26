@@ -34,7 +34,7 @@ func _ready() -> void:
 	# layers temp --------------------------------------------------------------
 
 
-func add_layer(new_texture_node : Node2D = null, select_new : bool = true)->void:
+func add_layer(new_texture_node : Node = null, select_new : bool = true)->void:
 	# adds a new layer to the GUI,
 	# and a node heirarchy (with a Node2D root) to the rendering viewport
 	# (it is intended that new_texture_node is an instanced PackedScene loaded from a .tcsn)
@@ -94,11 +94,15 @@ func move_selected_layers_down() -> void:
 func sync_layers_from_ui() -> void:
 	# rebuilds internal layer list from the layer list in the UI
 	# (moving layers in UI list needs sycing back to layers list)
+	# then synchronises the node order under render_scene_root
 	pprint("sync layers from ui")
 	var redordered_layers = []
 	for l in layerListContainer.get_children():
 		redordered_layers.append(l)
 	layers = redordered_layers
+
+	for l in layers:
+		render_scene_root.move_child( (l as Layer).texture_scene, 0 )
 
 
 func _on_layer_selected( selected_layer : Object, append_select : bool )->void:

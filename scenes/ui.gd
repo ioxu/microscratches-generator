@@ -43,6 +43,7 @@ var VECTOR_DIRECTIONS = [
 	"bitangent"
 ]
 
+var _texture_chooser_chosen_index : int
 
 func _ready() -> void:
 	print("[ui] find labels")
@@ -176,9 +177,39 @@ func milliseconds_to_pretty_time( ms : float ) -> String :
 # layers -----------------------------------------------------------------------
 func _on_addLayer_TextureButton_pressed() -> void:
 	print("[ui][layers] add layer")
-	$layerManager.add_layer()
+	var paths = ["res://texture_scenes/"]
+	print("[ui][layers]    finding texture scenes (%s)"%paths)
+	var scene_paths = Util.get_texture_scenes_list(paths)
+	
+	var pop = PopupMenu.new()
+	var ui = get_node("/root/main/ui")
+	ui.add_child(pop)
+	pop.set_owner(ui)
+	pop.connect("index_pressed", self, "_on_textureLayerChooser_index_pressed")
+	for s in scene_paths:
+		pop.add_item(s)
+	pop.set_exclusive(true)
+	pop.popup_centered()
+	
+	# this WHOLE function's guts needs to be inline because of this yield
+	yield(pop, "popup_hide")
 
- 
+	var chosen_path = scene_paths[self._texture_chooser_chosen_index]
+	print("[ui][layers] chosen: %s"%chosen_path)
+	pop.queue_free()
+
+	var scene = load(chosen_path)
+	print("[ui][layers][texture scene] %s"%scene)
+	print("[ui][layers][texture scene] %s"%scene.get_name())
+
+	$layerManager.add_layer( scene.instance() )
+
+
+func _on_textureLayerChooser_index_pressed(index : int) -> void:
+	print("[ui][layers][_on_textureLayerChooser_index_pressed] %s"%index)
+	self._texture_chooser_chosen_index = index
+
+
 func _on_removeLayer_TextureButton_pressed() -> void:
 	print("[ui][layers] remove layer")
 	$layerManager.remove_selected_layers()

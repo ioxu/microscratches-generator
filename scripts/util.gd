@@ -41,6 +41,28 @@ func vec2_to_encoded_colour( vec : Vector2 ) -> Color:
 	return Color(ev.x, ev.y, 0.0, 1.0)
 
 
+# import -----------------------------------------------------------------------
+func get_texture_scenes_list(paths : Array) -> String:
+	var files = []
+	var dir = Directory.new()
+
+	for p in paths:
+		dir.open(p)
+		dir.list_dir_begin()
+		while true:
+			var file : String = dir.get_next()
+			if file == "":
+				break
+			elif not file.begins_with("."):
+				if file.ends_with(".tscn"):
+					files.append(p +"/"+file)
+		dir.list_dir_end()
+	
+	for f in files:
+		pprint("    %s"%f)
+	return files
+
+
 # export -----------------------------------------------------------------------
 
 # formats:
@@ -87,3 +109,5 @@ func export_texture( tex : Texture, path : String ) -> void:
 	image_exr.save_exr( base + ".exr", false )
 
 
+func pprint(thing) -> void:
+	print("[util] %s"%str(thing))
