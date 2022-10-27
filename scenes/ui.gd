@@ -143,7 +143,8 @@ func _on_generate_button_pressed() -> void:
 	Util.set_rng_seed( int(seed_number.get_value()) )
 	
 	var test_lines = viewport.find_node("test_lines")
-	test_lines.generate_lines()
+	if test_lines:
+		test_lines.generate_lines()
 
 	# chain updates down into image datas
 	# this order, and frame-waits, are important
@@ -213,9 +214,6 @@ func _on_textureLayerChooser_index_pressed(index : int) -> void:
 func _on_removeLayer_TextureButton_pressed() -> void:
 	print("[ui][layers] remove layer")
 	$layerManager.remove_selected_layers()
-#	if layerListContainer.get_child_count() > 0:
-#		var l = layerListContainer.get_child(0)
-#		l.queue_free()
 
 
 func _on_moveLayerUp_TextureButton_pressed() -> void:

@@ -63,15 +63,24 @@ func add_layer(new_texture_node : Node = null, select_new : bool = true)->void:
 
 func remove_selected_layers() -> void:
 	var layers_to_free = []
+	var scenes_to_free = []
 	if layerListContainer.get_child_count() > 0:
 		for l in layerListContainer.get_children():
 			if selected_layers.find(l) != -1:
 				layers_to_free.append(l)
+				if l.texture_scene != null:
+					scenes_to_free.append( l.texture_scene )
+	
 	for l in layers_to_free:
 		selected_layers.remove( selected_layers.find(l) )
 		layers.remove( layers.find(l) )
-		pprint("removing layer: %s"%l)
+		pprint("[remove layers] removing layer: %s"%l)
 		l.queue_free()
+	
+	for s in scenes_to_free:
+		pprint("[remove layers] removing texture scene: %s (%s)"%[s, s.get_path()])
+		s.queue_free()
+
 	refresh_layers()
 
 
