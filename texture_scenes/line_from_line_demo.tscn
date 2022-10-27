@@ -1,12 +1,27 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://texture_scenes/line_from_line_demo.gd" type="Script" id=1]
+
+[sub_resource type="GDScript" id=2]
+script/source = "extends Node2D
+# DUMMY
+
+export var setting_A := true
+export var setting_B := 15.23
+
+func _ready() -> void:
+	pass
+
+func generate() -> void:
+	pass
+"
 
 [sub_resource type="Curve" id=1]
 _data = [ Vector2( 0, 0.155172 ), 0.0, 0.0, 0, 0, Vector2( 0.514286, 0.991379 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.12931 ), 0.0, 0.0, 0, 0 ]
 
 [node name="line_from_line_demo" type="Node2D"]
 position = Vector2( 139.891, 169.861 )
+script = SubResource( 2 )
 
 [node name="source_line" type="Line2D" parent="."]
 position = Vector2( 110.177, -250.741 )

@@ -146,6 +146,11 @@ func refresh_layers() -> void:
 			l.set_selected()
 		else:
 			l.set_deselected()
+	
+	# clear existing parameterss
+	if len(selected_layers) == 0:
+		remove_transient_parameters()
+	
 	display_layer_parameters()
 
 
@@ -155,6 +160,11 @@ func connect_layer_signals(layer)->void:
 
 
 # parameters -------------------------------------------------------------------
+
+func remove_transient_parameters() -> void:
+	for child in layerParametersListContainer.get_children():
+		if not child.name.begins_with("base_"):
+			child.queue_free()
 
 
 func display_layer_parameters() -> void:
@@ -167,14 +177,57 @@ func display_layer_parameters() -> void:
 		var l : Layer = selected_layers[0]
 		pprint("displaying parameters for %s"%l)
 		layerNameParameter.text = l.layer_name
-		var scene_name : String
-		if l.texture_scene:
-			texture_scene_name_parameter.set_modulate(texture_scene_name_parameter_colour)
-			scene_name = l.texture_scene.get_name()
-		else:
+		var scene_name : String = ""
+		if not l.texture_scene:
 			texture_scene_name_parameter.set_modulate(Color(0.90625, 0.441067, 0.392944, 0.854902))
 			scene_name = "NULL"
+		else:
+			texture_scene_name_parameter.set_modulate(texture_scene_name_parameter_colour)
+			scene_name = l.texture_scene.get_name()
+
+			
+			# list exported vars:
+			# https://godotengine.org/qa/38526/how-to-list-the-export-vars-of-a-node
+			# 8199 is PROPERTY_USAGE_SCRIPT_VARIABLE + PROPERTY_USAGE_DEFAULT 
+			var exported_vars = []
+			for p in l.texture_scene.get_property_list():
+				if p["usage"] == PROPERTY_USAGE_SCRIPT_VARIABLE + PROPERTY_USAGE_DEFAULT:
+					exported_vars.append( p )
+					
+			if len(exported_vars) > 0:
+				pprint("    exposed parameters:")
+				for p in exported_vars:
+					pprint("      \"%s\":%s (%s) .. %s"%[p.name, l.texture_scene.get(p.name) ,  Util.PROPERTY_TYPE_STRINGS[int(p.type)], str(p)])
+
+			# list methods on object
+			var method_list = l.texture_scene.get_method_list()
+			var is_generator = false
+			for m in method_list:
+				if m.name == "generate":
+					is_generator = true
+			
+			if is_generator:
+				pprint("    is generator.")
+
+			# clear existing parameters
+			remove_transient_parameters()
+
+			# build transient parameters
+			for p in exported_vars:
+				var new_hbox = HBoxContainer.new()
+				var new_label = Label.new()
+				var new_parm = SpinBox.new()
+				new_label.text = p.name
+				new_hbox.add_child(new_label)
+				new_hbox.add_child(new_parm)
+				layerParametersListContainer.add_child( new_hbox )
+
+			# connect parammeter signals to a single edit handler
+			# set values on textue_scene instance
+			# copy fonts to transient parameters
+
 		texture_scene_name_parameter.text = scene_name
+
 
 
 func _on_layerName_LineEdit_text_entered(new_text: String) -> void:

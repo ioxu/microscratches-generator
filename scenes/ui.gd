@@ -144,7 +144,7 @@ func _on_generate_button_pressed() -> void:
 	
 	var test_lines = viewport.find_node("test_lines")
 	if test_lines:
-		test_lines.generate_lines()
+		test_lines.generate()
 
 	# chain updates down into image datas
 	# this order, and frame-waits, are important

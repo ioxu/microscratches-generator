@@ -12,11 +12,10 @@ var DRAW_ONCE = true
 var DRAWN = false
 
 func _ready() -> void:
-	#generate_lines()
 	print("[test_lines] .size() %s"%lines.size())
 
 
-func generate_lines() -> void:
+func generate() -> void:
 	print("[test_lines] generate")
 	lines = []
 	lines_colours = []
