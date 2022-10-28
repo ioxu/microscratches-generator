@@ -214,29 +214,26 @@ func display_layer_parameters() -> void:
 
 			# build transient parameters
 			for p in exported_vars:
+				var tooltip = "name: %s\nvalue: %s\ntype: %s"%[p.name, l.texture_scene.get(p.name), Util.PROPERTY_TYPE_STRINGS[int(p.type)]]
 				var new_hbox = HBoxContainer.new()
 				new_hbox.set_name("transient_parameter_%s"%p["name"] )
 				var new_label = Label.new()
 				new_label.set("custom_fonts/font", parameter_text_font)
 				new_label.text = p.name
-				var new_parm = SpinBox.new()
+				new_label.set_mouse_filter(Control.MOUSE_FILTER_STOP)
+				new_label.set_tooltip(tooltip)
+				var new_parm = LineEdit.new()
+				new_parm.text = str(l.texture_scene.get(p.name))
 				new_parm.set("custom_fonts/font", parameter_text_font)
-#				new_parm.min_value = -100000
-#				new_parm.max_value =  100000
-				new_parm.set_allow_greater(true)
-				new_parm.set_allow_lesser(true)
 				new_parm.align = 2
 				new_parm.size_flags_horizontal = Control.SIZE_FILL + Control.SIZE_EXPAND
-				new_parm.get_line_edit().set("custom_fonts/font", parameter_text_font)
-#				for c in new_parm.get_children():
-#					if c.get_class() == "LineEdit":
-#						c.set("custom_fonts/font", parameter_text_font)
+				new_parm.set_tooltip(tooltip)
 				new_hbox.add_child(new_label)
 				new_hbox.add_child(new_parm)
 				new_hbox.set_script( transient_parameter_script )
 				new_hbox.parameter_name = p["name"]
 				new_hbox.connect("parameter_changed", self, "_on_transient_parameter_changed" )
-				
+
 				layerParametersListContainer.add_child( new_hbox )
 
 			# ✓ connect parammeter signals to a single edit handler

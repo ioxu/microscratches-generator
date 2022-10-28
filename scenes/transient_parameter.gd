@@ -6,10 +6,9 @@ signal parameter_changed(new_value, this_object)
 var line_edit : LineEdit
 
 func _ready() -> void:
-	for c in self.get_children():
-		if c.get_class() == "SpinBox":
-			line_edit = c.get_line_edit()
-			var err = line_edit.connect( "text_entered", self, "_on_LineEdit_text_entered" )
+	line_edit = self.get_child(1)
+	line_edit.connect( "text_entered", self, "_on_LineEdit_text_entered" )
+	line_edit.connect( "focus_exited", self, "_on_LineEdit_focus_exited" )
 
 
 func _on_LineEdit_text_entered(new_string : String) -> void:
@@ -17,5 +16,10 @@ func _on_LineEdit_text_entered(new_string : String) -> void:
 	emit_signal( "parameter_changed", new_string, self )
 
 
+func _on_LineEdit_focus_exited( ) -> void:
+	emit_signal( "parameter_changed", line_edit.text, self )
+
+
 func pprint(thing) -> void:
 	print("[transient parameter] %s"%str(thing))
+
