@@ -191,12 +191,12 @@ margin_right = 1021.0
 margin_bottom = 597.0
 mouse_filter = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="ui/Control/MarginContainer/VBoxContainer"]
+[node name="menuBar_PanelContainer" type="PanelContainer" parent="ui/Control/MarginContainer/VBoxContainer"]
 margin_right = 1018.0
 margin_bottom = 23.0
 custom_styles/panel = SubResource( 3 )
 
-[node name="MarginContainer" type="MarginContainer" parent="ui/Control/MarginContainer/VBoxContainer/PanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="ui/Control/MarginContainer/VBoxContainer/menuBar_PanelContainer"]
 margin_right = 1018.0
 margin_bottom = 23.0
 mouse_filter = 2
@@ -205,14 +205,14 @@ custom_constants/margin_top = 3
 custom_constants/margin_left = 3
 custom_constants/margin_bottom = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="ui/Control/MarginContainer/VBoxContainer/PanelContainer/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="ui/Control/MarginContainer/VBoxContainer/menuBar_PanelContainer/MarginContainer"]
 margin_left = 3.0
 margin_top = 3.0
 margin_right = 1015.0
 margin_bottom = 20.0
 mouse_filter = 2
 
-[node name="file_menu_button" type="MenuButton" parent="ui/Control/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer"]
+[node name="file_menu_button" type="MenuButton" parent="ui/Control/MarginContainer/VBoxContainer/menuBar_PanelContainer/MarginContainer/HBoxContainer"]
 margin_right = 16.0
 margin_bottom = 17.0
 custom_styles/hover = SubResource( 4 )
@@ -223,7 +223,7 @@ custom_styles/normal = SubResource( 4 )
 custom_fonts/font = SubResource( 5 )
 text = "file"
 
-[node name="Control" type="Control" parent="ui/Control/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer"]
+[node name="Control" type="Control" parent="ui/Control/MarginContainer/VBoxContainer/menuBar_PanelContainer/MarginContainer/HBoxContainer"]
 margin_left = 20.0
 margin_right = 977.0
 margin_bottom = 17.0
@@ -233,7 +233,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="fps_label" type="Label" parent="ui/Control/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer"]
+[node name="fps_label" type="Label" parent="ui/Control/MarginContainer/VBoxContainer/menuBar_PanelContainer/MarginContainer/HBoxContainer"]
 margin_left = 981.0
 margin_right = 998.0
 margin_bottom = 17.0
@@ -241,7 +241,7 @@ custom_fonts/font = SubResource( 6 )
 custom_colors/font_color = Color( 0.717647, 0.717647, 0.717647, 0.458824 )
 text = "fps"
 
-[node name="Control2" type="Control" parent="ui/Control/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer"]
+[node name="Control2" type="Control" parent="ui/Control/MarginContainer/VBoxContainer/menuBar_PanelContainer/MarginContainer/HBoxContainer"]
 margin_left = 1002.0
 margin_right = 1012.0
 margin_bottom = 17.0
@@ -595,7 +595,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="ui/Control/MarginContainer/VBoxContainer/Control/HBoxContainer/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/VSplitContainer/layerParameters_PanelContainer/MarginContainer/VBoxContainer/layerParametersTitle_HBoxContainer"]
+[node name="layerParametersTitle" type="Label" parent="ui/Control/MarginContainer/VBoxContainer/Control/HBoxContainer/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/VSplitContainer/layerParameters_PanelContainer/MarginContainer/VBoxContainer/layerParametersTitle_HBoxContainer"]
 margin_right = 79.0
 margin_bottom = 15.0
 custom_fonts/font = SubResource( 16 )
@@ -678,14 +678,14 @@ size_flags_stretch_ratio = 4.66
 custom_fonts/font = SubResource( 16 )
 align = 1
 
-[node name="PanelContainer2" type="PanelContainer" parent="ui/Control/MarginContainer/VBoxContainer"]
+[node name="helpBar_PanelContainer" type="PanelContainer" parent="ui/Control/MarginContainer/VBoxContainer"]
 margin_top = 573.0
 margin_right = 1018.0
 margin_bottom = 594.0
 mouse_filter = 1
 custom_styles/panel = SubResource( 17 )
 
-[node name="MarginContainer" type="MarginContainer" parent="ui/Control/MarginContainer/VBoxContainer/PanelContainer2"]
+[node name="MarginContainer" type="MarginContainer" parent="ui/Control/MarginContainer/VBoxContainer/helpBar_PanelContainer"]
 margin_right = 1018.0
 margin_bottom = 21.0
 custom_constants/margin_right = 3
@@ -693,20 +693,20 @@ custom_constants/margin_top = 3
 custom_constants/margin_left = 3
 custom_constants/margin_bottom = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="ui/Control/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="ui/Control/MarginContainer/VBoxContainer/helpBar_PanelContainer/MarginContainer"]
 margin_left = 3.0
 margin_top = 3.0
 margin_right = 1015.0
 margin_bottom = 18.0
 size_flags_horizontal = 5
 
-[node name="hint_label" type="Label" parent="ui/Control/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/HBoxContainer"]
+[node name="hint_label" type="Label" parent="ui/Control/MarginContainer/VBoxContainer/helpBar_PanelContainer/MarginContainer/HBoxContainer"]
 margin_right = 249.0
 margin_bottom = 15.0
 custom_fonts/font = SubResource( 18 )
 text = "Home : reset camera    Alt-Enter : toggle fullscreen   "
 
-[node name="hint_channel_selection_label" type="Label" parent="ui/Control/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/HBoxContainer"]
+[node name="hint_channel_selection_label" type="Label" parent="ui/Control/MarginContainer/VBoxContainer/helpBar_PanelContainer/MarginContainer/HBoxContainer"]
 margin_left = 253.0
 margin_right = 455.0
 margin_bottom = 15.0
@@ -722,7 +722,7 @@ mouse_filter = 1
 custom_fonts/font = SubResource( 18 )
 text = "A,R,G,B,T :  toggle colour channel display"
 
-[node name="Control" type="Control" parent="ui/Control/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/HBoxContainer"]
+[node name="Control" type="Control" parent="ui/Control/MarginContainer/VBoxContainer/helpBar_PanelContainer/MarginContainer/HBoxContainer"]
 margin_left = 459.0
 margin_right = 786.0
 margin_bottom = 15.0
@@ -731,7 +731,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="coords_label" type="Label" parent="ui/Control/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/HBoxContainer"]
+[node name="coords_label" type="Label" parent="ui/Control/MarginContainer/VBoxContainer/helpBar_PanelContainer/MarginContainer/HBoxContainer"]
 margin_left = 790.0
 margin_right = 813.0
 margin_bottom = 15.0
@@ -739,7 +739,7 @@ custom_fonts/font = SubResource( 18 )
 custom_colors/font_color = Color( 0.721569, 0.490196, 0.286275, 1 )
 text = "x : y :"
 
-[node name="colour_channel_displayed_label" type="Label" parent="ui/Control/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/HBoxContainer"]
+[node name="colour_channel_displayed_label" type="Label" parent="ui/Control/MarginContainer/VBoxContainer/helpBar_PanelContainer/MarginContainer/HBoxContainer"]
 margin_left = 817.0
 margin_right = 839.0
 margin_bottom = 15.0
@@ -747,7 +747,7 @@ custom_fonts/font = SubResource( 18 )
 custom_colors/font_color = Color( 0.996078, 0.996078, 0.996078, 1 )
 text = "RGB"
 
-[node name="pixelvalues_red_label" type="Label" parent="ui/Control/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/HBoxContainer"]
+[node name="pixelvalues_red_label" type="Label" parent="ui/Control/MarginContainer/VBoxContainer/helpBar_PanelContainer/MarginContainer/HBoxContainer"]
 margin_left = 843.0
 margin_right = 847.0
 margin_bottom = 15.0
@@ -755,7 +755,7 @@ custom_fonts/font = SubResource( 18 )
 custom_colors/font_color = Color( 0.945098, 0.14902, 0.129412, 1 )
 text = "r"
 
-[node name="pixelvalues_green_label" type="Label" parent="ui/Control/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/HBoxContainer"]
+[node name="pixelvalues_green_label" type="Label" parent="ui/Control/MarginContainer/VBoxContainer/helpBar_PanelContainer/MarginContainer/HBoxContainer"]
 margin_left = 851.0
 margin_right = 858.0
 margin_bottom = 15.0
@@ -763,7 +763,7 @@ custom_fonts/font = SubResource( 18 )
 custom_colors/font_color = Color( 0.231373, 0.945098, 0.129412, 1 )
 text = "g"
 
-[node name="pixelvalues_blue_label" type="Label" parent="ui/Control/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/HBoxContainer"]
+[node name="pixelvalues_blue_label" type="Label" parent="ui/Control/MarginContainer/VBoxContainer/helpBar_PanelContainer/MarginContainer/HBoxContainer"]
 margin_left = 862.0
 margin_right = 869.0
 margin_bottom = 15.0
@@ -771,7 +771,7 @@ custom_fonts/font = SubResource( 18 )
 custom_colors/font_color = Color( 0.129412, 0.447059, 0.945098, 1 )
 text = "b"
 
-[node name="pixelvalues_alpha_label" type="Label" parent="ui/Control/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/HBoxContainer"]
+[node name="pixelvalues_alpha_label" type="Label" parent="ui/Control/MarginContainer/VBoxContainer/helpBar_PanelContainer/MarginContainer/HBoxContainer"]
 margin_left = 873.0
 margin_right = 878.0
 margin_bottom = 15.0
@@ -779,7 +779,7 @@ custom_fonts/font = SubResource( 18 )
 custom_colors/font_color = Color( 0.494118, 0.513726, 0.545098, 1 )
 text = "a"
 
-[node name="Control2" type="Control" parent="ui/Control/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/HBoxContainer"]
+[node name="Control2" type="Control" parent="ui/Control/MarginContainer/VBoxContainer/helpBar_PanelContainer/MarginContainer/HBoxContainer"]
 margin_left = 882.0
 margin_right = 912.0
 margin_bottom = 15.0
@@ -788,7 +788,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="swatch_rect_bg" type="PanelContainer" parent="ui/Control/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/HBoxContainer/Control2"]
+[node name="swatch_rect_bg" type="PanelContainer" parent="ui/Control/MarginContainer/VBoxContainer/helpBar_PanelContainer/MarginContainer/HBoxContainer/Control2"]
 modulate = Color( 0.2, 0.2, 0.2, 1 )
 margin_right = 30.0
 margin_bottom = 15.0
@@ -798,7 +798,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="swatch_rect" type="ColorRect" parent="ui/Control/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/HBoxContainer/Control2"]
+[node name="swatch_rect" type="ColorRect" parent="ui/Control/MarginContainer/VBoxContainer/helpBar_PanelContainer/MarginContainer/HBoxContainer/Control2"]
 margin_right = 30.0
 margin_bottom = 15.0
 rect_min_size = Vector2( 30, 0 )
@@ -806,7 +806,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="resolution_label" type="Label" parent="ui/Control/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/HBoxContainer"]
+[node name="resolution_label" type="Label" parent="ui/Control/MarginContainer/VBoxContainer/helpBar_PanelContainer/MarginContainer/HBoxContainer"]
 margin_left = 916.0
 margin_right = 973.0
 margin_bottom = 15.0
@@ -814,7 +814,7 @@ custom_fonts/font = SubResource( 18 )
 custom_colors/font_color = Color( 0.286275, 0.466667, 0.721569, 1 )
 text = "resolution : "
 
-[node name="zoom_label" type="Label" parent="ui/Control/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/HBoxContainer"]
+[node name="zoom_label" type="Label" parent="ui/Control/MarginContainer/VBoxContainer/helpBar_PanelContainer/MarginContainer/HBoxContainer"]
 margin_left = 977.0
 margin_right = 1012.0
 margin_bottom = 15.0
@@ -888,14 +888,14 @@ texture = ExtResource( 7 )
 [connection signal="size_changed" from="scene/Viewport" to="ui" method="_on_Viewport_size_changed"]
 [connection signal="cam_transform_changed" from="display" to="display" method="_on_display_cam_transform_changed"]
 [connection signal="colour_channel_display_mode_changed" from="display" to="ui" method="_on_display_colour_channel_display_mode_changed"]
-[connection signal="colour_under_mouse_changed" from="display" to="custom_draw" method="_on_display_colour_under_mouse_changed"]
 [connection signal="colour_under_mouse_changed" from="display" to="ui" method="_on_display_colour_under_mouse_changed"]
+[connection signal="colour_under_mouse_changed" from="display" to="custom_draw" method="_on_display_colour_under_mouse_changed"]
 [connection signal="mouse_coords_in_viewport_changed" from="display" to="ui" method="_on_display_mouse_coords_in_viewport_changed"]
 [connection signal="zoom_changed" from="display" to="ui" method="_on_display_zoom_changed"]
-[connection signal="mouse_entered" from="ui/Control/MarginContainer/VBoxContainer/Control" to="display" method="_on_Control_mouse_entered"]
 [connection signal="mouse_entered" from="ui/Control/MarginContainer/VBoxContainer/Control" to="ui" method="_on_Control_mouse_entered"]
-[connection signal="mouse_exited" from="ui/Control/MarginContainer/VBoxContainer/Control" to="display" method="_on_Control_mouse_exited"]
+[connection signal="mouse_entered" from="ui/Control/MarginContainer/VBoxContainer/Control" to="display" method="_on_Control_mouse_entered"]
 [connection signal="mouse_exited" from="ui/Control/MarginContainer/VBoxContainer/Control" to="ui" method="_on_Control_mouse_exited"]
+[connection signal="mouse_exited" from="ui/Control/MarginContainer/VBoxContainer/Control" to="display" method="_on_Control_mouse_exited"]
 [connection signal="pressed" from="ui/Control/MarginContainer/VBoxContainer/Control/HBoxContainer/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/generate_PanelContainer/MarginContainer/VBoxContainer/generate_button" to="ui" method="_on_generate_button_pressed"]
 [connection signal="pressed" from="ui/Control/MarginContainer/VBoxContainer/Control/HBoxContainer/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/VSplitContainer/layersPanel_PanelContainer/MarginContainer/VBoxContainer/layersControl_PanelContainer/MarginContainer/HBoxContainer/addLayer_TextureButton" to="ui" method="_on_addLayer_TextureButton_pressed"]
 [connection signal="pressed" from="ui/Control/MarginContainer/VBoxContainer/Control/HBoxContainer/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/VSplitContainer/layersPanel_PanelContainer/MarginContainer/VBoxContainer/layersControl_PanelContainer/MarginContainer/HBoxContainer/removeLayer_TextureButton" to="ui" method="_on_removeLayer_TextureButton_pressed"]

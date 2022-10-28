@@ -12,10 +12,16 @@ var layerNameParameter : LineEdit
 var texture_scene_name_parameter : Label
 var texture_scene_name_parameter_colour : Color
 
+var parameter_text_font : Font
+
 var _layers_count : int = 0
 
 # layers
 const ui_layer : PackedScene = preload("res://scenes/layer.tscn")
+
+# parameters
+const transient_parameter_script = preload("res://scenes/transient_parameter.gd")
+signal changed_transient_parameter (new_value, transient_parameter)
 
 
 func _ready() -> void:
@@ -24,14 +30,8 @@ func _ready() -> void:
 	layerNameParameter = layerParametersListContainer.find_node("layerName_LineEdit")
 	texture_scene_name_parameter = layerParametersListContainer.find_node("texture_scene_name_Label")
 	texture_scene_name_parameter_colour = texture_scene_name_parameter.get_modulate()
-	# layers temp --------------------------------------------------------------
-	pprint("existing layers:")
-	for l in layerListContainer.get_children():
-		connect_layer_signals(l)
-		pprint("   %s"%l)
-		layers.append( l )
-		_layers_count += 1
-	# layers temp --------------------------------------------------------------
+
+	parameter_text_font = texture_scene_name_parameter.get("custom_fonts/font").duplicate()
 
 
 func add_layer(new_texture_node : Node = null, select_new : bool = true)->void:
@@ -215,19 +215,39 @@ func display_layer_parameters() -> void:
 			# build transient parameters
 			for p in exported_vars:
 				var new_hbox = HBoxContainer.new()
+				new_hbox.set_name("transient_parameter_%s"%p["name"] )
 				var new_label = Label.new()
-				var new_parm = SpinBox.new()
+				new_label.set("custom_fonts/font", parameter_text_font)
 				new_label.text = p.name
+				var new_parm = SpinBox.new()
+				new_parm.set("custom_fonts/font", parameter_text_font)
+#				new_parm.min_value = -100000
+#				new_parm.max_value =  100000
+				new_parm.set_allow_greater(true)
+				new_parm.set_allow_lesser(true)
+				new_parm.align = 2
+				new_parm.size_flags_horizontal = Control.SIZE_FILL + Control.SIZE_EXPAND
+				new_parm.get_line_edit().set("custom_fonts/font", parameter_text_font)
+#				for c in new_parm.get_children():
+#					if c.get_class() == "LineEdit":
+#						c.set("custom_fonts/font", parameter_text_font)
 				new_hbox.add_child(new_label)
 				new_hbox.add_child(new_parm)
+				new_hbox.set_script( transient_parameter_script )
+				new_hbox.parameter_name = p["name"]
+				new_hbox.connect("parameter_changed", self, "_on_transient_parameter_changed" )
+				
 				layerParametersListContainer.add_child( new_hbox )
 
-			# connect parammeter signals to a single edit handler
-			# set values on textue_scene instance
-			# copy fonts to transient parameters
+			# ✓ connect parammeter signals to a single edit handler
+			# ❌❌✖ set values on textue_scene instance
+			# ✓ copy fonts to transient parameters 
 
 		texture_scene_name_parameter.text = scene_name
 
+
+func _on_transient_parameter_changed(new_value, on_object):
+	pprint("TRANSIENT PARAMETER VALUE CHANGED: %s on %s (%s)"%[new_value, on_object.parameter_name, on_object])
 
 
 func _on_layerName_LineEdit_text_entered(new_text: String) -> void:
