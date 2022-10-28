@@ -21,7 +21,6 @@ const ui_layer : PackedScene = preload("res://scenes/layer.tscn")
 
 # parameters
 const transient_parameter_script = preload("res://scenes/transient_parameter.gd")
-signal changed_transient_parameter (new_value, transient_parameter)
 
 
 func _ready() -> void:
@@ -214,37 +213,40 @@ func display_layer_parameters() -> void:
 
 			# build transient parameters
 			for p in exported_vars:
+				# TODO: all of this should really be moved into transient_parameter.gd as a Type.
 				var tooltip = "name: %s\nvalue: %s\ntype: %s"%[p.name, l.texture_scene.get(p.name), Util.PROPERTY_TYPE_STRINGS[int(p.type)]]
 				var new_hbox = HBoxContainer.new()
 				new_hbox.set_name("transient_parameter_%s"%p["name"] )
+				# -
 				var new_label = Label.new()
 				new_label.set("custom_fonts/font", parameter_text_font)
 				new_label.text = p.name
 				new_label.set_mouse_filter(Control.MOUSE_FILTER_STOP)
 				new_label.set_tooltip(tooltip)
+				# -
 				var new_parm = LineEdit.new()
 				new_parm.text = str(l.texture_scene.get(p.name))
 				new_parm.set("custom_fonts/font", parameter_text_font)
 				new_parm.align = 2
 				new_parm.size_flags_horizontal = Control.SIZE_FILL + Control.SIZE_EXPAND
 				new_parm.set_tooltip(tooltip)
+				# -
 				new_hbox.add_child(new_label)
 				new_hbox.add_child(new_parm)
 				new_hbox.set_script( transient_parameter_script )
 				new_hbox.parameter_name = p["name"]
 				new_hbox.connect("parameter_changed", self, "_on_transient_parameter_changed" )
-
+				# -
 				layerParametersListContainer.add_child( new_hbox )
-
-			# ✓ connect parammeter signals to a single edit handler
-			# ❌❌✖ set values on textue_scene instance
-			# ✓ copy fonts to transient parameters 
-
+		
 		texture_scene_name_parameter.text = scene_name
 
 
 func _on_transient_parameter_changed(new_value, on_object):
 	pprint("TRANSIENT PARAMETER VALUE CHANGED: %s on %s (%s)"%[new_value, on_object.parameter_name, on_object])
+	var l : Layer = selected_layers[0]
+	pprint("setting \'%s\' on %s to %s"%[on_object.parameter_name, l.texture_scene.get_name(), new_value])
+	l.texture_scene.set( on_object.parameter_name, new_value )
 
 
 func _on_layerName_LineEdit_text_entered(new_text: String) -> void:
@@ -254,7 +256,6 @@ func _on_layerName_LineEdit_text_entered(new_text: String) -> void:
 
 
 # ------------------------------------------------------------------------------
-
 func print_layers() -> void:
 	pprint("layers: (n:%s, %s selected)"%[len(layers), len(selected_layers)])
 	for l in layers:

@@ -7,7 +7,9 @@ var line_edit : LineEdit
 
 func _ready() -> void:
 	line_edit = self.get_child(1)
+	# warning-ignore:return_value_discarded
 	line_edit.connect( "text_entered", self, "_on_LineEdit_text_entered" )
+	# warning-ignore:return_value_discarded
 	line_edit.connect( "focus_exited", self, "_on_LineEdit_focus_exited" )
 
 
