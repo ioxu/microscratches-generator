@@ -2,7 +2,7 @@
 
 Release name "Aniseed".
 
-![Blender Cyles render of anisotropic microscratches](microscratches_01.png?raw=true "anisotropic micro scratches render in Blender Cycles")
+![Blender Cyles render of anisotropic microscratches](images/microscratches_01.png?raw=true "anisotropic micro scratches render in Blender Cycles")
 
 An app made in the Godot Engine.
 
