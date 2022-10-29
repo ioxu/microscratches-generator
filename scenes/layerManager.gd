@@ -204,7 +204,6 @@ func display_layer_parameters() -> void:
 			for m in method_list:
 				if m.name == "generate":
 					is_generator = true
-			
 			if is_generator:
 				pprint("    is generator.")
 
@@ -213,9 +212,12 @@ func display_layer_parameters() -> void:
 
 			# build transient parameters
 			for p in exported_vars:
-				# TODO: all of this should really be moved into transient_parameter.gd as a Type.
+				# this would normaly exist in the _ready of a class_name'd script
+				# for some reason it seems natural to keep it here ...
 				var tooltip = "name: %s\nvalue: %s\ntype: %s"%[p.name, l.texture_scene.get(p.name), Util.PROPERTY_TYPE_STRINGS[int(p.type)]]
 				var new_hbox = HBoxContainer.new()
+				new_hbox.set_script( transient_parameter_script )
+				new_hbox.type = p.type
 				new_hbox.set_name("transient_parameter_%s"%p["name"] )
 				# -
 				var new_label = Label.new()
@@ -224,16 +226,20 @@ func display_layer_parameters() -> void:
 				new_label.set_mouse_filter(Control.MOUSE_FILTER_STOP)
 				new_label.set_tooltip(tooltip)
 				# -
-				var new_parm = LineEdit.new()
-				new_parm.text = str(l.texture_scene.get(p.name))
-				new_parm.set("custom_fonts/font", parameter_text_font)
-				new_parm.align = 2
+				var new_parm
+				if new_hbox.type in [TYPE_INT, TYPE_REAL, TYPE_STRING]:
+					new_parm = LineEdit.new()
+					new_parm.text = str(l.texture_scene.get(p.name))
+					new_parm.set("custom_fonts/font", parameter_text_font)
+					new_parm.align = 2
+				elif new_hbox.type in [TYPE_BOOL]:
+					new_parm = CheckBox.new()
+					new_parm.pressed = l.texture_scene.get(p.name)
 				new_parm.size_flags_horizontal = Control.SIZE_FILL + Control.SIZE_EXPAND
 				new_parm.set_tooltip(tooltip)
 				# -
 				new_hbox.add_child(new_label)
 				new_hbox.add_child(new_parm)
-				new_hbox.set_script( transient_parameter_script )
 				new_hbox.parameter_name = p["name"]
 				new_hbox.connect("parameter_changed", self, "_on_transient_parameter_changed" )
 				# -

@@ -34,6 +34,10 @@ run/main_scene="res://scenes/main.tscn"
 Util="*res://scripts/util.gd"
 Global="*res://scripts/global.gd"
 
+[debug]
+
+gdscript/warnings/return_value_discarded=false
+
 [input]
 
 ui_reset_camera={

@@ -114,6 +114,7 @@ func pprint(thing) -> void:
 
 # properties--------------------------------------------------------------------
 
+# https://docs.godotengine.org/en/stable/classes/class_@globalscope.html enum Variant.Type:
 var PROPERTY_TYPE_STRINGS = {
 	0 : "TYPE_NIL",
 	1 : "TYPE_BOOL",
