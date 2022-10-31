@@ -256,30 +256,29 @@ margin_right = 1018.0
 margin_bottom = 569.0
 size_flags_vertical = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="ui/Control/MarginContainer/VBoxContainer/Control"]
+[node name="HSplitContainer" type="HSplitContainer" parent="ui/Control/MarginContainer/VBoxContainer/Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-mouse_filter = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Control" type="Control" parent="ui/Control/MarginContainer/VBoxContainer/Control/HBoxContainer"]
-margin_right = 869.0
+[node name="Control" type="Control" parent="ui/Control/MarginContainer/VBoxContainer/Control/HSplitContainer"]
+margin_right = 861.0
 margin_bottom = 542.0
 size_flags_horizontal = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ui/Control/MarginContainer/VBoxContainer/Control/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="ui/Control/MarginContainer/VBoxContainer/Control/HSplitContainer"]
 margin_left = 873.0
 margin_right = 1018.0
 margin_bottom = 542.0
 
-[node name="Control" type="Control" parent="ui/Control/MarginContainer/VBoxContainer/Control/HBoxContainer/VBoxContainer"]
+[node name="Control" type="Control" parent="ui/Control/MarginContainer/VBoxContainer/Control/HSplitContainer/VBoxContainer"]
 margin_right = 145.0
 margin_bottom = 23.771
 rect_min_size = Vector2( 0, 23.771 )
 
-[node name="mainParameterPanel__PanelContainer" type="PanelContainer" parent="ui/Control/MarginContainer/VBoxContainer/Control/HBoxContainer/VBoxContainer"]
+[node name="mainParameterPanel__PanelContainer" type="PanelContainer" parent="ui/Control/MarginContainer/VBoxContainer/Control/HSplitContainer/VBoxContainer"]
 margin_top = 27.0
 margin_right = 145.0
 margin_bottom = 542.0
@@ -287,7 +286,7 @@ rect_min_size = Vector2( 145, 0 )
 size_flags_vertical = 3
 custom_styles/panel = SubResource( 7 )
 
-[node name="MarginContainer" type="MarginContainer" parent="ui/Control/MarginContainer/VBoxContainer/Control/HBoxContainer/VBoxContainer/mainParameterPanel__PanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="ui/Control/MarginContainer/VBoxContainer/Control/HSplitContainer/VBoxContainer/mainParameterPanel__PanelContainer"]
 margin_right = 145.0
 margin_bottom = 515.0
 custom_constants/margin_right = 3
@@ -295,18 +294,18 @@ custom_constants/margin_top = 3
 custom_constants/margin_left = 3
 custom_constants/margin_bottom = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ui/Control/MarginContainer/VBoxContainer/Control/HBoxContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="ui/Control/MarginContainer/VBoxContainer/Control/HSplitContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer"]
 margin_left = 3.0
 margin_top = 3.0
 margin_right = 142.0
 margin_bottom = 512.0
 
-[node name="generate_PanelContainer" type="PanelContainer" parent="ui/Control/MarginContainer/VBoxContainer/Control/HBoxContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer"]
+[node name="generate_PanelContainer" type="PanelContainer" parent="ui/Control/MarginContainer/VBoxContainer/Control/HSplitContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer"]
 margin_right = 139.0
 margin_bottom = 89.0
 custom_styles/panel = SubResource( 8 )
 
-[node name="MarginContainer" type="MarginContainer" parent="ui/Control/MarginContainer/VBoxContainer/Control/HBoxContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/generate_PanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="ui/Control/MarginContainer/VBoxContainer/Control/HSplitContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/generate_PanelContainer"]
 margin_left = 1.0
 margin_top = 1.0
 margin_right = 138.0
@@ -316,14 +315,14 @@ custom_constants/margin_top = 3
 custom_constants/margin_left = 3
 custom_constants/margin_bottom = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ui/Control/MarginContainer/VBoxContainer/Control/HBoxContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/generate_PanelContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="ui/Control/MarginContainer/VBoxContainer/Control/HSplitContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/generate_PanelContainer/MarginContainer"]
 margin_left = 3.0
 margin_top = 3.0
 margin_right = 134.0
 margin_bottom = 84.0
 custom_constants/separation = -2
 
-[node name="resolution_menu_button" type="MenuButton" parent="ui/Control/MarginContainer/VBoxContainer/Control/HBoxContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/generate_PanelContainer/MarginContainer/VBoxContainer"]
+[node name="resolution_menu_button" type="MenuButton" parent="ui/Control/MarginContainer/VBoxContainer/Control/HSplitContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/generate_PanelContainer/MarginContainer/VBoxContainer"]
 margin_right = 131.0
 margin_bottom = 23.0
 custom_fonts/font = SubResource( 9 )
@@ -334,12 +333,12 @@ custom_colors/font_color_pressed = Color( 1, 0.690196, 0.290196, 1 )
 text = "1k (1024x1024)"
 items = [ "half  (512 x 512)", null, 0, false, false, 0, 0, null, "", false, "1k  (1024 x 1024)", null, 0, false, false, 1, 0, null, "", false, "2k  (2048 x 2048)", null, 0, false, false, 2, 0, null, "", false, "4k  (4096 x 4096)", null, 0, false, false, 3, 0, null, "", false ]
 
-[node name="HBoxContainer" type="HBoxContainer" parent="ui/Control/MarginContainer/VBoxContainer/Control/HBoxContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/generate_PanelContainer/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="ui/Control/MarginContainer/VBoxContainer/Control/HSplitContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/generate_PanelContainer/MarginContainer/VBoxContainer"]
 margin_top = 21.0
 margin_right = 131.0
 margin_bottom = 45.0
 
-[node name="seed_label" type="Label" parent="ui/Control/MarginContainer/VBoxContainer/Control/HBoxContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/generate_PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="seed_label" type="Label" parent="ui/Control/MarginContainer/VBoxContainer/Control/HSplitContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/generate_PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
 margin_top = 3.0
 margin_right = 63.0
 margin_bottom = 20.0
@@ -347,7 +346,7 @@ size_flags_horizontal = 3
 custom_fonts/font = SubResource( 10 )
 text = "seed"
 
-[node name="seed" type="SpinBox" parent="ui/Control/MarginContainer/VBoxContainer/Control/HBoxContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/generate_PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="seed" type="SpinBox" parent="ui/Control/MarginContainer/VBoxContainer/Control/HSplitContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/generate_PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
 margin_left = 67.0
 margin_right = 131.0
 margin_bottom = 24.0
@@ -358,7 +357,7 @@ max_value = 10000.0
 value = 1.0
 align = 2
 
-[node name="generate_button" type="Button" parent="ui/Control/MarginContainer/VBoxContainer/Control/HBoxContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/generate_PanelContainer/MarginContainer/VBoxContainer"]
+[node name="generate_button" type="Button" parent="ui/Control/MarginContainer/VBoxContainer/Control/HSplitContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/generate_PanelContainer/MarginContainer/VBoxContainer"]
 margin_top = 43.0
 margin_right = 131.0
 margin_bottom = 66.0
@@ -369,7 +368,7 @@ custom_colors/font_color_hover = Color( 1, 0.690196, 0.290196, 1 )
 custom_colors/font_color_pressed = Color( 1, 0.690196, 0.290196, 1 )
 text = "generate"
 
-[node name="Control" type="Control" parent="ui/Control/MarginContainer/VBoxContainer/Control/HBoxContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/generate_PanelContainer/MarginContainer/VBoxContainer"]
+[node name="Control" type="Control" parent="ui/Control/MarginContainer/VBoxContainer/Control/HSplitContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/generate_PanelContainer/MarginContainer/VBoxContainer"]
 margin_top = 64.0
 margin_right = 131.0
 margin_bottom = 70.129
@@ -378,7 +377,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="generation_timing_label" type="Label" parent="ui/Control/MarginContainer/VBoxContainer/Control/HBoxContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/generate_PanelContainer/MarginContainer/VBoxContainer"]
+[node name="generation_timing_label" type="Label" parent="ui/Control/MarginContainer/VBoxContainer/Control/HSplitContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/generate_PanelContainer/MarginContainer/VBoxContainer"]
 margin_top = 68.0
 margin_right = 131.0
 margin_bottom = 81.0
@@ -387,13 +386,13 @@ custom_colors/font_color = Color( 0.717647, 0.717647, 0.717647, 1 )
 custom_colors/font_outline_modulate = Color( 0.717647, 0.717647, 0.717647, 1 )
 text = "timing"
 
-[node name="format_settings_PanelContainer" type="PanelContainer" parent="ui/Control/MarginContainer/VBoxContainer/Control/HBoxContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer"]
+[node name="format_settings_PanelContainer" type="PanelContainer" parent="ui/Control/MarginContainer/VBoxContainer/Control/HSplitContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer"]
 margin_top = 93.0
 margin_right = 139.0
 margin_bottom = 124.0
 custom_styles/panel = SubResource( 8 )
 
-[node name="MarginContainer" type="MarginContainer" parent="ui/Control/MarginContainer/VBoxContainer/Control/HBoxContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/format_settings_PanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="ui/Control/MarginContainer/VBoxContainer/Control/HSplitContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/format_settings_PanelContainer"]
 margin_left = 1.0
 margin_top = 1.0
 margin_right = 138.0
@@ -403,17 +402,17 @@ custom_constants/margin_top = 3
 custom_constants/margin_left = 3
 custom_constants/margin_bottom = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ui/Control/MarginContainer/VBoxContainer/Control/HBoxContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/format_settings_PanelContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="ui/Control/MarginContainer/VBoxContainer/Control/HSplitContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/format_settings_PanelContainer/MarginContainer"]
 margin_left = 3.0
 margin_top = 3.0
 margin_right = 134.0
 margin_bottom = 26.0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="ui/Control/MarginContainer/VBoxContainer/Control/HBoxContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/format_settings_PanelContainer/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="ui/Control/MarginContainer/VBoxContainer/Control/HSplitContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/format_settings_PanelContainer/MarginContainer/VBoxContainer"]
 margin_right = 131.0
 margin_bottom = 23.0
 
-[node name="vector_direction_label" type="Label" parent="ui/Control/MarginContainer/VBoxContainer/Control/HBoxContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/format_settings_PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="vector_direction_label" type="Label" parent="ui/Control/MarginContainer/VBoxContainer/Control/HSplitContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/format_settings_PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
 margin_top = 3.0
 margin_right = 63.0
 margin_bottom = 20.0
@@ -421,7 +420,7 @@ size_flags_horizontal = 3
 custom_fonts/font = SubResource( 10 )
 text = "direction"
 
-[node name="vector_direction_MenuButton" type="MenuButton" parent="ui/Control/MarginContainer/VBoxContainer/Control/HBoxContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/format_settings_PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="vector_direction_MenuButton" type="MenuButton" parent="ui/Control/MarginContainer/VBoxContainer/Control/HSplitContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/format_settings_PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
 margin_left = 67.0
 margin_right = 131.0
 margin_bottom = 23.0
@@ -435,14 +434,14 @@ text = "bitangent"
 align = 2
 items = [ "tangent", null, 0, false, false, 0, 0, null, "", false, "bitangent", null, 0, false, false, 1, 0, null, "", false ]
 
-[node name="VSplitContainer" type="VSplitContainer" parent="ui/Control/MarginContainer/VBoxContainer/Control/HBoxContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer"]
+[node name="VSplitContainer" type="VSplitContainer" parent="ui/Control/MarginContainer/VBoxContainer/Control/HSplitContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer"]
 margin_top = 128.0
 margin_right = 139.0
 margin_bottom = 509.0
 size_flags_vertical = 3
 custom_constants/autohide = 0
 
-[node name="layersPanel_PanelContainer" type="PanelContainer" parent="ui/Control/MarginContainer/VBoxContainer/Control/HBoxContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/VSplitContainer"]
+[node name="layersPanel_PanelContainer" type="PanelContainer" parent="ui/Control/MarginContainer/VBoxContainer/Control/HSplitContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/VSplitContainer"]
 margin_right = 139.0
 margin_bottom = 241.0
 rect_min_size = Vector2( 0, 55 )
@@ -450,7 +449,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/panel = SubResource( 13 )
 
-[node name="MarginContainer" type="MarginContainer" parent="ui/Control/MarginContainer/VBoxContainer/Control/HBoxContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/VSplitContainer/layersPanel_PanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="ui/Control/MarginContainer/VBoxContainer/Control/HSplitContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/VSplitContainer/layersPanel_PanelContainer"]
 margin_left = 1.0
 margin_top = 1.0
 margin_right = 138.0
@@ -460,19 +459,19 @@ custom_constants/margin_top = 3
 custom_constants/margin_left = 3
 custom_constants/margin_bottom = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ui/Control/MarginContainer/VBoxContainer/Control/HBoxContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/VSplitContainer/layersPanel_PanelContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="ui/Control/MarginContainer/VBoxContainer/Control/HSplitContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/VSplitContainer/layersPanel_PanelContainer/MarginContainer"]
 margin_left = 3.0
 margin_top = 3.0
 margin_right = 134.0
 margin_bottom = 236.0
 
-[node name="ScrollContainer" type="ScrollContainer" parent="ui/Control/MarginContainer/VBoxContainer/Control/HBoxContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/VSplitContainer/layersPanel_PanelContainer/MarginContainer/VBoxContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="ui/Control/MarginContainer/VBoxContainer/Control/HSplitContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/VSplitContainer/layersPanel_PanelContainer/MarginContainer/VBoxContainer"]
 margin_right = 131.0
 margin_bottom = 207.0
 size_flags_vertical = 3
 follow_focus = true
 
-[node name="layerListContainer" type="VBoxContainer" parent="ui/Control/MarginContainer/VBoxContainer/Control/HBoxContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/VSplitContainer/layersPanel_PanelContainer/MarginContainer/VBoxContainer/ScrollContainer"]
+[node name="layerListContainer" type="VBoxContainer" parent="ui/Control/MarginContainer/VBoxContainer/Control/HSplitContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/VSplitContainer/layersPanel_PanelContainer/MarginContainer/VBoxContainer/ScrollContainer"]
 margin_right = 131.0
 margin_bottom = 207.0
 size_flags_horizontal = 3
@@ -481,13 +480,13 @@ __meta__ = {
 "_editor_description_": "Layer objects are instanced under here!"
 }
 
-[node name="layersControl_PanelContainer" type="PanelContainer" parent="ui/Control/MarginContainer/VBoxContainer/Control/HBoxContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/VSplitContainer/layersPanel_PanelContainer/MarginContainer/VBoxContainer"]
+[node name="layersControl_PanelContainer" type="PanelContainer" parent="ui/Control/MarginContainer/VBoxContainer/Control/HSplitContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/VSplitContainer/layersPanel_PanelContainer/MarginContainer/VBoxContainer"]
 margin_top = 211.0
 margin_right = 131.0
 margin_bottom = 233.0
 custom_styles/panel = SubResource( 14 )
 
-[node name="MarginContainer" type="MarginContainer" parent="ui/Control/MarginContainer/VBoxContainer/Control/HBoxContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/VSplitContainer/layersPanel_PanelContainer/MarginContainer/VBoxContainer/layersControl_PanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="ui/Control/MarginContainer/VBoxContainer/Control/HSplitContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/VSplitContainer/layersPanel_PanelContainer/MarginContainer/VBoxContainer/layersControl_PanelContainer"]
 margin_left = 1.0
 margin_top = 1.0
 margin_right = 130.0
@@ -497,14 +496,14 @@ custom_constants/margin_top = 2
 custom_constants/margin_left = 2
 custom_constants/margin_bottom = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="ui/Control/MarginContainer/VBoxContainer/Control/HBoxContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/VSplitContainer/layersPanel_PanelContainer/MarginContainer/VBoxContainer/layersControl_PanelContainer/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="ui/Control/MarginContainer/VBoxContainer/Control/HSplitContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/VSplitContainer/layersPanel_PanelContainer/MarginContainer/VBoxContainer/layersControl_PanelContainer/MarginContainer"]
 margin_left = 2.0
 margin_top = 2.0
 margin_right = 127.0
 margin_bottom = 18.0
 custom_constants/separation = 2
 
-[node name="addLayer_TextureButton" type="TextureButton" parent="ui/Control/MarginContainer/VBoxContainer/Control/HBoxContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/VSplitContainer/layersPanel_PanelContainer/MarginContainer/VBoxContainer/layersControl_PanelContainer/MarginContainer/HBoxContainer"]
+[node name="addLayer_TextureButton" type="TextureButton" parent="ui/Control/MarginContainer/VBoxContainer/Control/HSplitContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/VSplitContainer/layersPanel_PanelContainer/MarginContainer/VBoxContainer/layersControl_PanelContainer/MarginContainer/HBoxContainer"]
 modulate = Color( 1, 1, 1, 0.482353 )
 margin_right = 16.0
 margin_bottom = 16.0
@@ -514,7 +513,7 @@ texture_normal = ExtResource( 12 )
 expand = true
 stretch_mode = 4
 
-[node name="removeLayer_TextureButton" type="TextureButton" parent="ui/Control/MarginContainer/VBoxContainer/Control/HBoxContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/VSplitContainer/layersPanel_PanelContainer/MarginContainer/VBoxContainer/layersControl_PanelContainer/MarginContainer/HBoxContainer"]
+[node name="removeLayer_TextureButton" type="TextureButton" parent="ui/Control/MarginContainer/VBoxContainer/Control/HSplitContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/VSplitContainer/layersPanel_PanelContainer/MarginContainer/VBoxContainer/layersControl_PanelContainer/MarginContainer/HBoxContainer"]
 modulate = Color( 1, 1, 1, 0.482353 )
 margin_left = 18.0
 margin_right = 34.0
@@ -525,13 +524,13 @@ texture_normal = ExtResource( 13 )
 expand = true
 stretch_mode = 4
 
-[node name="Control" type="Control" parent="ui/Control/MarginContainer/VBoxContainer/Control/HBoxContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/VSplitContainer/layersPanel_PanelContainer/MarginContainer/VBoxContainer/layersControl_PanelContainer/MarginContainer/HBoxContainer"]
+[node name="Control" type="Control" parent="ui/Control/MarginContainer/VBoxContainer/Control/HSplitContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/VSplitContainer/layersPanel_PanelContainer/MarginContainer/VBoxContainer/layersControl_PanelContainer/MarginContainer/HBoxContainer"]
 margin_left = 36.0
 margin_right = 71.0
 margin_bottom = 16.0
 size_flags_horizontal = 3
 
-[node name="moveLayerUp_TextureButton" type="TextureButton" parent="ui/Control/MarginContainer/VBoxContainer/Control/HBoxContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/VSplitContainer/layersPanel_PanelContainer/MarginContainer/VBoxContainer/layersControl_PanelContainer/MarginContainer/HBoxContainer"]
+[node name="moveLayerUp_TextureButton" type="TextureButton" parent="ui/Control/MarginContainer/VBoxContainer/Control/HSplitContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/VSplitContainer/layersPanel_PanelContainer/MarginContainer/VBoxContainer/layersControl_PanelContainer/MarginContainer/HBoxContainer"]
 modulate = Color( 1, 1, 1, 0.482353 )
 margin_left = 73.0
 margin_right = 89.0
@@ -542,7 +541,7 @@ texture_normal = ExtResource( 14 )
 expand = true
 stretch_mode = 4
 
-[node name="moveLayerDown_TextureButton" type="TextureButton" parent="ui/Control/MarginContainer/VBoxContainer/Control/HBoxContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/VSplitContainer/layersPanel_PanelContainer/MarginContainer/VBoxContainer/layersControl_PanelContainer/MarginContainer/HBoxContainer"]
+[node name="moveLayerDown_TextureButton" type="TextureButton" parent="ui/Control/MarginContainer/VBoxContainer/Control/HSplitContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/VSplitContainer/layersPanel_PanelContainer/MarginContainer/VBoxContainer/layersControl_PanelContainer/MarginContainer/HBoxContainer"]
 modulate = Color( 1, 1, 1, 0.482353 )
 margin_left = 91.0
 margin_right = 107.0
@@ -553,7 +552,7 @@ texture_normal = ExtResource( 15 )
 expand = true
 stretch_mode = 4
 
-[node name="layersInformation_TextureButton" type="TextureButton" parent="ui/Control/MarginContainer/VBoxContainer/Control/HBoxContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/VSplitContainer/layersPanel_PanelContainer/MarginContainer/VBoxContainer/layersControl_PanelContainer/MarginContainer/HBoxContainer"]
+[node name="layersInformation_TextureButton" type="TextureButton" parent="ui/Control/MarginContainer/VBoxContainer/Control/HSplitContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/VSplitContainer/layersPanel_PanelContainer/MarginContainer/VBoxContainer/layersControl_PanelContainer/MarginContainer/HBoxContainer"]
 modulate = Color( 0.152941, 0.854902, 0.411765, 1 )
 margin_left = 109.0
 margin_right = 125.0
@@ -564,14 +563,14 @@ texture_normal = ExtResource( 18 )
 expand = true
 stretch_mode = 4
 
-[node name="layerParameters_PanelContainer" type="PanelContainer" parent="ui/Control/MarginContainer/VBoxContainer/Control/HBoxContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/VSplitContainer"]
+[node name="layerParameters_PanelContainer" type="PanelContainer" parent="ui/Control/MarginContainer/VBoxContainer/Control/HSplitContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/VSplitContainer"]
 margin_top = 253.0
 margin_right = 139.0
 margin_bottom = 381.0
 rect_min_size = Vector2( 0, 50 )
 custom_styles/panel = SubResource( 15 )
 
-[node name="MarginContainer" type="MarginContainer" parent="ui/Control/MarginContainer/VBoxContainer/Control/HBoxContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/VSplitContainer/layerParameters_PanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="ui/Control/MarginContainer/VBoxContainer/Control/HSplitContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/VSplitContainer/layerParameters_PanelContainer"]
 margin_left = 1.0
 margin_top = 1.0
 margin_right = 138.0
@@ -581,26 +580,26 @@ custom_constants/margin_top = 3
 custom_constants/margin_left = 3
 custom_constants/margin_bottom = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ui/Control/MarginContainer/VBoxContainer/Control/HBoxContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/VSplitContainer/layerParameters_PanelContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="ui/Control/MarginContainer/VBoxContainer/Control/HSplitContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/VSplitContainer/layerParameters_PanelContainer/MarginContainer"]
 margin_left = 3.0
 margin_top = 3.0
 margin_right = 134.0
 margin_bottom = 123.0
 
-[node name="layerParametersTitle_HBoxContainer" type="HBoxContainer" parent="ui/Control/MarginContainer/VBoxContainer/Control/HBoxContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/VSplitContainer/layerParameters_PanelContainer/MarginContainer/VBoxContainer"]
+[node name="layerParametersTitle_HBoxContainer" type="HBoxContainer" parent="ui/Control/MarginContainer/VBoxContainer/Control/HSplitContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/VSplitContainer/layerParameters_PanelContainer/MarginContainer/VBoxContainer"]
 margin_right = 131.0
 margin_bottom = 16.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="layerParametersTitle" type="Label" parent="ui/Control/MarginContainer/VBoxContainer/Control/HBoxContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/VSplitContainer/layerParameters_PanelContainer/MarginContainer/VBoxContainer/layerParametersTitle_HBoxContainer"]
+[node name="layerParametersTitle" type="Label" parent="ui/Control/MarginContainer/VBoxContainer/Control/HSplitContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/VSplitContainer/layerParameters_PanelContainer/MarginContainer/VBoxContainer/layerParametersTitle_HBoxContainer"]
 margin_right = 79.0
 margin_bottom = 15.0
 custom_fonts/font = SubResource( 16 )
 text = "layer parameters"
 
-[node name="Control" type="Control" parent="ui/Control/MarginContainer/VBoxContainer/Control/HBoxContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/VSplitContainer/layerParameters_PanelContainer/MarginContainer/VBoxContainer/layerParametersTitle_HBoxContainer"]
+[node name="Control" type="Control" parent="ui/Control/MarginContainer/VBoxContainer/Control/HSplitContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/VSplitContainer/layerParameters_PanelContainer/MarginContainer/VBoxContainer/layerParametersTitle_HBoxContainer"]
 margin_left = 83.0
 margin_right = 111.0
 margin_bottom = 16.0
@@ -609,31 +608,31 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextureRect" type="TextureRect" parent="ui/Control/MarginContainer/VBoxContainer/Control/HBoxContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/VSplitContainer/layerParameters_PanelContainer/MarginContainer/VBoxContainer/layerParametersTitle_HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="ui/Control/MarginContainer/VBoxContainer/Control/HSplitContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/VSplitContainer/layerParameters_PanelContainer/MarginContainer/VBoxContainer/layerParametersTitle_HBoxContainer"]
 modulate = Color( 0.266667, 0.933333, 0.415686, 0.403922 )
 margin_left = 115.0
 margin_right = 131.0
 margin_bottom = 16.0
 texture = ExtResource( 11 )
 
-[node name="ScrollContainer" type="ScrollContainer" parent="ui/Control/MarginContainer/VBoxContainer/Control/HBoxContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/VSplitContainer/layerParameters_PanelContainer/MarginContainer/VBoxContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="ui/Control/MarginContainer/VBoxContainer/Control/HSplitContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/VSplitContainer/layerParameters_PanelContainer/MarginContainer/VBoxContainer"]
 margin_top = 20.0
 margin_right = 131.0
 margin_bottom = 120.0
 rect_min_size = Vector2( 0, 100 )
 size_flags_vertical = 3
 
-[node name="layerParametersListContainer" type="VBoxContainer" parent="ui/Control/MarginContainer/VBoxContainer/Control/HBoxContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/VSplitContainer/layerParameters_PanelContainer/MarginContainer/VBoxContainer/ScrollContainer"]
+[node name="layerParametersListContainer" type="VBoxContainer" parent="ui/Control/MarginContainer/VBoxContainer/Control/HSplitContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/VSplitContainer/layerParameters_PanelContainer/MarginContainer/VBoxContainer/ScrollContainer"]
 margin_right = 131.0
 margin_bottom = 48.0
 size_flags_horizontal = 3
 
-[node name="base_PanelContainer" type="PanelContainer" parent="ui/Control/MarginContainer/VBoxContainer/Control/HBoxContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/VSplitContainer/layerParameters_PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/layerParametersListContainer"]
+[node name="base_PanelContainer" type="PanelContainer" parent="ui/Control/MarginContainer/VBoxContainer/Control/HSplitContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/VSplitContainer/layerParameters_PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/layerParametersListContainer"]
 margin_right = 131.0
 margin_bottom = 48.0
 custom_styles/panel = SubResource( 15 )
 
-[node name="MarginContainer" type="MarginContainer" parent="ui/Control/MarginContainer/VBoxContainer/Control/HBoxContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/VSplitContainer/layerParameters_PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/layerParametersListContainer/base_PanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="ui/Control/MarginContainer/VBoxContainer/Control/HSplitContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/VSplitContainer/layerParameters_PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/layerParametersListContainer/base_PanelContainer"]
 margin_left = 1.0
 margin_top = 1.0
 margin_right = 130.0
@@ -643,31 +642,31 @@ custom_constants/margin_top = 1
 custom_constants/margin_left = 1
 custom_constants/margin_bottom = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ui/Control/MarginContainer/VBoxContainer/Control/HBoxContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/VSplitContainer/layerParameters_PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/layerParametersListContainer/base_PanelContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="ui/Control/MarginContainer/VBoxContainer/Control/HSplitContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/VSplitContainer/layerParameters_PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/layerParametersListContainer/base_PanelContainer/MarginContainer"]
 margin_left = 1.0
 margin_top = 1.0
 margin_right = 128.0
 margin_bottom = 45.0
 
-[node name="layerName_LineEdit" type="LineEdit" parent="ui/Control/MarginContainer/VBoxContainer/Control/HBoxContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/VSplitContainer/layerParameters_PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/layerParametersListContainer/base_PanelContainer/MarginContainer/VBoxContainer"]
+[node name="layerName_LineEdit" type="LineEdit" parent="ui/Control/MarginContainer/VBoxContainer/Control/HSplitContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/VSplitContainer/layerParameters_PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/layerParametersListContainer/base_PanelContainer/MarginContainer/VBoxContainer"]
 margin_right = 127.0
 margin_bottom = 25.0
 size_flags_horizontal = 3
 custom_fonts/font = SubResource( 16 )
 
-[node name="HBoxContainer" type="HBoxContainer" parent="ui/Control/MarginContainer/VBoxContainer/Control/HBoxContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/VSplitContainer/layerParameters_PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/layerParametersListContainer/base_PanelContainer/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="ui/Control/MarginContainer/VBoxContainer/Control/HSplitContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/VSplitContainer/layerParameters_PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/layerParametersListContainer/base_PanelContainer/MarginContainer/VBoxContainer"]
 margin_top = 29.0
 margin_right = 127.0
 margin_bottom = 44.0
 
-[node name="texture_scene_origin_Label" type="Label" parent="ui/Control/MarginContainer/VBoxContainer/Control/HBoxContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/VSplitContainer/layerParameters_PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/layerParametersListContainer/base_PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="texture_scene_origin_Label" type="Label" parent="ui/Control/MarginContainer/VBoxContainer/Control/HSplitContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/VSplitContainer/layerParameters_PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/layerParametersListContainer/base_PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
 margin_right = 27.0
 margin_bottom = 15.0
 size_flags_stretch_ratio = 2.67
 custom_fonts/font = SubResource( 16 )
 text = "scene"
 
-[node name="texture_scene_name_Label" type="Label" parent="ui/Control/MarginContainer/VBoxContainer/Control/HBoxContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/VSplitContainer/layerParameters_PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/layerParametersListContainer/base_PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="texture_scene_name_Label" type="Label" parent="ui/Control/MarginContainer/VBoxContainer/Control/HSplitContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/VSplitContainer/layerParameters_PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/layerParametersListContainer/base_PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
 modulate = Color( 0.301961, 0.615686, 0.952941, 1 )
 margin_left = 31.0
 margin_right = 127.0
@@ -891,17 +890,17 @@ texture = ExtResource( 7 )
 [connection signal="colour_under_mouse_changed" from="display" to="custom_draw" method="_on_display_colour_under_mouse_changed"]
 [connection signal="mouse_coords_in_viewport_changed" from="display" to="ui" method="_on_display_mouse_coords_in_viewport_changed"]
 [connection signal="zoom_changed" from="display" to="ui" method="_on_display_zoom_changed"]
-[connection signal="mouse_entered" from="ui/Control/MarginContainer/VBoxContainer/Control/HBoxContainer/Control" to="ui" method="_on_Control_mouse_entered"]
-[connection signal="mouse_entered" from="ui/Control/MarginContainer/VBoxContainer/Control/HBoxContainer/Control" to="display" method="_on_Control_mouse_entered"]
-[connection signal="mouse_exited" from="ui/Control/MarginContainer/VBoxContainer/Control/HBoxContainer/Control" to="ui" method="_on_Control_mouse_exited"]
-[connection signal="mouse_exited" from="ui/Control/MarginContainer/VBoxContainer/Control/HBoxContainer/Control" to="display" method="_on_Control_mouse_exited"]
-[connection signal="pressed" from="ui/Control/MarginContainer/VBoxContainer/Control/HBoxContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/generate_PanelContainer/MarginContainer/VBoxContainer/generate_button" to="ui" method="_on_generate_button_pressed"]
-[connection signal="pressed" from="ui/Control/MarginContainer/VBoxContainer/Control/HBoxContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/VSplitContainer/layersPanel_PanelContainer/MarginContainer/VBoxContainer/layersControl_PanelContainer/MarginContainer/HBoxContainer/addLayer_TextureButton" to="ui" method="_on_addLayer_TextureButton_pressed"]
-[connection signal="pressed" from="ui/Control/MarginContainer/VBoxContainer/Control/HBoxContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/VSplitContainer/layersPanel_PanelContainer/MarginContainer/VBoxContainer/layersControl_PanelContainer/MarginContainer/HBoxContainer/removeLayer_TextureButton" to="ui" method="_on_removeLayer_TextureButton_pressed"]
-[connection signal="pressed" from="ui/Control/MarginContainer/VBoxContainer/Control/HBoxContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/VSplitContainer/layersPanel_PanelContainer/MarginContainer/VBoxContainer/layersControl_PanelContainer/MarginContainer/HBoxContainer/moveLayerUp_TextureButton" to="ui" method="_on_moveLayerUp_TextureButton_pressed"]
-[connection signal="pressed" from="ui/Control/MarginContainer/VBoxContainer/Control/HBoxContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/VSplitContainer/layersPanel_PanelContainer/MarginContainer/VBoxContainer/layersControl_PanelContainer/MarginContainer/HBoxContainer/moveLayerDown_TextureButton" to="ui" method="_on_moveLayerDown_TextureButton_pressed"]
-[connection signal="pressed" from="ui/Control/MarginContainer/VBoxContainer/Control/HBoxContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/VSplitContainer/layersPanel_PanelContainer/MarginContainer/VBoxContainer/layersControl_PanelContainer/MarginContainer/HBoxContainer/layersInformation_TextureButton" to="ui" method="_on_layersInformation_TextureButton_pressed"]
-[connection signal="text_entered" from="ui/Control/MarginContainer/VBoxContainer/Control/HBoxContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/VSplitContainer/layerParameters_PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/layerParametersListContainer/base_PanelContainer/MarginContainer/VBoxContainer/layerName_LineEdit" to="ui/layerManager" method="_on_layerName_LineEdit_text_entered"]
+[connection signal="mouse_entered" from="ui/Control/MarginContainer/VBoxContainer/Control/HSplitContainer/Control" to="ui" method="_on_Control_mouse_entered"]
+[connection signal="mouse_entered" from="ui/Control/MarginContainer/VBoxContainer/Control/HSplitContainer/Control" to="display" method="_on_Control_mouse_entered"]
+[connection signal="mouse_exited" from="ui/Control/MarginContainer/VBoxContainer/Control/HSplitContainer/Control" to="ui" method="_on_Control_mouse_exited"]
+[connection signal="mouse_exited" from="ui/Control/MarginContainer/VBoxContainer/Control/HSplitContainer/Control" to="display" method="_on_Control_mouse_exited"]
+[connection signal="pressed" from="ui/Control/MarginContainer/VBoxContainer/Control/HSplitContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/generate_PanelContainer/MarginContainer/VBoxContainer/generate_button" to="ui" method="_on_generate_button_pressed"]
+[connection signal="pressed" from="ui/Control/MarginContainer/VBoxContainer/Control/HSplitContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/VSplitContainer/layersPanel_PanelContainer/MarginContainer/VBoxContainer/layersControl_PanelContainer/MarginContainer/HBoxContainer/addLayer_TextureButton" to="ui" method="_on_addLayer_TextureButton_pressed"]
+[connection signal="pressed" from="ui/Control/MarginContainer/VBoxContainer/Control/HSplitContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/VSplitContainer/layersPanel_PanelContainer/MarginContainer/VBoxContainer/layersControl_PanelContainer/MarginContainer/HBoxContainer/removeLayer_TextureButton" to="ui" method="_on_removeLayer_TextureButton_pressed"]
+[connection signal="pressed" from="ui/Control/MarginContainer/VBoxContainer/Control/HSplitContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/VSplitContainer/layersPanel_PanelContainer/MarginContainer/VBoxContainer/layersControl_PanelContainer/MarginContainer/HBoxContainer/moveLayerUp_TextureButton" to="ui" method="_on_moveLayerUp_TextureButton_pressed"]
+[connection signal="pressed" from="ui/Control/MarginContainer/VBoxContainer/Control/HSplitContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/VSplitContainer/layersPanel_PanelContainer/MarginContainer/VBoxContainer/layersControl_PanelContainer/MarginContainer/HBoxContainer/moveLayerDown_TextureButton" to="ui" method="_on_moveLayerDown_TextureButton_pressed"]
+[connection signal="pressed" from="ui/Control/MarginContainer/VBoxContainer/Control/HSplitContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/VSplitContainer/layersPanel_PanelContainer/MarginContainer/VBoxContainer/layersControl_PanelContainer/MarginContainer/HBoxContainer/layersInformation_TextureButton" to="ui" method="_on_layersInformation_TextureButton_pressed"]
+[connection signal="text_entered" from="ui/Control/MarginContainer/VBoxContainer/Control/HSplitContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/VSplitContainer/layerParameters_PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/layerParametersListContainer/base_PanelContainer/MarginContainer/VBoxContainer/layerName_LineEdit" to="ui/layerManager" method="_on_layerName_LineEdit_text_entered"]
 [connection signal="about_to_show" from="ui/file_export_FileDialog" to="ui" method="_on_file_export_FileDialog_about_to_show"]
 [connection signal="file_selected" from="ui/file_export_FileDialog" to="." method="_on_file_export_FileDialog_file_selected"]
 [connection signal="popup_hide" from="ui/file_export_FileDialog" to="ui" method="_on_file_export_FileDialog_popup_hide"]
