@@ -217,7 +217,9 @@ func update_image(force:=false) -> void: # TODO: need to find a good pattern inw
 
 func _on_Control_mouse_entered() -> void:
 	accept_mouse_navigation = true
+	self.accept_input = true
 
 
 func _on_Control_mouse_exited() -> void:
 	accept_mouse_navigation = false
+	self.accept_input = false
