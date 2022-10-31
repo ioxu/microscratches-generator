@@ -43,13 +43,14 @@ func add_layer(new_texture_node : Node = null, select_new : bool = true)->void:
 	# move to top
 	l.get_parent().move_child(l, 0)
 	_layers_count +=1
-	l.layer_name = "Layer%s"%str(_layers_count)
+	#l.layer_name = "Layer%s"%str(_layers_count)
 	layers.append( l )
 
 	if new_texture_node != null:
 		render_scene_root.add_child( new_texture_node )
 		new_texture_node.set_owner( render_scene_root )
 		l.texture_scene = new_texture_node
+		l.layer_name = l.texture_scene.get_name()
 
 	if select_new:
 		# select only the new layer

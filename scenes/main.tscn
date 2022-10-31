@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=2]
+[gd_scene load_steps=36 format=2]
 
 [ext_resource path="res://scenes/main.gd" type="Script" id=1]
 [ext_resource path="res://fonts/RobotoCondensed-Light.ttf" type="DynamicFontData" id=2]
@@ -65,8 +65,6 @@ font_data = ExtResource( 2 )
 [sub_resource type="DynamicFont" id=10]
 size = 14
 font_data = ExtResource( 2 )
-
-[sub_resource type="ImageTexture" id=11]
 
 [sub_resource type="DynamicFont" id=12]
 size = 10
@@ -340,18 +338,17 @@ margin_bottom = 45.0
 
 [node name="seed_label" type="Label" parent="ui/Control/MarginContainer/VBoxContainer/Control/HSplitContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/generate_PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
 margin_top = 3.0
-margin_right = 63.0
+margin_right = 53.0
 margin_bottom = 20.0
 size_flags_horizontal = 3
 custom_fonts/font = SubResource( 10 )
 text = "seed"
 
 [node name="seed" type="SpinBox" parent="ui/Control/MarginContainer/VBoxContainer/Control/HSplitContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/generate_PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
-margin_left = 67.0
+margin_left = 57.0
 margin_right = 131.0
 margin_bottom = 24.0
 size_flags_horizontal = 3
-custom_icons/updown = SubResource( 11 )
 min_value = -10000.0
 max_value = 10000.0
 value = 1.0
@@ -886,14 +883,14 @@ texture = ExtResource( 7 )
 [connection signal="size_changed" from="scene/Viewport" to="ui" method="_on_Viewport_size_changed"]
 [connection signal="cam_transform_changed" from="display" to="display" method="_on_display_cam_transform_changed"]
 [connection signal="colour_channel_display_mode_changed" from="display" to="ui" method="_on_display_colour_channel_display_mode_changed"]
-[connection signal="colour_under_mouse_changed" from="display" to="ui" method="_on_display_colour_under_mouse_changed"]
 [connection signal="colour_under_mouse_changed" from="display" to="custom_draw" method="_on_display_colour_under_mouse_changed"]
+[connection signal="colour_under_mouse_changed" from="display" to="ui" method="_on_display_colour_under_mouse_changed"]
 [connection signal="mouse_coords_in_viewport_changed" from="display" to="ui" method="_on_display_mouse_coords_in_viewport_changed"]
 [connection signal="zoom_changed" from="display" to="ui" method="_on_display_zoom_changed"]
-[connection signal="mouse_entered" from="ui/Control/MarginContainer/VBoxContainer/Control/HSplitContainer/Control" to="ui" method="_on_Control_mouse_entered"]
 [connection signal="mouse_entered" from="ui/Control/MarginContainer/VBoxContainer/Control/HSplitContainer/Control" to="display" method="_on_Control_mouse_entered"]
-[connection signal="mouse_exited" from="ui/Control/MarginContainer/VBoxContainer/Control/HSplitContainer/Control" to="ui" method="_on_Control_mouse_exited"]
+[connection signal="mouse_entered" from="ui/Control/MarginContainer/VBoxContainer/Control/HSplitContainer/Control" to="ui" method="_on_Control_mouse_entered"]
 [connection signal="mouse_exited" from="ui/Control/MarginContainer/VBoxContainer/Control/HSplitContainer/Control" to="display" method="_on_Control_mouse_exited"]
+[connection signal="mouse_exited" from="ui/Control/MarginContainer/VBoxContainer/Control/HSplitContainer/Control" to="ui" method="_on_Control_mouse_exited"]
 [connection signal="pressed" from="ui/Control/MarginContainer/VBoxContainer/Control/HSplitContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/generate_PanelContainer/MarginContainer/VBoxContainer/generate_button" to="ui" method="_on_generate_button_pressed"]
 [connection signal="pressed" from="ui/Control/MarginContainer/VBoxContainer/Control/HSplitContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/VSplitContainer/layersPanel_PanelContainer/MarginContainer/VBoxContainer/layersControl_PanelContainer/MarginContainer/HBoxContainer/addLayer_TextureButton" to="ui" method="_on_addLayer_TextureButton_pressed"]
 [connection signal="pressed" from="ui/Control/MarginContainer/VBoxContainer/Control/HSplitContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/VSplitContainer/layersPanel_PanelContainer/MarginContainer/VBoxContainer/layersControl_PanelContainer/MarginContainer/HBoxContainer/removeLayer_TextureButton" to="ui" method="_on_removeLayer_TextureButton_pressed"]
