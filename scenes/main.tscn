@@ -147,7 +147,7 @@ viewport = NodePath("../scene/Viewport")
 
 [node name="display" type="Sprite" parent="display"]
 material = SubResource( 1 )
-position = Vector2( 38, 651 )
+position = Vector2( 538.129, 358.753 )
 texture = SubResource( 2 )
 
 [node name="ui" type="Node" parent="."]
