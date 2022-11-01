@@ -15,6 +15,9 @@ var hilighted = false
 
 var layer_name_label : Label setget set_layer_name
 
+var generator := false setget set_generator, is_generator
+var generator_label : Label 
+
 var layer_visible := true
 var layer_visibility_button : TextureButton
 
@@ -35,8 +38,27 @@ func _ready() -> void:
 	style_panel = get("custom_styles/panel")
 	style_panel.border_color = border_colour
 	style_panel.bg_color = background_colour
+	generator_label = find_node("generator_Label")
 	layer_name_label = find_node("layerName_Label")
 	layer_visibility_button = find_node("layerVisibility_TextureButton")
+
+
+func set_generator( flag : bool ) -> void:
+	generator = flag
+	if generator:
+		generator_label.set_visible(true)
+	else:
+		generator_label.set_visible(false)
+
+
+func is_generator() -> bool:
+	return generator
+
+
+func generate() -> void:
+	if generator:
+		pprint("[generate] %s (%s)"%[self.get_name(), self.texture_scene.get_name()])
+		self.texture_scene.generate()
 
 
 func set_layer_name(new_name) -> void:
@@ -97,7 +119,7 @@ func _to_string() -> String:
 		scene_name = self.texture_scene.get_name()
 	else:
 		scene_name = "NULL"
-	return "Layer \"%s\" (%s)"%[self.layer_name, scene_name]
+	return "Layer (%s)"%[scene_name]
 
 
 func _on_layerVisibility_TextureButton_toggled(button_pressed: bool) -> void:
@@ -111,3 +133,6 @@ func _on_layerVisibility_TextureButton_toggled(button_pressed: bool) -> void:
 	self.texture_scene.set_visible( vis )
 	emit_signal("layer_visiblity_toggled", self, vis)
 
+
+func pprint(thing) -> void:
+	print("[layer] %s"%str(thing))

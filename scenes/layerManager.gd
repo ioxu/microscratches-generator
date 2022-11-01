@@ -43,7 +43,6 @@ func add_layer(new_texture_node : Node = null, select_new : bool = true) -> void
 	# move to top
 	l.get_parent().move_child(l, 0)
 	_layers_count +=1
-	#l.layer_name = "Layer%s"%str(_layers_count)
 	layers.append( l )
 
 	if new_texture_node != null:
@@ -51,6 +50,10 @@ func add_layer(new_texture_node : Node = null, select_new : bool = true) -> void
 		new_texture_node.set_owner( render_scene_root )
 		l.texture_scene = new_texture_node
 		l.layer_name = l.texture_scene.get_name()
+		
+		# generator
+		if layer_is_generator( l ):
+			l.set_generator( true )
 
 	if select_new:
 		# select only the new layer
@@ -158,6 +161,15 @@ func connect_layer_signals(layer)->void:
 	layer.connect( "selected", self, "_on_layer_selected" )
 	layer.connect( "deselected", self, "_on_layer_deselected" )
 	layer.connect("layer_visiblity_toggled", ui_root, "_on_layer_visibility_toggle") # TODO : ugh, this is horrible.
+
+
+func layer_is_generator( layer : Layer) -> bool:
+	var method_list = layer.texture_scene.get_method_list()
+	var is_generator = false
+	for m in method_list:
+		if m.name == "generate":
+			is_generator = true
+	return is_generator
 
 
 # parameters -------------------------------------------------------------------

@@ -150,13 +150,16 @@ func _on_generate_button_pressed() -> void:
 
 	var time_now = OS.get_system_time_msecs() 
 	
-	################################
 	Util.set_rng_seed( int(seed_number.get_value()) )
-	var test_lines = viewport.find_node("test_lines")
-	if test_lines:
-		test_lines.generate()
-	################################
-	
+
+#	var test_lines = viewport.find_node("test_lines")
+#	if test_lines:
+#		test_lines.generate()
+	for l in $layerManager.layers:
+		l = (l as Layer)
+		if l.is_generator():
+			l.generate()
+
 	viewport_step_update()
 	generation_timing_label.text =  milliseconds_to_pretty_time( OS.get_system_time_msecs()  - time_now )
 

@@ -68,6 +68,18 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="generator_Label" type="Label" parent="MarginContainer/HBoxContainer"]
+visible = false
+modulate = Color( 0.411765, 0.92549, 0.337255, 1 )
+margin_left = 98.0
+margin_right = 106.0
+margin_bottom = 17.0
+custom_fonts/font = SubResource( 2 )
+text = "g"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="CenterContainer" type="CenterContainer" parent="MarginContainer/HBoxContainer"]
 margin_left = 110.0
 margin_right = 125.0
