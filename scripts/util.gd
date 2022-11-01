@@ -88,6 +88,7 @@ func export_texture( tex : Texture, path : String ) -> void:
 	var tex_data = tex.get_data()
 	var image : Image = tex_data
 	print("[util][export_texture] png: %s"%[base + ".png"])
+	image.convert(Image.FORMAT_RGBA8)
 # warning-ignore:return_value_discarded
 	image.save_png( base + ".png" )
 	
@@ -111,6 +112,7 @@ func export_texture( tex : Texture, path : String ) -> void:
 
 func pprint(thing) -> void:
 	print("[util] %s"%str(thing))
+
 
 # properties--------------------------------------------------------------------
 
@@ -145,3 +147,9 @@ var PROPERTY_TYPE_STRINGS = {
 	26 : "TYPE_COLOR_ARRAY",
 	27 : "TYPE_MAX" 
 }
+
+# properties--------------------------------------------------------------------
+
+func is_f6(node:Node):
+	# https://github.com/godotengine/godot/issues/28230
+	return node.get_parent() == get_tree().root and ProjectSettings.get_setting("application/run/main_scene") != node.filename

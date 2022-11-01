@@ -133,6 +133,17 @@ func _on_vector_direction_menu_button_item_pressed( id_pressed ) -> void:
 	Global.vector_direction = VECTOR_DIRECTIONS[id_pressed]
 
 
+func viewport_step_update() -> void:
+	# chain updates down into image datas
+	# this order, and frame-waits, are important
+	print("[ui][viewport] viewport step update")
+	viewport.set_update_mode(Viewport.UPDATE_ALWAYS)
+	yield(get_tree(), "idle_frame")
+	viewport.set_update_mode(Viewport.UPDATE_ONCE)
+	yield(get_tree(), "idle_frame")
+	display.update_image(true)
+
+
 func _on_generate_button_pressed() -> void:
 	Util.set_rng_seed( int(seed_number.get_value()) )
 	Global.report()
@@ -141,20 +152,12 @@ func _on_generate_button_pressed() -> void:
 	
 	################################
 	Util.set_rng_seed( int(seed_number.get_value()) )
-	
 	var test_lines = viewport.find_node("test_lines")
 	if test_lines:
 		test_lines.generate()
-
-	# chain updates down into image datas
-	# this order, and frame-waits, are important
-	viewport.set_update_mode(Viewport.UPDATE_ALWAYS)
-	yield(get_tree(), "idle_frame")
-	viewport.set_update_mode(Viewport.UPDATE_ONCE)
-	yield(get_tree(), "idle_frame")
-	display.update_image(true)
 	################################
-
+	
+	viewport_step_update()
 	generation_timing_label.text =  milliseconds_to_pretty_time( OS.get_system_time_msecs()  - time_now )
 
 
@@ -204,7 +207,8 @@ func _on_addLayer_TextureButton_pressed() -> void:
 	print("[ui][layers][texture scene] %s"%scene.get_name())
 
 	$layerManager.add_layer( scene.instance() )
-
+	viewport_step_update()
+	
 
 func _on_textureLayerChooser_index_pressed(index : int) -> void:
 	print("[ui][layers][_on_textureLayerChooser_index_pressed] %s"%index)
@@ -214,17 +218,25 @@ func _on_textureLayerChooser_index_pressed(index : int) -> void:
 func _on_removeLayer_TextureButton_pressed() -> void:
 	print("[ui][layers] remove layer")
 	$layerManager.remove_selected_layers()
-
+	viewport_step_update()
+	
 
 func _on_moveLayerUp_TextureButton_pressed() -> void:
 	print("[ui][layers] move layer up")
 	$layerManager.move_selected_layers_up()
+	viewport_step_update()
 
 
 func _on_moveLayerDown_TextureButton_pressed() -> void:
 	print("[ui][layers] move layer down")
 	$layerManager.move_selected_layers_down()
+	viewport_step_update()
 	
+
+func _on_layer_visibility_toggle(layer : Layer, pressed : bool) -> void:
+	print("[ui][layers] layer \"%s\" visiblity %s"%[ layer, pressed ])
+	viewport_step_update()
+
 
 func _on_layersInformation_TextureButton_pressed() -> void:
 	$layerManager.print_layers()

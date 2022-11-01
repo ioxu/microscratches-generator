@@ -33,7 +33,7 @@ func _ready() -> void:
 	parameter_text_font = texture_scene_name_parameter.get("custom_fonts/font").duplicate()
 
 
-func add_layer(new_texture_node : Node = null, select_new : bool = true)->void:
+func add_layer(new_texture_node : Node = null, select_new : bool = true) -> void:
 	# adds a new layer to the GUI,
 	# and a node heirarchy (with a Node2D root) to the rendering viewport
 	# (it is intended that new_texture_node is an instanced PackedScene loaded from a .tcsn)
@@ -157,6 +157,7 @@ func refresh_layers() -> void:
 func connect_layer_signals(layer)->void:
 	layer.connect( "selected", self, "_on_layer_selected" )
 	layer.connect( "deselected", self, "_on_layer_deselected" )
+	layer.connect("layer_visiblity_toggled", ui_root, "_on_layer_visibility_toggle") # TODO : ugh, this is horrible.
 
 
 # parameters -------------------------------------------------------------------

@@ -14,6 +14,22 @@ var DRAWN = false
 func _ready() -> void:
 	print("[test_lines] .size() %s"%lines.size())
 
+	if Util.is_f6( self ):
+		# DEMO
+		print("IS F6 in test_lines")
+		self.generate()
+		
+
+func _input(event: InputEvent) -> void:
+
+	if Util.is_f6( self ):
+		# DEMO
+		if Input.is_key_pressed(KEY_H) and event.is_pressed() and not event.is_echo():
+			self.visible = !self.visible
+			print("toggle visiblity (\"h\") %s"%self.visible)
+#			if self.visible:
+#				update()
+
 
 func generate() -> void:
 	print("[test_lines] generate")
@@ -45,11 +61,15 @@ func _rdomain() -> int:
 
 
 func _draw() -> void:
-	if DRAW_ONCE and not DRAWN:
-		#print("[test_lines] drawing once DRAW_ONCE %s DRAWN %s"%[DRAW_ONCE, DRAWN])
-		for i in lines.size():
-			draw_polyline_colors( lines[i], lines_colours[i], Util.randf_range(0.35, 2.0), false)
-		DRAWN = true
+#	if DRAW_ONCE and not DRAWN:
+#		#print("[test_lines] drawing once DRAW_ONCE %s DRAWN %s"%[DRAW_ONCE, DRAWN])
+#		for i in lines.size():
+#			draw_polyline_colors( lines[i], lines_colours[i], Util.randf_range(0.35, 2.0), false)
+#		DRAWN = true
+
+	for i in lines.size():
+		draw_polyline_colors( lines[i], lines_colours[i], Util.randf_range(0.35, 2.0), false)
+
 
 
 #-------------------------------------------------------------------------------

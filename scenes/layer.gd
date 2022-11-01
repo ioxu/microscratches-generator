@@ -14,6 +14,12 @@ var selected = false
 var hilighted = false
 
 var layer_name_label : Label setget set_layer_name
+
+var layer_visible := true
+var layer_visibility_button : TextureButton
+
+signal layer_visiblity_toggled( layer, pressed )
+
 var style_panel : StyleBox
 
 var texture_scene : CanvasItem #: Node2D # stores a reference for the texture scene
@@ -30,6 +36,7 @@ func _ready() -> void:
 	style_panel.border_color = border_colour
 	style_panel.bg_color = background_colour
 	layer_name_label = find_node("layerName_Label")
+	layer_visibility_button = find_node("layerVisibility_TextureButton")
 
 
 func set_layer_name(new_name) -> void:
@@ -81,6 +88,7 @@ func _on_layer_PanelContainer_mouse_exited() -> void:
 	if not selected:
 		style_panel.border_color = border_colour
 
+
 func _to_string() -> String:
 	# "[ClassName:RID]"
 	# "[%s:%s]"%[self.get_class(), self.get_instance_id()]
@@ -92,4 +100,14 @@ func _to_string() -> String:
 	return "Layer \"%s\" (%s)"%[self.layer_name, scene_name]
 
 
+func _on_layerVisibility_TextureButton_toggled(button_pressed: bool) -> void:
+	var vis : bool
+	if button_pressed:
+		layer_visibility_button.modulate = Color(1.0, 1.0, 1.0, 0.25)
+		vis = false
+	else:
+		layer_visibility_button.modulate = Color(1.0, 1.0, 1.0, 1.0)
+		vis = true
+	self.texture_scene.set_visible( vis )
+	emit_signal("layer_visiblity_toggled", self, vis)
 
