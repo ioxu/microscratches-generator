@@ -2,8 +2,10 @@ extends Node2D
 
 var lines = []
 var lines_colours = []
+var lines_widths = []
 
-export var n_lines := 3000#10000
+export var n_lines := 300#10000
+export var local_seed := 1
 
 var idim = 1024
 var mdim = idim * 3
@@ -35,6 +37,7 @@ func generate() -> void:
 	print("[test_lines] generate")
 	lines = []
 	lines_colours = []
+	lines_widths = []
 	for _l in range(n_lines):
 		var startp = Vector2(_rdomain(), _rdomain())
 		var endp = Vector2(_rdomain(), _rdomain())
@@ -48,6 +51,7 @@ func generate() -> void:
 		else:
 			lines_colours.append( vcolours_simple(line) )
 		
+		lines_widths.append( Util.randf_range(0.35, 2.0) )
 	DRAWN = false
 	update()
 
@@ -68,7 +72,7 @@ func _draw() -> void:
 #		DRAWN = true
 
 	for i in lines.size():
-		draw_polyline_colors( lines[i], lines_colours[i], Util.randf_range(0.35, 2.0), false)
+		draw_polyline_colors( lines[i], lines_colours[i], lines_widths[i], false)
 
 
 
@@ -86,7 +90,7 @@ func line_simple_simplex( startp:Vector2,
 
 	# Configure
 	#noise.seed = randi()
-	noise.seed = n_seed
+	noise.seed = n_seed + self.local_seed
 	noise.octaves = 5
 	noise.period = 20.0
 	noise.persistence = 0.72
