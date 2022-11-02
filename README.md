@@ -22,5 +22,5 @@ Some icons by [Kenny Vleugels](https://www.kenney.nl/)
 
 <a href="https://www.flaticon.com/authors/reussy" title="add icons">Add, Less, Up Chevron, Down Chevron, Alert icons created by reussy - Flaticon</a>
 
-<a href="https://www.flaticon.com/authors/rahul-kaklota" title="eye icons">Eye and Close-eye icons created by Rahul Kaklotar - Flaticon</a>
+<a href="https://www.flaticon.com/authors/rahul-kaklotar" title="eye icons">Eye and Close-eye icons created by Rahul Kaklotar - Flaticon</a>
 

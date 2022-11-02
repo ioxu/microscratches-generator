@@ -66,12 +66,12 @@ font_data = ExtResource( 2 )
 size = 14
 font_data = ExtResource( 2 )
 
-[sub_resource type="DynamicFont" id=12]
+[sub_resource type="DynamicFont" id=11]
 size = 10
 use_filter = true
 font_data = ExtResource( 2 )
 
-[sub_resource type="StyleBoxFlat" id=13]
+[sub_resource type="StyleBoxFlat" id=12]
 bg_color = Color( 0.6, 0.6, 0.6, 0 )
 border_width_left = 1
 border_width_top = 1
@@ -83,7 +83,7 @@ corner_radius_top_right = 2
 corner_radius_bottom_right = 2
 corner_radius_bottom_left = 2
 
-[sub_resource type="StyleBoxFlat" id=14]
+[sub_resource type="StyleBoxFlat" id=13]
 bg_color = Color( 0.262745, 0.411765, 0.670588, 0.447059 )
 border_width_left = 1
 border_width_top = 1
@@ -95,7 +95,7 @@ corner_radius_top_right = 2
 corner_radius_bottom_right = 2
 corner_radius_bottom_left = 2
 
-[sub_resource type="StyleBoxFlat" id=15]
+[sub_resource type="StyleBoxFlat" id=14]
 bg_color = Color( 0.6, 0.6, 0.6, 0 )
 border_width_left = 1
 border_width_top = 1
@@ -107,19 +107,19 @@ corner_radius_top_right = 2
 corner_radius_bottom_right = 2
 corner_radius_bottom_left = 2
 
-[sub_resource type="DynamicFont" id=16]
+[sub_resource type="DynamicFont" id=15]
 size = 12
 use_mipmaps = true
 font_data = ExtResource( 2 )
 
-[sub_resource type="StyleBoxFlat" id=17]
+[sub_resource type="StyleBoxFlat" id=16]
 bg_color = Color( 0.137255, 0.137255, 0.137255, 0.862745 )
 
-[sub_resource type="DynamicFont" id=18]
+[sub_resource type="DynamicFont" id=17]
 size = 12
 font_data = ExtResource( 2 )
 
-[sub_resource type="StyleBoxTexture" id=19]
+[sub_resource type="StyleBoxTexture" id=18]
 texture = ExtResource( 6 )
 region_rect = Rect2( 0, 0, 17, 15 )
 axis_stretch_horizontal = 1
@@ -378,7 +378,7 @@ __meta__ = {
 margin_top = 68.0
 margin_right = 131.0
 margin_bottom = 81.0
-custom_fonts/font = SubResource( 12 )
+custom_fonts/font = SubResource( 11 )
 custom_colors/font_color = Color( 0.717647, 0.717647, 0.717647, 1 )
 custom_colors/font_outline_modulate = Color( 0.717647, 0.717647, 0.717647, 1 )
 text = "timing"
@@ -444,7 +444,7 @@ margin_bottom = 241.0
 rect_min_size = Vector2( 0, 55 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_styles/panel = SubResource( 13 )
+custom_styles/panel = SubResource( 12 )
 
 [node name="MarginContainer" type="MarginContainer" parent="ui/Control/MarginContainer/VBoxContainer/Control/HSplitContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/VSplitContainer/layersPanel_PanelContainer"]
 margin_left = 1.0
@@ -481,7 +481,7 @@ __meta__ = {
 margin_top = 211.0
 margin_right = 131.0
 margin_bottom = 233.0
-custom_styles/panel = SubResource( 14 )
+custom_styles/panel = SubResource( 13 )
 
 [node name="MarginContainer" type="MarginContainer" parent="ui/Control/MarginContainer/VBoxContainer/Control/HSplitContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/VSplitContainer/layersPanel_PanelContainer/MarginContainer/VBoxContainer/layersControl_PanelContainer"]
 margin_left = 1.0
@@ -565,7 +565,7 @@ margin_top = 253.0
 margin_right = 139.0
 margin_bottom = 381.0
 rect_min_size = Vector2( 0, 50 )
-custom_styles/panel = SubResource( 15 )
+custom_styles/panel = SubResource( 14 )
 
 [node name="MarginContainer" type="MarginContainer" parent="ui/Control/MarginContainer/VBoxContainer/Control/HSplitContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/VSplitContainer/layerParameters_PanelContainer"]
 margin_left = 1.0
@@ -593,7 +593,7 @@ __meta__ = {
 [node name="layerParametersTitle" type="Label" parent="ui/Control/MarginContainer/VBoxContainer/Control/HSplitContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/VSplitContainer/layerParameters_PanelContainer/MarginContainer/VBoxContainer/layerParametersTitle_HBoxContainer"]
 margin_right = 79.0
 margin_bottom = 15.0
-custom_fonts/font = SubResource( 16 )
+custom_fonts/font = SubResource( 15 )
 text = "layer parameters"
 
 [node name="Control" type="Control" parent="ui/Control/MarginContainer/VBoxContainer/Control/HSplitContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/VSplitContainer/layerParameters_PanelContainer/MarginContainer/VBoxContainer/layerParametersTitle_HBoxContainer"]
@@ -627,7 +627,7 @@ size_flags_horizontal = 3
 [node name="base_PanelContainer" type="PanelContainer" parent="ui/Control/MarginContainer/VBoxContainer/Control/HSplitContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/VSplitContainer/layerParameters_PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/layerParametersListContainer"]
 margin_right = 131.0
 margin_bottom = 48.0
-custom_styles/panel = SubResource( 15 )
+custom_styles/panel = SubResource( 14 )
 
 [node name="MarginContainer" type="MarginContainer" parent="ui/Control/MarginContainer/VBoxContainer/Control/HSplitContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/VSplitContainer/layerParameters_PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/layerParametersListContainer/base_PanelContainer"]
 margin_left = 1.0
@@ -649,7 +649,7 @@ margin_bottom = 45.0
 margin_right = 127.0
 margin_bottom = 25.0
 size_flags_horizontal = 3
-custom_fonts/font = SubResource( 16 )
+custom_fonts/font = SubResource( 15 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="ui/Control/MarginContainer/VBoxContainer/Control/HSplitContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/VSplitContainer/layerParameters_PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/layerParametersListContainer/base_PanelContainer/MarginContainer/VBoxContainer"]
 margin_top = 29.0
@@ -660,7 +660,7 @@ margin_bottom = 44.0
 margin_right = 27.0
 margin_bottom = 15.0
 size_flags_stretch_ratio = 2.67
-custom_fonts/font = SubResource( 16 )
+custom_fonts/font = SubResource( 15 )
 text = "scene"
 
 [node name="texture_scene_name_Label" type="Label" parent="ui/Control/MarginContainer/VBoxContainer/Control/HSplitContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/VSplitContainer/layerParameters_PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/layerParametersListContainer/base_PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
@@ -670,7 +670,7 @@ margin_right = 127.0
 margin_bottom = 15.0
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 4.66
-custom_fonts/font = SubResource( 16 )
+custom_fonts/font = SubResource( 15 )
 align = 1
 
 [node name="helpBar_PanelContainer" type="PanelContainer" parent="ui/Control/MarginContainer/VBoxContainer"]
@@ -678,7 +678,7 @@ margin_top = 573.0
 margin_right = 1018.0
 margin_bottom = 594.0
 mouse_filter = 1
-custom_styles/panel = SubResource( 17 )
+custom_styles/panel = SubResource( 16 )
 
 [node name="MarginContainer" type="MarginContainer" parent="ui/Control/MarginContainer/VBoxContainer/helpBar_PanelContainer"]
 margin_right = 1018.0
@@ -698,7 +698,7 @@ size_flags_horizontal = 5
 [node name="hint_label" type="Label" parent="ui/Control/MarginContainer/VBoxContainer/helpBar_PanelContainer/MarginContainer/HBoxContainer"]
 margin_right = 249.0
 margin_bottom = 15.0
-custom_fonts/font = SubResource( 18 )
+custom_fonts/font = SubResource( 17 )
 text = "Home : reset camera    Alt-Enter : toggle fullscreen   "
 
 [node name="hint_channel_selection_label" type="Label" parent="ui/Control/MarginContainer/VBoxContainer/helpBar_PanelContainer/MarginContainer/HBoxContainer"]
@@ -714,7 +714,7 @@ G: green
 B: blue
 T: rotation ( atan(y, x) of encoded texture vectors)"
 mouse_filter = 1
-custom_fonts/font = SubResource( 18 )
+custom_fonts/font = SubResource( 17 )
 text = "A,R,G,B,T :  toggle colour channel display"
 
 [node name="Control" type="Control" parent="ui/Control/MarginContainer/VBoxContainer/helpBar_PanelContainer/MarginContainer/HBoxContainer"]
@@ -730,7 +730,7 @@ __meta__ = {
 margin_left = 790.0
 margin_right = 813.0
 margin_bottom = 15.0
-custom_fonts/font = SubResource( 18 )
+custom_fonts/font = SubResource( 17 )
 custom_colors/font_color = Color( 0.721569, 0.490196, 0.286275, 1 )
 text = "x : y :"
 
@@ -738,7 +738,7 @@ text = "x : y :"
 margin_left = 817.0
 margin_right = 839.0
 margin_bottom = 15.0
-custom_fonts/font = SubResource( 18 )
+custom_fonts/font = SubResource( 17 )
 custom_colors/font_color = Color( 0.996078, 0.996078, 0.996078, 1 )
 text = "RGB"
 
@@ -746,7 +746,7 @@ text = "RGB"
 margin_left = 843.0
 margin_right = 847.0
 margin_bottom = 15.0
-custom_fonts/font = SubResource( 18 )
+custom_fonts/font = SubResource( 17 )
 custom_colors/font_color = Color( 0.945098, 0.14902, 0.129412, 1 )
 text = "r"
 
@@ -754,7 +754,7 @@ text = "r"
 margin_left = 851.0
 margin_right = 858.0
 margin_bottom = 15.0
-custom_fonts/font = SubResource( 18 )
+custom_fonts/font = SubResource( 17 )
 custom_colors/font_color = Color( 0.231373, 0.945098, 0.129412, 1 )
 text = "g"
 
@@ -762,7 +762,7 @@ text = "g"
 margin_left = 862.0
 margin_right = 869.0
 margin_bottom = 15.0
-custom_fonts/font = SubResource( 18 )
+custom_fonts/font = SubResource( 17 )
 custom_colors/font_color = Color( 0.129412, 0.447059, 0.945098, 1 )
 text = "b"
 
@@ -770,7 +770,7 @@ text = "b"
 margin_left = 873.0
 margin_right = 878.0
 margin_bottom = 15.0
-custom_fonts/font = SubResource( 18 )
+custom_fonts/font = SubResource( 17 )
 custom_colors/font_color = Color( 0.494118, 0.513726, 0.545098, 1 )
 text = "a"
 
@@ -788,7 +788,7 @@ modulate = Color( 0.2, 0.2, 0.2, 1 )
 margin_right = 30.0
 margin_bottom = 15.0
 rect_min_size = Vector2( 30, 15 )
-custom_styles/panel = SubResource( 19 )
+custom_styles/panel = SubResource( 18 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -805,7 +805,7 @@ __meta__ = {
 margin_left = 916.0
 margin_right = 973.0
 margin_bottom = 15.0
-custom_fonts/font = SubResource( 18 )
+custom_fonts/font = SubResource( 17 )
 custom_colors/font_color = Color( 0.286275, 0.466667, 0.721569, 1 )
 text = "resolution : "
 
@@ -813,7 +813,7 @@ text = "resolution : "
 margin_left = 977.0
 margin_right = 1012.0
 margin_bottom = 15.0
-custom_fonts/font = SubResource( 18 )
+custom_fonts/font = SubResource( 17 )
 custom_colors/font_color = Color( 0.286275, 0.721569, 0.498039, 1 )
 text = "zoom : "
 
@@ -883,14 +883,14 @@ texture = ExtResource( 7 )
 [connection signal="size_changed" from="scene/Viewport" to="ui" method="_on_Viewport_size_changed"]
 [connection signal="cam_transform_changed" from="display" to="display" method="_on_display_cam_transform_changed"]
 [connection signal="colour_channel_display_mode_changed" from="display" to="ui" method="_on_display_colour_channel_display_mode_changed"]
-[connection signal="colour_under_mouse_changed" from="display" to="custom_draw" method="_on_display_colour_under_mouse_changed"]
 [connection signal="colour_under_mouse_changed" from="display" to="ui" method="_on_display_colour_under_mouse_changed"]
+[connection signal="colour_under_mouse_changed" from="display" to="custom_draw" method="_on_display_colour_under_mouse_changed"]
 [connection signal="mouse_coords_in_viewport_changed" from="display" to="ui" method="_on_display_mouse_coords_in_viewport_changed"]
 [connection signal="zoom_changed" from="display" to="ui" method="_on_display_zoom_changed"]
-[connection signal="mouse_entered" from="ui/Control/MarginContainer/VBoxContainer/Control/HSplitContainer/Control" to="display" method="_on_Control_mouse_entered"]
 [connection signal="mouse_entered" from="ui/Control/MarginContainer/VBoxContainer/Control/HSplitContainer/Control" to="ui" method="_on_Control_mouse_entered"]
-[connection signal="mouse_exited" from="ui/Control/MarginContainer/VBoxContainer/Control/HSplitContainer/Control" to="display" method="_on_Control_mouse_exited"]
+[connection signal="mouse_entered" from="ui/Control/MarginContainer/VBoxContainer/Control/HSplitContainer/Control" to="display" method="_on_Control_mouse_entered"]
 [connection signal="mouse_exited" from="ui/Control/MarginContainer/VBoxContainer/Control/HSplitContainer/Control" to="ui" method="_on_Control_mouse_exited"]
+[connection signal="mouse_exited" from="ui/Control/MarginContainer/VBoxContainer/Control/HSplitContainer/Control" to="display" method="_on_Control_mouse_exited"]
 [connection signal="pressed" from="ui/Control/MarginContainer/VBoxContainer/Control/HSplitContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/generate_PanelContainer/MarginContainer/VBoxContainer/generate_button" to="ui" method="_on_generate_button_pressed"]
 [connection signal="pressed" from="ui/Control/MarginContainer/VBoxContainer/Control/HSplitContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/VSplitContainer/layersPanel_PanelContainer/MarginContainer/VBoxContainer/layersControl_PanelContainer/MarginContainer/HBoxContainer/addLayer_TextureButton" to="ui" method="_on_addLayer_TextureButton_pressed"]
 [connection signal="pressed" from="ui/Control/MarginContainer/VBoxContainer/Control/HSplitContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/VSplitContainer/layersPanel_PanelContainer/MarginContainer/VBoxContainer/layersControl_PanelContainer/MarginContainer/HBoxContainer/removeLayer_TextureButton" to="ui" method="_on_removeLayer_TextureButton_pressed"]

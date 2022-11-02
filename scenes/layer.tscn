@@ -86,8 +86,9 @@ margin_right = 125.0
 margin_bottom = 17.0
 
 [node name="layerVisibility_TextureButton" type="TextureButton" parent="MarginContainer/HBoxContainer/CenterContainer"]
+margin_top = 1.0
 margin_right = 15.0
-margin_bottom = 15.0
+margin_bottom = 16.0
 rect_min_size = Vector2( 15, 15 )
 rect_pivot_offset = Vector2( 7.5, 7.5 )
 size_flags_horizontal = 9
