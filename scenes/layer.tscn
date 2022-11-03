@@ -51,10 +51,13 @@ margin_left = 2.0
 margin_top = 2.0
 margin_right = 127.0
 margin_bottom = 19.0
+size_flags_horizontal = 9
+alignment = 2
 
 [node name="layerName_Label" type="Label" parent="MarginContainer/HBoxContainer"]
 margin_right = 29.0
 margin_bottom = 17.0
+size_flags_horizontal = 9
 custom_fonts/font = SubResource( 2 )
 text = "Layer"
 

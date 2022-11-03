@@ -467,6 +467,7 @@ margin_right = 131.0
 margin_bottom = 207.0
 size_flags_vertical = 3
 follow_focus = true
+scroll_horizontal_enabled = false
 
 [node name="layerListContainer" type="VBoxContainer" parent="ui/Control/MarginContainer/VBoxContainer/Control/HSplitContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/VSplitContainer/layersPanel_PanelContainer/MarginContainer/VBoxContainer/ScrollContainer"]
 margin_right = 131.0
@@ -698,12 +699,13 @@ size_flags_horizontal = 5
 [node name="hint_label" type="Label" parent="ui/Control/MarginContainer/VBoxContainer/helpBar_PanelContainer/MarginContainer/HBoxContainer"]
 margin_right = 249.0
 margin_bottom = 15.0
+size_flags_horizontal = 9
 custom_fonts/font = SubResource( 17 )
 text = "Home : reset camera    Alt-Enter : toggle fullscreen   "
 
 [node name="hint_channel_selection_label" type="Label" parent="ui/Control/MarginContainer/VBoxContainer/helpBar_PanelContainer/MarginContainer/HBoxContainer"]
 margin_left = 253.0
-margin_right = 455.0
+margin_right = 465.0
 margin_bottom = 15.0
 hint_tooltip = "Toggle Colour Channel Display :
 
@@ -714,11 +716,12 @@ G: green
 B: blue
 T: rotation ( atan(y, x) of encoded texture vectors)"
 mouse_filter = 1
+size_flags_horizontal = 9
 custom_fonts/font = SubResource( 17 )
-text = "A,R,G,B,T :  toggle colour channel display"
+text = "A,R,G,B,T,U :  toggle colour channel display"
 
 [node name="Control" type="Control" parent="ui/Control/MarginContainer/VBoxContainer/helpBar_PanelContainer/MarginContainer/HBoxContainer"]
-margin_left = 459.0
+margin_left = 469.0
 margin_right = 786.0
 margin_bottom = 15.0
 size_flags_horizontal = 3
@@ -883,14 +886,14 @@ texture = ExtResource( 7 )
 [connection signal="size_changed" from="scene/Viewport" to="ui" method="_on_Viewport_size_changed"]
 [connection signal="cam_transform_changed" from="display" to="display" method="_on_display_cam_transform_changed"]
 [connection signal="colour_channel_display_mode_changed" from="display" to="ui" method="_on_display_colour_channel_display_mode_changed"]
-[connection signal="colour_under_mouse_changed" from="display" to="ui" method="_on_display_colour_under_mouse_changed"]
 [connection signal="colour_under_mouse_changed" from="display" to="custom_draw" method="_on_display_colour_under_mouse_changed"]
+[connection signal="colour_under_mouse_changed" from="display" to="ui" method="_on_display_colour_under_mouse_changed"]
 [connection signal="mouse_coords_in_viewport_changed" from="display" to="ui" method="_on_display_mouse_coords_in_viewport_changed"]
 [connection signal="zoom_changed" from="display" to="ui" method="_on_display_zoom_changed"]
-[connection signal="mouse_entered" from="ui/Control/MarginContainer/VBoxContainer/Control/HSplitContainer/Control" to="ui" method="_on_Control_mouse_entered"]
 [connection signal="mouse_entered" from="ui/Control/MarginContainer/VBoxContainer/Control/HSplitContainer/Control" to="display" method="_on_Control_mouse_entered"]
-[connection signal="mouse_exited" from="ui/Control/MarginContainer/VBoxContainer/Control/HSplitContainer/Control" to="ui" method="_on_Control_mouse_exited"]
+[connection signal="mouse_entered" from="ui/Control/MarginContainer/VBoxContainer/Control/HSplitContainer/Control" to="ui" method="_on_Control_mouse_entered"]
 [connection signal="mouse_exited" from="ui/Control/MarginContainer/VBoxContainer/Control/HSplitContainer/Control" to="display" method="_on_Control_mouse_exited"]
+[connection signal="mouse_exited" from="ui/Control/MarginContainer/VBoxContainer/Control/HSplitContainer/Control" to="ui" method="_on_Control_mouse_exited"]
 [connection signal="pressed" from="ui/Control/MarginContainer/VBoxContainer/Control/HSplitContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/generate_PanelContainer/MarginContainer/VBoxContainer/generate_button" to="ui" method="_on_generate_button_pressed"]
 [connection signal="pressed" from="ui/Control/MarginContainer/VBoxContainer/Control/HSplitContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/VSplitContainer/layersPanel_PanelContainer/MarginContainer/VBoxContainer/layersControl_PanelContainer/MarginContainer/HBoxContainer/addLayer_TextureButton" to="ui" method="_on_addLayer_TextureButton_pressed"]
 [connection signal="pressed" from="ui/Control/MarginContainer/VBoxContainer/Control/HSplitContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/VSplitContainer/layersPanel_PanelContainer/MarginContainer/VBoxContainer/layersControl_PanelContainer/MarginContainer/HBoxContainer/removeLayer_TextureButton" to="ui" method="_on_removeLayer_TextureButton_pressed"]

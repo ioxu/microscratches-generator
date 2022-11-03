@@ -7,6 +7,10 @@ var lines_widths = []
 export var n_lines := 300#10000
 export var local_seed := 1
 
+export var thickness_min := 0.1
+export var thickness_max := 3.5
+
+
 var idim = 1024
 var mdim = idim * 3
 
@@ -51,7 +55,8 @@ func generate() -> void:
 		else:
 			lines_colours.append( vcolours_simple(line) )
 		
-		lines_widths.append( Util.randf_range(0.35, 2.0) )
+		lines_widths.append( Util.randf_range(thickness_max, thickness_min) )
+		
 	DRAWN = false
 	update()
 
