@@ -204,7 +204,7 @@ func update_image(force:=false) -> void: # TODO: need to find a good pattern inw
 		print("[display] copy viewport to image data")
 		viewport_image = $display.texture.get_data()
 		image_dirty = false
-		
+
 		# test
 		# used to copy image data into display_test_image_data Sprite
 		# yield(get_tree(), "idle_frame") was needed to step single updates

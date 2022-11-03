@@ -125,6 +125,8 @@ func _on_resolution_menu_button_item_pressed( id_pressed ) -> void:
 	print("[ui][control panel] resolution selected: %s"%RESOLUTIONS[id_pressed][0])
 	resolution_menu_button.set_text(RESOLUTIONS[id_pressed][0])
 	Global.resolution = RESOLUTIONS[id_pressed][1]
+	(viewport as Viewport).size = Global.resolution
+	viewport_step_update()
 
 
 func _on_vector_direction_menu_button_item_pressed( id_pressed ) -> void:
@@ -141,10 +143,22 @@ func viewport_step_update() -> void:
 	yield(get_tree(), "idle_frame")
 	viewport.set_update_mode(Viewport.UPDATE_ONCE)
 	yield(get_tree(), "idle_frame")
+	
+	#------------------------------
+	# what # TODO: what.
+	# https://github.com/godotengine/godot/issues/51241
+	OS.window_size.y += 1
+	yield(get_tree(), "idle_frame")
+	yield(get_tree(), "idle_frame")
+	OS.window_size.y -= 1
+	#------------------------------
 	display.update_image(true)
 
 
 func _on_generate_button_pressed() -> void:
+	# resolution
+	#(viewport as Viewport).size = Global.resolution
+
 	Util.set_rng_seed( int(seed_number.get_value()) )
 	Global.report()
 
@@ -152,9 +166,6 @@ func _on_generate_button_pressed() -> void:
 	
 	Util.set_rng_seed( int(seed_number.get_value()) )
 
-#	var test_lines = viewport.find_node("test_lines")
-#	if test_lines:
-#		test_lines.generate()
 	for l in $layerManager.layers:
 		l = (l as Layer)
 		if l.is_generator():
