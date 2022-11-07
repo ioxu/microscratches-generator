@@ -88,4 +88,4 @@ ui_uv_channel_toggle={
 
 [network]
 
-limits/debugger_stdout/max_chars_per_second=4096
+limits/debugger_stdout/max_chars_per_second=8192

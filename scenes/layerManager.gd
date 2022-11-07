@@ -204,6 +204,7 @@ func display_layer_parameters() -> void:
 			# 8199 is PROPERTY_USAGE_SCRIPT_VARIABLE + PROPERTY_USAGE_DEFAULT 
 			var exported_vars = []
 			for p in l.texture_scene.get_property_list():
+				#pprint("##### %s "%[p])
 				if p["usage"] == PROPERTY_USAGE_SCRIPT_VARIABLE + PROPERTY_USAGE_DEFAULT:
 					exported_vars.append( p )
 					

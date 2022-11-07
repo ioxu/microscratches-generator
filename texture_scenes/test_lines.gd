@@ -5,10 +5,14 @@ var lines_colours = []
 var lines_widths = []
 
 export var n_lines := 300#10000
+export var line_points := 300
 export var local_seed := 1
 
-export var thickness_min := 0.1
+# [layerManager] ##### {class_name:, hint:0, hint_string:, name:thickness_min, type:3, usage:7} 
+
+export(float) var thickness_min := 0.1
 export var thickness_max := 3.5
+export var test_float := 7.2
 
 
 var idim = 1024
@@ -21,10 +25,13 @@ func _ready() -> void:
 	print("[test_lines] .size() %s"%lines.size())
 
 	if Util.is_f6( self ):
+		
+		Global.resolution = get_viewport().get_size()
+
 		# DEMO
 		print("IS F6 in test_lines")
 		self.generate()
-		
+
 
 func _input(event: InputEvent) -> void:
 
@@ -39,6 +46,10 @@ func _input(event: InputEvent) -> void:
 
 func generate() -> void:
 	print("[test_lines] generate")
+	
+	idim = int(Global.resolution.x)
+	mdim = int(idim * 3)
+	
 	lines = []
 	lines_colours = []
 	lines_widths = []
@@ -104,7 +115,7 @@ func line_simple_simplex( startp:Vector2,
 	var noise_amplitude = 35
 	
 	var points = []
-	var n = 300
+	var n = line_points
 
 	for i in range(n):
 		var r = float(i)/(n-1)
