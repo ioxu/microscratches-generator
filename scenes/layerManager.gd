@@ -33,7 +33,7 @@ func _ready() -> void:
 	parameter_text_font = texture_scene_name_parameter.get("custom_fonts/font").duplicate()
 
 
-func add_layer(new_texture_node : Node = null, select_new : bool = true) -> void:
+func add_layer(new_texture_node : Node = null, select_new : bool = true) -> Layer:
 	# adds a new layer to the GUI,
 	# and a node heirarchy (with a Node2D root) to the rendering viewport
 	# (it is intended that new_texture_node is an instanced PackedScene loaded from a .tcsn)
@@ -62,6 +62,7 @@ func add_layer(new_texture_node : Node = null, select_new : bool = true) -> void
 	connect_layer_signals(l)
 	sync_layers_from_ui()
 	refresh_layers()
+	return l
 
 
 func remove_selected_layers() -> void:

@@ -13,6 +13,8 @@ export var background_colour_hilight := Color(0.435294, 0.211765, 0.505882, 0.10
 var selected = false
 var hilighted = false
 
+var meta = {}
+
 var layer_name_label : Label setget set_layer_name
 
 var generator := false setget set_generator, is_generator
@@ -53,6 +55,19 @@ func set_generator( flag : bool ) -> void:
 
 func is_generator() -> bool:
 	return generator
+
+
+func add_meta( key : String, value  )->void:
+	self.meta[key] = value
+	update_tooltip()
+
+
+func update_tooltip() -> void:
+	var tt = ""
+	tt += "generator : %s\n"%self.is_generator()
+	for k in self.meta.keys():
+		tt += "%s : %s\n"%[k, str(self.meta[k])]
+	self.hint_tooltip = tt
 
 
 func generate() -> void:

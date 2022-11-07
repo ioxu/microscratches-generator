@@ -43,8 +43,9 @@ func _ready() -> void:
 	var default_texture_layer_resource : PackedScene = load("res://texture_scenes/test_lines.tscn")
 	var default_texture_layer_instance = default_texture_layer_resource.instance()
 	pprint("   %s (%s)"%[default_texture_layer_instance, default_texture_layer_instance.get_name()])
-	layer_manager.add_layer( default_texture_layer_instance )
-	
+	var layer = layer_manager.add_layer( default_texture_layer_instance )
+	layer.add_meta( "scene", "res://texture_scenes/test_lines.tscn" )
+
 
 func _input(event):
 	if event.is_action("ui_cancel") and event.is_pressed() and not event.is_echo():

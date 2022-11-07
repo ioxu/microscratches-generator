@@ -220,9 +220,10 @@ func _on_addLayer_TextureButton_pressed() -> void:
 	print("[ui][layers][texture scene] %s"%scene)
 	print("[ui][layers][texture scene] %s"%scene.get_name())
 
-	$layerManager.add_layer( scene.instance() )
+	var layer = $layerManager.add_layer( scene.instance() )
+	layer.add_meta( "scene", chosen_path )
 	viewport_step_update()
-	
+
 
 func _on_textureLayerChooser_index_pressed(index : int) -> void:
 	print("[ui][layers][_on_textureLayerChooser_index_pressed] %s"%index)
