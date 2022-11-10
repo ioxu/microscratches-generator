@@ -2,6 +2,7 @@ extends Node
 
 export(NodePath) onready var viewport = get_node( viewport )
 export(NodePath) onready var display = get_node( display )
+export(NodePath) onready var display_3d = get_node( display_3d )
 export(NodePath) onready var cursor = get_node( cursor )
 export(NodePath) onready var custom_draw = get_node( custom_draw )
 
@@ -45,6 +46,12 @@ var VECTOR_DIRECTIONS = [
 
 var _texture_chooser_chosen_index : int
 
+# viewmode:
+# 0: 2d
+# 1: 3d
+var viewmode : int = 0
+
+
 func _ready() -> void:
 	print("[ui] find labels")
 	zoom_label = self.find_node("zoom_label")
@@ -82,6 +89,22 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	fps_label.text = "%s fps"%Engine.get_frames_per_second()
+
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("ui_2d_to_3d_view_toggle"):
+		if viewmode == 0:
+			viewmode = 1
+		elif viewmode == 1:
+			viewmode = 0
+		print("[ui][2d/3d toggle] %s"%viewmode)
+		
+		if viewmode == 0:
+			display.visible = true
+			display_3d.visible = false
+		elif viewmode == 1:
+			display.visible = false
+			display_3d.visible = true
 
 
 func _on_display_zoom_changed(new_zoom) -> void:

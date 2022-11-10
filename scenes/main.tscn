@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=2]
+[gd_scene load_steps=46 format=2]
 
 [ext_resource path="res://scenes/main.gd" type="Script" id=1]
 [ext_resource path="res://fonts/RobotoCondensed-Light.ttf" type="DynamicFontData" id=2]
@@ -18,6 +18,54 @@
 [ext_resource path="res://scenes/layerManager.gd" type="Script" id=17]
 [ext_resource path="res://textures/alert.png" type="Texture" id=18]
 
+[sub_resource type="GDScript" id=26]
+script/source = "extends Spatial
+var gtime := 0.0
+
+var cam_root : Spatial
+
+func _ready() -> void:
+	cam_root = find_node(\"cam_root\")
+
+func _process(delta: float) -> void:
+	gtime += delta
+	cam_root.rotate( Vector3.UP, delta * 0.2 )
+"
+
+[sub_resource type="QuadMesh" id=21]
+
+[sub_resource type="ViewportTexture" id=28]
+viewport_path = NodePath("scene/Viewport")
+
+[sub_resource type="SpatialMaterial" id=27]
+resource_local_to_scene = true
+albedo_color = Color( 0.121569, 0.129412, 0.152941, 1 )
+roughness = 0.31
+anisotropy_enabled = true
+anisotropy = 1.0
+anisotropy_flowmap = SubResource( 28 )
+
+[sub_resource type="SphereMesh" id=22]
+
+[sub_resource type="ProceduralSky" id=24]
+sky_energy = 0.2
+
+[sub_resource type="Environment" id=25]
+background_mode = 3
+background_sky = SubResource( 24 )
+ssao_enabled = true
+ssao_intensity = 3.0
+ssao_radius2 = 0.2
+ssao_intensity2 = 3.0
+glow_enabled = true
+glow_levels/1 = true
+glow_levels/2 = true
+glow_levels/4 = true
+glow_levels/6 = true
+glow_levels/7 = true
+glow_strength = 0.99
+glow_blend_mode = 0
+
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 10 )
 shader_param/display_mode = 0
@@ -25,28 +73,54 @@ shader_param/display_mode = 0
 [sub_resource type="ViewportTexture" id=2]
 viewport_path = NodePath("scene/Viewport")
 
-[sub_resource type="StyleBoxFlat" id=3]
-bg_color = Color( 0.164706, 0.164706, 0.164706, 0.862745 )
+[sub_resource type="GDScript" id=3]
+script/source = "extends Node2D
+
+export(NodePath) onready var match_control = get_node( match_control ) as Control
+export(NodePath) onready var viewport = get_node( viewport ) as Viewport
+
+var display : TextureRect
+
+
+func _ready() -> void:
+	display = find_node(\"display\")
+	pprint(\"display %s\"%display)
+	
+func _process(delta: float) -> void:
+	display.set_position(match_control.get_global_transform().origin)
+	var cs : Vector2 = match_control.get_size()
+	display.set_size(cs )
+	viewport.set_size( cs/1.0 )
+
+func pprint(thing) -> void:
+	print(\"[display_3d] %s\"%str(thing))
+"
+
+[sub_resource type="ViewportTexture" id=23]
+viewport_path = NodePath("scene_3d/Viewport")
 
 [sub_resource type="StyleBoxFlat" id=4]
-bg_color = Color( 0.105882, 0.105882, 0.105882, 0.67451 )
+bg_color = Color( 0.164706, 0.164706, 0.164706, 0.862745 )
 
-[sub_resource type="DynamicFont" id=5]
-size = 14
-font_data = ExtResource( 2 )
+[sub_resource type="StyleBoxFlat" id=5]
+bg_color = Color( 0.105882, 0.105882, 0.105882, 0.67451 )
 
 [sub_resource type="DynamicFont" id=6]
 size = 14
 font_data = ExtResource( 2 )
 
-[sub_resource type="StyleBoxFlat" id=7]
+[sub_resource type="DynamicFont" id=7]
+size = 14
+font_data = ExtResource( 2 )
+
+[sub_resource type="StyleBoxFlat" id=8]
 bg_color = Color( 0.0784314, 0.0901961, 0.129412, 0.917647 )
 corner_radius_top_left = 3
 corner_radius_top_right = 3
 corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
 
-[sub_resource type="StyleBoxFlat" id=8]
+[sub_resource type="StyleBoxFlat" id=9]
 bg_color = Color( 0.6, 0.6, 0.6, 0 )
 border_width_left = 1
 border_width_top = 1
@@ -58,20 +132,20 @@ corner_radius_top_right = 2
 corner_radius_bottom_right = 2
 corner_radius_bottom_left = 2
 
-[sub_resource type="DynamicFont" id=9]
-size = 14
-font_data = ExtResource( 2 )
-
 [sub_resource type="DynamicFont" id=10]
 size = 14
 font_data = ExtResource( 2 )
 
 [sub_resource type="DynamicFont" id=11]
+size = 14
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=12]
 size = 10
 use_filter = true
 font_data = ExtResource( 2 )
 
-[sub_resource type="StyleBoxFlat" id=12]
+[sub_resource type="StyleBoxFlat" id=13]
 bg_color = Color( 0.6, 0.6, 0.6, 0 )
 border_width_left = 1
 border_width_top = 1
@@ -83,7 +157,7 @@ corner_radius_top_right = 2
 corner_radius_bottom_right = 2
 corner_radius_bottom_left = 2
 
-[sub_resource type="StyleBoxFlat" id=13]
+[sub_resource type="StyleBoxFlat" id=14]
 bg_color = Color( 0.262745, 0.411765, 0.670588, 0.447059 )
 border_width_left = 1
 border_width_top = 1
@@ -95,7 +169,7 @@ corner_radius_top_right = 2
 corner_radius_bottom_right = 2
 corner_radius_bottom_left = 2
 
-[sub_resource type="StyleBoxFlat" id=14]
+[sub_resource type="StyleBoxFlat" id=15]
 bg_color = Color( 0.6, 0.6, 0.6, 0 )
 border_width_left = 1
 border_width_top = 1
@@ -107,19 +181,65 @@ corner_radius_top_right = 2
 corner_radius_bottom_right = 2
 corner_radius_bottom_left = 2
 
-[sub_resource type="DynamicFont" id=15]
+[sub_resource type="DynamicFont" id=16]
 size = 12
 use_mipmaps = true
 font_data = ExtResource( 2 )
 
-[sub_resource type="StyleBoxFlat" id=16]
+[sub_resource type="StyleBoxFlat" id=17]
 bg_color = Color( 0.137255, 0.137255, 0.137255, 0.862745 )
 
-[sub_resource type="DynamicFont" id=17]
+[sub_resource type="GDScript" id=20]
+script/source = "extends PanelContainer
+
+var c_container : HBoxContainer 
+
+# if windows size is less than this, hide children
+var CONTENTS_HIDE_MIN_SIZE = 512
+
+var shrink_mode := false
+
+
+func _ready() -> void:
+	c_container = self.find_node(\"HBoxContainer\")
+
+
+#func _process(delta: float) -> void:
+#	var cw := 0.0
+#	for c in c_container.get_children():
+#		cw += c.get_size().x
+#	pprint(\"control width: %s, children width: %s \"%[get_viewport().get_size().x, cw])
+#	if get_viewport().get_size().x - 6 < cw:
+#		for i in range(1, c_container.get_child_count()):
+#			pprint(\"  i %s\"%i)
+#			c_container.get_child(i).visible = false
+
+
+func _process(delta: float) -> void:
+	if get_viewport().get_size().x < CONTENTS_HIDE_MIN_SIZE:
+		if shrink_mode == false:
+			_do_shrink(true)
+		shrink_mode = true
+	else:
+		if shrink_mode == true:
+			_do_shrink(false)
+		shrink_mode = false
+
+
+func _do_shrink(do : bool = true) -> void:
+	for i in range(1, c_container.get_child_count()):
+		c_container.get_child(i).visible = !do
+
+
+func pprint(thing) -> void:
+	print(\"[helpBar_PanelContainer] %s\"%str(thing))
+"
+
+[sub_resource type="DynamicFont" id=18]
 size = 12
 font_data = ExtResource( 2 )
 
-[sub_resource type="StyleBoxTexture" id=18]
+[sub_resource type="StyleBoxTexture" id=19]
 texture = ExtResource( 6 )
 region_rect = Rect2( 0, 0, 17, 15 )
 axis_stretch_horizontal = 1
@@ -141,6 +261,40 @@ render_target_update_mode = 3
 
 [node name="render_scene" parent="scene/Viewport" instance=ExtResource( 3 )]
 
+[node name="scene_3d" type="Node2D" parent="."]
+
+[node name="Viewport" type="Viewport" parent="scene_3d"]
+size = Vector2( 512, 512 )
+msaa = 4
+render_target_v_flip = true
+shadow_atlas_size = 1024
+
+[node name="Spatial" type="Spatial" parent="scene_3d/Viewport"]
+script = SubResource( 26 )
+
+[node name="MeshInstance" type="MeshInstance" parent="scene_3d/Viewport/Spatial"]
+transform = Transform( 13.3925, 0, 0, 0, -2.18191e-06, 13.3925, 0, -13.3925, -2.18191e-06, 0, 0, 0 )
+mesh = SubResource( 21 )
+material/0 = SubResource( 27 )
+
+[node name="MeshInstance2" type="MeshInstance" parent="scene_3d/Viewport/Spatial"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.93541, 0 )
+mesh = SubResource( 22 )
+material/0 = SubResource( 27 )
+
+[node name="DirectionalLight" type="DirectionalLight" parent="scene_3d/Viewport/Spatial"]
+transform = Transform( 0.158847, -0.742146, 0.651143, 0, 0.659516, 0.75169, -0.987303, -0.119404, 0.104762, 0, 1.17411, 0 )
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="scene_3d/Viewport/Spatial"]
+environment = SubResource( 25 )
+
+[node name="cam_root" type="Spatial" parent="scene_3d/Viewport/Spatial"]
+
+[node name="Camera" type="Camera" parent="scene_3d/Viewport/Spatial/cam_root"]
+transform = Transform( 1, 0, 0, 0, 0.96902, 0.246982, 0, -0.246982, 0.96902, 0, 1.717, 3.857 )
+fov = 52.0
+
 [node name="display" type="Node2D" parent="."]
 script = ExtResource( 5 )
 viewport = NodePath("../scene/Viewport")
@@ -150,10 +304,27 @@ material = SubResource( 1 )
 position = Vector2( 538.129, 358.753 )
 texture = SubResource( 2 )
 
+[node name="display_3d" type="Node2D" parent="."]
+visible = false
+script = SubResource( 3 )
+match_control = NodePath("../ui/Control/MarginContainer/VBoxContainer/Control/HSplitContainer/Control")
+viewport = NodePath("../scene_3d/Viewport")
+
+[node name="display" type="TextureRect" parent="display_3d"]
+margin_right = 512.0
+margin_bottom = 512.0
+mouse_filter = 0
+texture = SubResource( 23 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="ui" type="Node" parent="."]
 script = ExtResource( 4 )
 viewport = NodePath("../scene/Viewport")
 display = NodePath("../display")
+display_3d = NodePath("../display_3d")
 cursor = NodePath("../cursor")
 custom_draw = NodePath("../custom_draw")
 
@@ -192,7 +363,7 @@ mouse_filter = 2
 [node name="menuBar_PanelContainer" type="PanelContainer" parent="ui/Control/MarginContainer/VBoxContainer"]
 margin_right = 1018.0
 margin_bottom = 23.0
-custom_styles/panel = SubResource( 3 )
+custom_styles/panel = SubResource( 4 )
 
 [node name="MarginContainer" type="MarginContainer" parent="ui/Control/MarginContainer/VBoxContainer/menuBar_PanelContainer"]
 margin_right = 1018.0
@@ -213,12 +384,12 @@ mouse_filter = 2
 [node name="file_menu_button" type="MenuButton" parent="ui/Control/MarginContainer/VBoxContainer/menuBar_PanelContainer/MarginContainer/HBoxContainer"]
 margin_right = 16.0
 margin_bottom = 17.0
-custom_styles/hover = SubResource( 4 )
-custom_styles/pressed = SubResource( 4 )
-custom_styles/focus = SubResource( 4 )
-custom_styles/disabled = SubResource( 4 )
-custom_styles/normal = SubResource( 4 )
-custom_fonts/font = SubResource( 5 )
+custom_styles/hover = SubResource( 5 )
+custom_styles/pressed = SubResource( 5 )
+custom_styles/focus = SubResource( 5 )
+custom_styles/disabled = SubResource( 5 )
+custom_styles/normal = SubResource( 5 )
+custom_fonts/font = SubResource( 6 )
 text = "file"
 
 [node name="Control" type="Control" parent="ui/Control/MarginContainer/VBoxContainer/menuBar_PanelContainer/MarginContainer/HBoxContainer"]
@@ -235,7 +406,7 @@ __meta__ = {
 margin_left = 981.0
 margin_right = 998.0
 margin_bottom = 17.0
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = SubResource( 7 )
 custom_colors/font_color = Color( 0.717647, 0.717647, 0.717647, 0.458824 )
 text = "fps"
 
@@ -282,7 +453,7 @@ margin_right = 145.0
 margin_bottom = 542.0
 rect_min_size = Vector2( 145, 0 )
 size_flags_vertical = 3
-custom_styles/panel = SubResource( 7 )
+custom_styles/panel = SubResource( 8 )
 
 [node name="MarginContainer" type="MarginContainer" parent="ui/Control/MarginContainer/VBoxContainer/Control/HSplitContainer/VBoxContainer/mainParameterPanel__PanelContainer"]
 margin_right = 145.0
@@ -301,7 +472,7 @@ margin_bottom = 512.0
 [node name="generate_PanelContainer" type="PanelContainer" parent="ui/Control/MarginContainer/VBoxContainer/Control/HSplitContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer"]
 margin_right = 139.0
 margin_bottom = 89.0
-custom_styles/panel = SubResource( 8 )
+custom_styles/panel = SubResource( 9 )
 
 [node name="MarginContainer" type="MarginContainer" parent="ui/Control/MarginContainer/VBoxContainer/Control/HSplitContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/generate_PanelContainer"]
 margin_left = 1.0
@@ -323,7 +494,7 @@ custom_constants/separation = -2
 [node name="resolution_menu_button" type="MenuButton" parent="ui/Control/MarginContainer/VBoxContainer/Control/HSplitContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/generate_PanelContainer/MarginContainer/VBoxContainer"]
 margin_right = 131.0
 margin_bottom = 23.0
-custom_fonts/font = SubResource( 9 )
+custom_fonts/font = SubResource( 10 )
 custom_colors/font_color_disabled = Color( 1, 0.690196, 0.290196, 1 )
 custom_colors/font_color = Color( 1, 0.690196, 0.290196, 1 )
 custom_colors/font_color_hover = Color( 1, 0.690196, 0.290196, 1 )
@@ -341,7 +512,7 @@ margin_top = 3.0
 margin_right = 53.0
 margin_bottom = 20.0
 size_flags_horizontal = 3
-custom_fonts/font = SubResource( 10 )
+custom_fonts/font = SubResource( 11 )
 text = "seed"
 
 [node name="seed" type="SpinBox" parent="ui/Control/MarginContainer/VBoxContainer/Control/HSplitContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/generate_PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
@@ -358,7 +529,7 @@ align = 2
 margin_top = 43.0
 margin_right = 131.0
 margin_bottom = 66.0
-custom_fonts/font = SubResource( 9 )
+custom_fonts/font = SubResource( 10 )
 custom_colors/font_color_disabled = Color( 1, 0.690196, 0.290196, 1 )
 custom_colors/font_color = Color( 1, 0.690196, 0.290196, 1 )
 custom_colors/font_color_hover = Color( 1, 0.690196, 0.290196, 1 )
@@ -378,7 +549,7 @@ __meta__ = {
 margin_top = 68.0
 margin_right = 131.0
 margin_bottom = 81.0
-custom_fonts/font = SubResource( 11 )
+custom_fonts/font = SubResource( 12 )
 custom_colors/font_color = Color( 0.717647, 0.717647, 0.717647, 1 )
 custom_colors/font_outline_modulate = Color( 0.717647, 0.717647, 0.717647, 1 )
 text = "timing"
@@ -387,7 +558,7 @@ text = "timing"
 margin_top = 93.0
 margin_right = 139.0
 margin_bottom = 124.0
-custom_styles/panel = SubResource( 8 )
+custom_styles/panel = SubResource( 9 )
 
 [node name="MarginContainer" type="MarginContainer" parent="ui/Control/MarginContainer/VBoxContainer/Control/HSplitContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/format_settings_PanelContainer"]
 margin_left = 1.0
@@ -414,7 +585,7 @@ margin_top = 3.0
 margin_right = 63.0
 margin_bottom = 20.0
 size_flags_horizontal = 3
-custom_fonts/font = SubResource( 10 )
+custom_fonts/font = SubResource( 11 )
 text = "direction"
 
 [node name="vector_direction_MenuButton" type="MenuButton" parent="ui/Control/MarginContainer/VBoxContainer/Control/HSplitContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/format_settings_PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
@@ -422,7 +593,7 @@ margin_left = 67.0
 margin_right = 131.0
 margin_bottom = 23.0
 size_flags_horizontal = 3
-custom_fonts/font = SubResource( 10 )
+custom_fonts/font = SubResource( 11 )
 custom_colors/font_color_disabled = Color( 1, 0.690196, 0.290196, 1 )
 custom_colors/font_color = Color( 1, 0.690196, 0.290196, 1 )
 custom_colors/font_color_hover = Color( 1, 0.690196, 0.290196, 1 )
@@ -444,7 +615,7 @@ margin_bottom = 241.0
 rect_min_size = Vector2( 0, 55 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_styles/panel = SubResource( 12 )
+custom_styles/panel = SubResource( 13 )
 
 [node name="MarginContainer" type="MarginContainer" parent="ui/Control/MarginContainer/VBoxContainer/Control/HSplitContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/VSplitContainer/layersPanel_PanelContainer"]
 margin_left = 1.0
@@ -482,7 +653,7 @@ __meta__ = {
 margin_top = 211.0
 margin_right = 131.0
 margin_bottom = 233.0
-custom_styles/panel = SubResource( 13 )
+custom_styles/panel = SubResource( 14 )
 
 [node name="MarginContainer" type="MarginContainer" parent="ui/Control/MarginContainer/VBoxContainer/Control/HSplitContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/VSplitContainer/layersPanel_PanelContainer/MarginContainer/VBoxContainer/layersControl_PanelContainer"]
 margin_left = 1.0
@@ -566,7 +737,7 @@ margin_top = 253.0
 margin_right = 139.0
 margin_bottom = 381.0
 rect_min_size = Vector2( 0, 50 )
-custom_styles/panel = SubResource( 14 )
+custom_styles/panel = SubResource( 15 )
 
 [node name="MarginContainer" type="MarginContainer" parent="ui/Control/MarginContainer/VBoxContainer/Control/HSplitContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/VSplitContainer/layerParameters_PanelContainer"]
 margin_left = 1.0
@@ -594,7 +765,7 @@ __meta__ = {
 [node name="layerParametersTitle" type="Label" parent="ui/Control/MarginContainer/VBoxContainer/Control/HSplitContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/VSplitContainer/layerParameters_PanelContainer/MarginContainer/VBoxContainer/layerParametersTitle_HBoxContainer"]
 margin_right = 79.0
 margin_bottom = 15.0
-custom_fonts/font = SubResource( 15 )
+custom_fonts/font = SubResource( 16 )
 text = "layer parameters"
 
 [node name="Control" type="Control" parent="ui/Control/MarginContainer/VBoxContainer/Control/HSplitContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/VSplitContainer/layerParameters_PanelContainer/MarginContainer/VBoxContainer/layerParametersTitle_HBoxContainer"]
@@ -628,7 +799,7 @@ size_flags_horizontal = 3
 [node name="base_PanelContainer" type="PanelContainer" parent="ui/Control/MarginContainer/VBoxContainer/Control/HSplitContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/VSplitContainer/layerParameters_PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/layerParametersListContainer"]
 margin_right = 131.0
 margin_bottom = 48.0
-custom_styles/panel = SubResource( 14 )
+custom_styles/panel = SubResource( 15 )
 
 [node name="MarginContainer" type="MarginContainer" parent="ui/Control/MarginContainer/VBoxContainer/Control/HSplitContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/VSplitContainer/layerParameters_PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/layerParametersListContainer/base_PanelContainer"]
 margin_left = 1.0
@@ -650,7 +821,7 @@ margin_bottom = 45.0
 margin_right = 127.0
 margin_bottom = 25.0
 size_flags_horizontal = 3
-custom_fonts/font = SubResource( 15 )
+custom_fonts/font = SubResource( 16 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="ui/Control/MarginContainer/VBoxContainer/Control/HSplitContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/VSplitContainer/layerParameters_PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/layerParametersListContainer/base_PanelContainer/MarginContainer/VBoxContainer"]
 margin_top = 29.0
@@ -661,7 +832,7 @@ margin_bottom = 44.0
 margin_right = 27.0
 margin_bottom = 15.0
 size_flags_stretch_ratio = 2.67
-custom_fonts/font = SubResource( 15 )
+custom_fonts/font = SubResource( 16 )
 text = "scene"
 
 [node name="texture_scene_name_Label" type="Label" parent="ui/Control/MarginContainer/VBoxContainer/Control/HSplitContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/VSplitContainer/layerParameters_PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/layerParametersListContainer/base_PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
@@ -671,7 +842,7 @@ margin_right = 127.0
 margin_bottom = 15.0
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 4.66
-custom_fonts/font = SubResource( 15 )
+custom_fonts/font = SubResource( 16 )
 align = 1
 
 [node name="helpBar_PanelContainer" type="PanelContainer" parent="ui/Control/MarginContainer/VBoxContainer"]
@@ -679,7 +850,8 @@ margin_top = 573.0
 margin_right = 1018.0
 margin_bottom = 594.0
 mouse_filter = 1
-custom_styles/panel = SubResource( 16 )
+custom_styles/panel = SubResource( 17 )
+script = SubResource( 20 )
 
 [node name="MarginContainer" type="MarginContainer" parent="ui/Control/MarginContainer/VBoxContainer/helpBar_PanelContainer"]
 margin_right = 1018.0
@@ -694,36 +866,13 @@ margin_left = 3.0
 margin_top = 3.0
 margin_right = 1015.0
 margin_bottom = 18.0
+rect_min_size = Vector2( 0, 15 )
 size_flags_horizontal = 5
 
-[node name="hint_label" type="Label" parent="ui/Control/MarginContainer/VBoxContainer/helpBar_PanelContainer/MarginContainer/HBoxContainer"]
-margin_right = 249.0
-margin_bottom = 15.0
-size_flags_horizontal = 9
-custom_fonts/font = SubResource( 17 )
-text = "Home : reset camera    Alt-Enter : toggle fullscreen   "
-
-[node name="hint_channel_selection_label" type="Label" parent="ui/Control/MarginContainer/VBoxContainer/helpBar_PanelContainer/MarginContainer/HBoxContainer"]
-margin_left = 253.0
-margin_right = 465.0
-margin_bottom = 15.0
-hint_tooltip = "Toggle Colour Channel Display :
-
-Displays individual colour chanels from the texture
-A: alpha
-R:  red
-G: green
-B: blue
-T: rotation ( atan(y, x) of encoded texture vectors)"
-mouse_filter = 1
-size_flags_horizontal = 9
-custom_fonts/font = SubResource( 17 )
-text = "A,R,G,B,T,U :  toggle colour channel display"
-
-[node name="Control" type="Control" parent="ui/Control/MarginContainer/VBoxContainer/helpBar_PanelContainer/MarginContainer/HBoxContainer"]
-margin_left = 469.0
+[node name="SPACER_Control" type="Control" parent="ui/Control/MarginContainer/VBoxContainer/helpBar_PanelContainer/MarginContainer/HBoxContainer"]
 margin_right = 786.0
 margin_bottom = 15.0
+rect_min_size = Vector2( 0, 15 )
 size_flags_horizontal = 3
 __meta__ = {
 "_edit_use_anchors_": false
@@ -733,7 +882,7 @@ __meta__ = {
 margin_left = 790.0
 margin_right = 813.0
 margin_bottom = 15.0
-custom_fonts/font = SubResource( 17 )
+custom_fonts/font = SubResource( 18 )
 custom_colors/font_color = Color( 0.721569, 0.490196, 0.286275, 1 )
 text = "x : y :"
 
@@ -741,7 +890,7 @@ text = "x : y :"
 margin_left = 817.0
 margin_right = 839.0
 margin_bottom = 15.0
-custom_fonts/font = SubResource( 17 )
+custom_fonts/font = SubResource( 18 )
 custom_colors/font_color = Color( 0.996078, 0.996078, 0.996078, 1 )
 text = "RGB"
 
@@ -749,7 +898,7 @@ text = "RGB"
 margin_left = 843.0
 margin_right = 847.0
 margin_bottom = 15.0
-custom_fonts/font = SubResource( 17 )
+custom_fonts/font = SubResource( 18 )
 custom_colors/font_color = Color( 0.945098, 0.14902, 0.129412, 1 )
 text = "r"
 
@@ -757,7 +906,7 @@ text = "r"
 margin_left = 851.0
 margin_right = 858.0
 margin_bottom = 15.0
-custom_fonts/font = SubResource( 17 )
+custom_fonts/font = SubResource( 18 )
 custom_colors/font_color = Color( 0.231373, 0.945098, 0.129412, 1 )
 text = "g"
 
@@ -765,7 +914,7 @@ text = "g"
 margin_left = 862.0
 margin_right = 869.0
 margin_bottom = 15.0
-custom_fonts/font = SubResource( 17 )
+custom_fonts/font = SubResource( 18 )
 custom_colors/font_color = Color( 0.129412, 0.447059, 0.945098, 1 )
 text = "b"
 
@@ -773,7 +922,7 @@ text = "b"
 margin_left = 873.0
 margin_right = 878.0
 margin_bottom = 15.0
-custom_fonts/font = SubResource( 17 )
+custom_fonts/font = SubResource( 18 )
 custom_colors/font_color = Color( 0.494118, 0.513726, 0.545098, 1 )
 text = "a"
 
@@ -791,7 +940,7 @@ modulate = Color( 0.2, 0.2, 0.2, 1 )
 margin_right = 30.0
 margin_bottom = 15.0
 rect_min_size = Vector2( 30, 15 )
-custom_styles/panel = SubResource( 18 )
+custom_styles/panel = SubResource( 19 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -808,7 +957,7 @@ __meta__ = {
 margin_left = 916.0
 margin_right = 973.0
 margin_bottom = 15.0
-custom_fonts/font = SubResource( 17 )
+custom_fonts/font = SubResource( 18 )
 custom_colors/font_color = Color( 0.286275, 0.466667, 0.721569, 1 )
 text = "resolution : "
 
@@ -816,7 +965,7 @@ text = "resolution : "
 margin_left = 977.0
 margin_right = 1012.0
 margin_bottom = 15.0
-custom_fonts/font = SubResource( 17 )
+custom_fonts/font = SubResource( 18 )
 custom_colors/font_color = Color( 0.286275, 0.721569, 0.498039, 1 )
 text = "zoom : "
 
@@ -886,14 +1035,14 @@ texture = ExtResource( 7 )
 [connection signal="size_changed" from="scene/Viewport" to="ui" method="_on_Viewport_size_changed"]
 [connection signal="cam_transform_changed" from="display" to="display" method="_on_display_cam_transform_changed"]
 [connection signal="colour_channel_display_mode_changed" from="display" to="ui" method="_on_display_colour_channel_display_mode_changed"]
-[connection signal="colour_under_mouse_changed" from="display" to="custom_draw" method="_on_display_colour_under_mouse_changed"]
 [connection signal="colour_under_mouse_changed" from="display" to="ui" method="_on_display_colour_under_mouse_changed"]
+[connection signal="colour_under_mouse_changed" from="display" to="custom_draw" method="_on_display_colour_under_mouse_changed"]
 [connection signal="mouse_coords_in_viewport_changed" from="display" to="ui" method="_on_display_mouse_coords_in_viewport_changed"]
 [connection signal="zoom_changed" from="display" to="ui" method="_on_display_zoom_changed"]
-[connection signal="mouse_entered" from="ui/Control/MarginContainer/VBoxContainer/Control/HSplitContainer/Control" to="display" method="_on_Control_mouse_entered"]
 [connection signal="mouse_entered" from="ui/Control/MarginContainer/VBoxContainer/Control/HSplitContainer/Control" to="ui" method="_on_Control_mouse_entered"]
-[connection signal="mouse_exited" from="ui/Control/MarginContainer/VBoxContainer/Control/HSplitContainer/Control" to="display" method="_on_Control_mouse_exited"]
+[connection signal="mouse_entered" from="ui/Control/MarginContainer/VBoxContainer/Control/HSplitContainer/Control" to="display" method="_on_Control_mouse_entered"]
 [connection signal="mouse_exited" from="ui/Control/MarginContainer/VBoxContainer/Control/HSplitContainer/Control" to="ui" method="_on_Control_mouse_exited"]
+[connection signal="mouse_exited" from="ui/Control/MarginContainer/VBoxContainer/Control/HSplitContainer/Control" to="display" method="_on_Control_mouse_exited"]
 [connection signal="pressed" from="ui/Control/MarginContainer/VBoxContainer/Control/HSplitContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/generate_PanelContainer/MarginContainer/VBoxContainer/generate_button" to="ui" method="_on_generate_button_pressed"]
 [connection signal="pressed" from="ui/Control/MarginContainer/VBoxContainer/Control/HSplitContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/VSplitContainer/layersPanel_PanelContainer/MarginContainer/VBoxContainer/layersControl_PanelContainer/MarginContainer/HBoxContainer/addLayer_TextureButton" to="ui" method="_on_addLayer_TextureButton_pressed"]
 [connection signal="pressed" from="ui/Control/MarginContainer/VBoxContainer/Control/HSplitContainer/VBoxContainer/mainParameterPanel__PanelContainer/MarginContainer/VBoxContainer/VSplitContainer/layersPanel_PanelContainer/MarginContainer/VBoxContainer/layersControl_PanelContainer/MarginContainer/HBoxContainer/removeLayer_TextureButton" to="ui" method="_on_removeLayer_TextureButton_pressed"]

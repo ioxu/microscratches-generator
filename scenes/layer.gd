@@ -79,7 +79,8 @@ func generate() -> void:
 func set_layer_name(new_name) -> void:
 	layer_name = new_name
 	layer_name_label.text = layer_name
-
+	self.add_meta("name", new_name)
+	
 
 func _input(event: InputEvent) -> void:
 	if hilighted: # mouse inside
