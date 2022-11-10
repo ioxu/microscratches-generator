@@ -252,7 +252,7 @@ func display_layer_parameters() -> void:
 					new_parm = CheckBox.new()
 					new_parm.pressed = l.texture_scene.get(p.name)
 				new_parm.size_flags_horizontal = Control.SIZE_FILL + Control.SIZE_EXPAND
-				new_parm.set_tooltip(tooltip)
+				#new_parm.set_tooltip(tooltip)
 				# -
 				new_hbox.add_child(new_label)
 				new_hbox.add_child(new_parm)

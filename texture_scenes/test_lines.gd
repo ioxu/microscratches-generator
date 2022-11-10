@@ -10,9 +10,9 @@ export var local_seed := 1
 
 # [layerManager] ##### {class_name:, hint:0, hint_string:, name:thickness_min, type:3, usage:7} 
 
-export(float) var thickness_min := 0.1
+export var thickness_min := 0.1
 export var thickness_max := 3.5
-export var test_float := 7.2
+
 
 
 var idim = 1024
@@ -146,6 +146,7 @@ func vcolours_simple( points : PoolVector2Array, rotated : float = 90 ) -> PoolC
 			next_i = i
 		var c = (points[i] - points[next_i]).normalized()
 		c = c.rotated( deg2rad(rotated) )
+		#c = lerp( c, Vector2.UP, 0.85 )
 		c = Util.vec2_to_encoded_colour(c)
 		c.b = r_b
 		colours.append(c)
