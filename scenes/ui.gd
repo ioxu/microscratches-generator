@@ -93,18 +93,23 @@ func _process(_delta: float) -> void:
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_2d_to_3d_view_toggle"):
-		if viewmode == 0:
-			viewmode = 1
-		elif viewmode == 1:
-			viewmode = 0
-		print("[ui][2d/3d toggle] %s"%viewmode)
-		
-		if viewmode == 0:
-			display.visible = true
-			display_3d.visible = false
-		elif viewmode == 1:
-			display.visible = false
-			display_3d.visible = true
+		# see if there is a control that currently owns focus:
+		# (a line edit may have focus for editing, inwhich case don't consider
+		# the action "ui_2d_to_3d_view_toggle")
+		var focused_node = self.find_node("Control").get_focus_owner()
+		if focused_node == null:
+			if viewmode == 0:
+				viewmode = 1
+			elif viewmode == 1:
+				viewmode = 0
+			print("[ui][2d/3d toggle] %s"%viewmode)
+			
+			if viewmode == 0:
+				display.visible = true
+				display_3d.visible = false
+			elif viewmode == 1:
+				display.visible = false
+				display_3d.visible = true
 
 
 func _on_display_zoom_changed(new_zoom) -> void:
@@ -180,7 +185,6 @@ func viewport_step_update() -> void:
 
 func _on_generate_button_pressed() -> void:
 	# resolution
-	#(viewport as Viewport).size = Global.resolution
 
 	Util.set_rng_seed( int(seed_number.get_value()) )
 	Global.report()

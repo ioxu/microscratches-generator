@@ -146,7 +146,7 @@ func vcolours_simple( points : PoolVector2Array, rotated : float = 90 ) -> PoolC
 			next_i = i
 		var c = (points[i] - points[next_i]).normalized()
 		c = c.rotated( deg2rad(rotated) )
-		#c = lerp( c, Vector2.UP, 0.85 )
+		#c = lerp( c, Vector2.UP, 0.85 ).normalized()
 		c = Util.vec2_to_encoded_colour(c)
 		c.b = r_b
 		colours.append(c)
