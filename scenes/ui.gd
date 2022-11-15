@@ -107,9 +107,11 @@ func _input(event: InputEvent) -> void:
 			if viewmode == 0:
 				display.visible = true
 				display_3d.visible = false
+				custom_draw.draw_vector_debug = true
 			elif viewmode == 1:
 				display.visible = false
 				display_3d.visible = true
+				custom_draw.draw_vector_debug = false
 
 
 func _on_display_zoom_changed(new_zoom) -> void:
@@ -135,7 +137,10 @@ func _on_display_colour_under_mouse_changed(new_colour) -> void:
 func _on_Control_mouse_entered() -> void:
 	Input.set_mouse_mode( Input.MOUSE_MODE_HIDDEN )
 	cursor.set_visible(true)
-	custom_draw.draw_vector_debug = true
+	if viewmode == 0:
+		custom_draw.draw_vector_debug = true
+	else:
+		custom_draw.draw_vector_debug = false
 	Util.clear_focus( self.find_node("Control") )
 
 
@@ -217,7 +222,6 @@ func milliseconds_to_pretty_time( ms : float ) -> String :
 	var minutes = ms / 60
 	var seconds = fmod(ms, 60)
 	return "%02d' %02d\" %03d" % [minutes, seconds, milliseconds]
-	#return str(ms)
 
 
 # layers -----------------------------------------------------------------------

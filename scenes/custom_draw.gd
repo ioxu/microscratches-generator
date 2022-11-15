@@ -3,7 +3,7 @@ extends Node2D
 
 var vector_debug : Vector2
 export var vector_debug_length := 40.0
-export var draw_vector_debug := true
+export var draw_vector_debug := true setget _set_draw_vector_debug
 
 var mouse_location : Vector2
 
@@ -21,6 +21,11 @@ func _on_display_colour_under_mouse_changed(new_colour) -> void:
 	if draw_vector_debug:
 		vector_debug = Vector2(new_colour.r, new_colour.g)
 		update()
+
+
+func _set_draw_vector_debug( new_value ) -> void:
+	draw_vector_debug = new_value
+	update()
 
 
 func _draw() -> void:
