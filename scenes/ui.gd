@@ -136,6 +136,7 @@ func _on_Control_mouse_entered() -> void:
 	Input.set_mouse_mode( Input.MOUSE_MODE_HIDDEN )
 	cursor.set_visible(true)
 	custom_draw.draw_vector_debug = true
+	Util.clear_focus( self.find_node("Control") )
 
 
 func _on_Control_mouse_exited() -> void:

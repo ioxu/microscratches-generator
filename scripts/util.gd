@@ -153,3 +153,9 @@ var PROPERTY_TYPE_STRINGS = {
 func is_f6(node:Node):
 	# https://github.com/godotengine/godot/issues/28230
 	return node.get_parent() == get_tree().root and ProjectSettings.get_setting("application/run/main_scene") != node.filename
+
+
+func clear_focus( control : Control) -> void:
+	var current_focus_control = control.get_focus_owner()
+	if current_focus_control:
+		current_focus_control.release_focus()
