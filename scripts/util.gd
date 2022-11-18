@@ -82,7 +82,17 @@ func get_texture_scenes_list(paths : Array) -> String:
 # Appleseed
 # LuxRender
 
+
 func export_texture( tex : Texture, path : String ) -> void:
+	var thread = Thread.new()
+	thread.start( self, "_do_export_texture", [tex, path] )
+
+
+func _do_export_texture( conf : Array ) -> void:
+
+	var tex = conf[0]
+	var path = conf[1]
+
 	var base = path.get_basename()
 	# asset Texture
 	var tex_data = tex.get_data()
@@ -108,6 +118,8 @@ func export_texture( tex : Texture, path : String ) -> void:
 	print("[util][export_texture] exr: %s"%[base + ".exr"])	
 # warning-ignore:return_value_discarded
 	image_exr.save_exr( base + ".exr", false )
+
+	#pb.set_visible(false)
 
 
 func pprint(thing) -> void:
