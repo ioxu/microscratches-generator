@@ -87,8 +87,8 @@ func _ready() -> void:
 	Global.resolution = RESOLUTIONS[1][1] # TODO : hardcoded
 	Global.vector_direction = VECTOR_DIRECTIONS[VECTOR_DIRECTIONS.find(vector_direction_menu_button.get_text())]
 
+	# export
 	file_export_ProgressBar = get_tree().get_root().get_node( "main/ui/file_export_ProgressBar" )
-	Util.connect( "texture_export_progressed", self, "_on_texture_export_progressed" )
 
 
 func _process(_delta: float) -> void:
@@ -296,8 +296,7 @@ func _on_layersInformation_TextureButton_pressed() -> void:
 # export -----------------------------------------------------------------------
 func _on_texture_export_progressed(progress, meta) -> void:
 	file_export_ProgressBar.value = progress
-	
+	file_export_ProgressBar.get_child(0).text = meta
 	if meta == "DONE":
-		print("PROGRESS BAR META == DONE")
 		# clean up progressbar
 		file_export_ProgressBar.set_visible(false)

@@ -1,7 +1,7 @@
 extends Node
 # utility autoload
 
-signal texture_export_progressed(progress, meta)
+#signal texture_export_progressed(progress, meta)
 
 
 
@@ -88,51 +88,17 @@ func get_texture_scenes_list(paths : Array) -> String:
 
 
 func export_texture( tex : Texture, path : String ) -> void:
+	# progress bar:
 	var pb = get_tree().get_root().get_node( "main/ui/file_export_ProgressBar" )
-	print("PRE PB %s"%pb.get_path())
-	print("PRE PB loc %s"%[ get_viewport().get_size() / 2.0 - Vector2(pb.get_size().x/2.0, 0.0) ] )
 	pb.set_position( get_viewport().get_size() / 2.0 - Vector2(pb.get_size().x/2.0, 0.0) )
 	pb.set_visible(true)
-	
-	var thread = Thread.new()
-	thread.start( self, "_do_export_texture", [tex, path] )
 
-
-func _do_export_texture( conf : Array ) -> void:
-
-	var tex = conf[0]
-	var path = conf[1]
-
-	var base = path.get_basename()
-	# asset Texture
-	var tex_data = tex.get_data()
-	var image : Image = tex_data
-	print("[util][export_texture] png: %s"%[base + ".png"])
-	image.convert(Image.FORMAT_RGBA8)
-# warning-ignore:return_value_discarded
-	image.save_png( base + ".png" )
-	
-	var width = image.data["width"]
-	var height = image.data["height"]
-	var image_exr : Image = Image.new()
-	image_exr.create( width, height, false, Image.FORMAT_RGBAH)
-	image.lock()
-	image_exr.lock()
-	for x in range(width):
-		emit_signal("texture_export_progressed", (float(x)/width)*100, "converting pixels" )
-		for y in range(height):
-			var c = image.get_pixel( x, y )
-			# A R G B
-			image_exr.set_pixel( x, y, Color( c.g, c.b, c.a, c.r ))
-	image_exr.unlock()
-	image.unlock()
-	print("[util][export_texture] exr: %s"%[base + ".exr"])	
-# warning-ignore:return_value_discarded
-	image_exr.save_exr( base + ".exr", false )
-
-	emit_signal("texture_export_progressed", 100.0, "DONE")
-
-	#pb.set_visible(false)
+	# texture export thread:
+	# TODO : grabbing these nodes like this smells really bad.
+	var t = load( "res://scripts/texture_exporter_thread.gd" )
+	t = t.new( tex, path )
+	t.connect( "texture_export_progressed", get_tree().get_root().get_node( "main/ui"), "_on_texture_export_progressed" )
+	t.start()
 
 
 func pprint(thing) -> void:

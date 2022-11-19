@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=2]
+[gd_scene load_steps=49 format=2]
 
 [ext_resource path="res://scenes/main.gd" type="Script" id=1]
 [ext_resource path="res://fonts/RobotoCondensed-Light.ttf" type="DynamicFontData" id=2]
@@ -86,7 +86,7 @@ func _ready() -> void:
 	display = find_node(\"display\")
 	pprint(\"display %s\"%display)
 	
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	display.set_position(match_control.get_global_transform().origin)
 	var cs : Vector2 = match_control.get_size()
 	display.set_size(cs )
@@ -215,7 +215,7 @@ func _ready() -> void:
 #			c_container.get_child(i).visible = false
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if get_viewport().get_size().x < CONTENTS_HIDE_MIN_SIZE:
 		if shrink_mode == false:
 			_do_shrink(true)
@@ -243,6 +243,30 @@ font_data = ExtResource( 2 )
 texture = ExtResource( 6 )
 region_rect = Rect2( 0, 0, 17, 15 )
 axis_stretch_horizontal = 1
+
+[sub_resource type="StyleBoxFlat" id=29]
+bg_color = Color( 0.686275, 0.45098, 0.662745, 1 )
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+shadow_offset = Vector2( 5, 5 )
+
+[sub_resource type="StyleBoxFlat" id=31]
+bg_color = Color( 0.301961, 0.207843, 0.309804, 1 )
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+expand_margin_left = 2.0
+expand_margin_right = 2.0
+expand_margin_top = 2.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="DynamicFont" id=30]
+size = 24
+use_mipmaps = true
+font_data = ExtResource( 2 )
 
 [node name="main" type="Node2D"]
 script = ExtResource( 1 )
@@ -1029,6 +1053,20 @@ margin_top = -594.603
 margin_right = 427.352
 margin_bottom = -562.603
 rect_min_size = Vector2( 400, 0 )
+custom_styles/fg = SubResource( 29 )
+custom_styles/bg = SubResource( 31 )
+value = 25.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="ui/file_export_ProgressBar"]
+margin_left = -0.130478
+margin_top = -30.7322
+margin_right = 174.87
+margin_bottom = -1.73218
+custom_fonts/font = SubResource( 30 )
+text = "progress bar meta"
 __meta__ = {
 "_edit_use_anchors_": false
 }
