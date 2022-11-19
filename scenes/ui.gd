@@ -17,6 +17,7 @@ var swatch_rect : ColorRect
 var fps_label : Label
 var colour_channel_displayed_label : Label
 var generation_timing_label : Label
+var file_export_ProgressBar : ProgressBar
 
 var layerListContainer : VBoxContainer
 
@@ -85,6 +86,9 @@ func _ready() -> void:
 	# state
 	Global.resolution = RESOLUTIONS[1][1] # TODO : hardcoded
 	Global.vector_direction = VECTOR_DIRECTIONS[VECTOR_DIRECTIONS.find(vector_direction_menu_button.get_text())]
+
+	file_export_ProgressBar = get_tree().get_root().get_node( "main/ui/file_export_ProgressBar" )
+	Util.connect( "texture_export_progressed", self, "_on_texture_export_progressed" )
 
 
 func _process(_delta: float) -> void:
@@ -287,3 +291,13 @@ func _on_layer_visibility_toggle(layer : Layer, pressed : bool) -> void:
 
 func _on_layersInformation_TextureButton_pressed() -> void:
 	$layerManager.print_layers()
+
+
+# export -----------------------------------------------------------------------
+func _on_texture_export_progressed(progress, meta) -> void:
+	file_export_ProgressBar.value = progress
+	
+	if meta == "DONE":
+		print("PROGRESS BAR META == DONE")
+		# clean up progressbar
+		file_export_ProgressBar.set_visible(false)

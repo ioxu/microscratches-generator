@@ -1,6 +1,10 @@
 extends Node
 # utility autoload
 
+signal texture_export_progressed(progress, meta)
+
+
+
 var RNG : RandomNumberGenerator
 var rng_seed : int setget set_rng_seed, get_rng_seed
 
@@ -84,6 +88,12 @@ func get_texture_scenes_list(paths : Array) -> String:
 
 
 func export_texture( tex : Texture, path : String ) -> void:
+	var pb = get_tree().get_root().get_node( "main/ui/file_export_ProgressBar" )
+	print("PRE PB %s"%pb.get_path())
+	print("PRE PB loc %s"%[ get_viewport().get_size() / 2.0 - Vector2(pb.get_size().x/2.0, 0.0) ] )
+	pb.set_position( get_viewport().get_size() / 2.0 - Vector2(pb.get_size().x/2.0, 0.0) )
+	pb.set_visible(true)
+	
 	var thread = Thread.new()
 	thread.start( self, "_do_export_texture", [tex, path] )
 
@@ -109,6 +119,7 @@ func _do_export_texture( conf : Array ) -> void:
 	image.lock()
 	image_exr.lock()
 	for x in range(width):
+		emit_signal("texture_export_progressed", (float(x)/width)*100, "converting pixels" )
 		for y in range(height):
 			var c = image.get_pixel( x, y )
 			# A R G B
@@ -118,6 +129,8 @@ func _do_export_texture( conf : Array ) -> void:
 	print("[util][export_texture] exr: %s"%[base + ".exr"])	
 # warning-ignore:return_value_discarded
 	image_exr.save_exr( base + ".exr", false )
+
+	emit_signal("texture_export_progressed", 100.0, "DONE")
 
 	#pb.set_visible(false)
 
