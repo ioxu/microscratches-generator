@@ -19,7 +19,7 @@ func start() -> void:
 	thread.start(self, "_do_export_texture", [self.texture, self.path] )
 
 
-func _do_export_texture(conf : Array) -> void:
+func _do_export_texture(conf : Array) -> int:
 	pprint(" _do_export_texture()")
 # warning-ignore:shadowed_variable
 	var ttexture = conf[0]
@@ -62,6 +62,9 @@ func _do_export_texture(conf : Array) -> void:
 	image_exr.save_exr( base + ".exr", false )
 	
 	emit_signal("texture_export_progressed", 100.0, "DONE")
+	
+	pprint("done.")
+	return 0
 
 
 func _exit_tree() -> void:
