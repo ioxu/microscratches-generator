@@ -1,7 +1,7 @@
 extends Node
 
 var parameter_name := ""
-signal parameter_changed(new_value, this_object)
+signal parameter_changed(new_value, this_object, type)
 
 var line_edit : LineEdit
 var check_box : CheckBox
@@ -21,17 +21,17 @@ func _ready() -> void:
 
 func _on_LineEdit_text_entered(new_string : String) -> void:
 	line_edit.release_focus()
-	emit_signal( "parameter_changed", new_string, self )
+	emit_signal( "parameter_changed", new_string, self, type )
 
 
 func _on_LineEdit_focus_exited( ) -> void:
-	emit_signal( "parameter_changed", line_edit.text, self )
+	emit_signal( "parameter_changed", line_edit.text, self, type )
 
 
 func _on_CheckBox_toggled(new_value) -> void:
-	emit_signal( "parameter_changed", new_value, self )
+	emit_signal( "parameter_changed", new_value, self, type )
 
 
 func pprint(thing) -> void:
-	print("[transient parameter] %s"%str(thing))
+	print("[transient parameter] %s type : %s"%[str(thing), Util.PROPERTY_TYPE_STRINGS[self.type] ])
 

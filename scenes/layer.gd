@@ -19,7 +19,6 @@ var layer_name_label : Label setget set_layer_name
 
 var generator := false setget set_generator, is_generator
 var generator_label : Label 
-
 var layer_visible := true
 var layer_visibility_button : TextureButton
 
@@ -65,6 +64,8 @@ func add_meta( key : String, value  )->void:
 func update_tooltip() -> void:
 	var tt = ""
 	tt += "generator : %s\n"%self.is_generator()
+	if self.texture_scene.has_method("is_dirty"):
+		tt += "dirty : %s\n"%self.texture_scene.is_dirty()
 	for k in self.meta.keys():
 		tt += "%s : %s\n"%[k, str(self.meta[k])]
 	self.hint_tooltip = tt
@@ -74,6 +75,7 @@ func generate() -> void:
 	if generator:
 		pprint("[generate] %s (%s)"%[self.get_name(), self.texture_scene.get_name()])
 		self.texture_scene.generate()
+		update_tooltip()
 
 
 func set_layer_name(new_name) -> void:
@@ -148,6 +150,10 @@ func _on_layerVisibility_TextureButton_toggled(button_pressed: bool) -> void:
 		vis = true
 	self.texture_scene.set_visible( vis )
 	emit_signal("layer_visiblity_toggled", self, vis)
+
+
+func _on_texture_scene_dirty( _state : bool ) -> void:
+	update_tooltip()
 
 
 func pprint(thing) -> void:

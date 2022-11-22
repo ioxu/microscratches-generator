@@ -161,7 +161,8 @@ func refresh_layers() -> void:
 func connect_layer_signals(layer)->void:
 	layer.connect( "selected", self, "_on_layer_selected" )
 	layer.connect( "deselected", self, "_on_layer_deselected" )
-	layer.connect("layer_visiblity_toggled", ui_root, "_on_layer_visibility_toggle") # TODO : ugh, this is horrible.
+	layer.connect( "layer_visiblity_toggled", ui_root, "_on_layer_visibility_toggle") # TODO : ugh, this is horrible.
+	layer.texture_scene.connect( "dirty", layer,  "_on_texture_scene_dirty" )
 
 
 func layer_is_generator( layer : Layer) -> bool:
@@ -260,14 +261,13 @@ func display_layer_parameters() -> void:
 				new_hbox.connect("parameter_changed", self, "_on_transient_parameter_changed" )
 				# -
 				layerParametersListContainer.add_child( new_hbox )
-		
 		texture_scene_name_parameter.text = scene_name
 
 
-func _on_transient_parameter_changed(new_value, on_object):
-	pprint("TRANSIENT PARAMETER VALUE CHANGED: %s on %s (%s)"%[new_value, on_object.parameter_name, on_object])
+func _on_transient_parameter_changed(new_value, on_object, type):
 	var l : Layer = selected_layers[0]
-	pprint("setting \'%s\' on %s to %s"%[on_object.parameter_name, l.texture_scene.get_name(), new_value])
+	pprint("setting \'%s\' on %s to %s (%s)"%[on_object.parameter_name, l.texture_scene.get_name(), new_value, Util.PROPERTY_TYPE_STRINGS[type] ])
+	new_value = Util.cast_type(new_value, type)
 	l.texture_scene.set( on_object.parameter_name, new_value )
 
 

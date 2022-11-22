@@ -139,6 +139,51 @@ var PROPERTY_TYPE_STRINGS = {
 	27 : "TYPE_MAX" 
 }
 
+func cast_type( value, type :int  ):
+	#convert value to type.
+	# TODO: (what about str2var() and var2str()?)
+	match type:
+		TYPE_NIL:
+			value = null
+		TYPE_BOOL:
+			value = bool(value)
+		TYPE_INT:
+			value = int(value)
+		TYPE_REAL:
+			value = float(value)
+		TYPE_STRING:
+			value = str(value)
+	return value
+
+
+func get_exported_properties_list(thing : Node) -> Array:
+	# list exported vars:
+	# https://godotengine.org/qa/38526/how-to-list-the-export-vars-of-a-node
+	# 8199 is PROPERTY_USAGE_SCRIPT_VARIABLE + PROPERTY_USAGE_DEFAULT 
+	var exported_props = []
+	for p in thing.get_property_list():
+		if p["usage"] == PROPERTY_USAGE_SCRIPT_VARIABLE + PROPERTY_USAGE_DEFAULT:
+			exported_props.append( p )
+	return exported_props
+
+
+func get_exported_properties_dict(thing : Node ) -> Dictionary:
+	var pl = get_exported_properties_list( thing )
+	var d = {}
+	for p in pl:
+		d[p.name] = thing.get(p.name)
+	return d
+
+
+func get_exported_property_hash( thing : Node ) -> int:
+	var pl = get_exported_properties_list( thing )
+	var d = {}
+	for p in pl:
+		d[p.name] = thing.get(p.name)
+	pprint("get_exported_property_hash dictionary: %s"%d)
+	return d.hash()
+
+
 # properties--------------------------------------------------------------------
 
 func is_f6(node:Node):
