@@ -66,6 +66,13 @@ func set(property: String, value) -> void:
 		emit_signal("dirty", self._dirty)
 
 
+func _on_set_dirty() -> void:
+	# for connecting signals from nodes that would cause the texture_scene to become dirty.
+	# e.g. when the ui changes something to do with image settings, like resolution.
+	self._dirty = true
+	emit_signal("dirty", self._dirty)
+
+
 func is_dirty() -> bool:
 	return self._dirty
 

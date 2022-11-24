@@ -38,6 +38,7 @@ var RESOLUTIONS = [
 	["4k (4096 x 4096)", Vector2(4096, 4096)]
 ]
 var _previous_resolution_id := 1
+signal resolution_changed_ui
 
 var seed_number : SpinBox
 
@@ -169,7 +170,8 @@ func _on_resolution_menu_button_item_pressed( id_pressed ) -> void:
 		(viewport as Viewport).size = Global.resolution
 		_previous_resolution_id = id_pressed
 		viewport_step_update()
-		
+		emit_signal("resolution_changed_ui")
+
 
 func _on_vector_direction_menu_button_item_pressed( id_pressed ) -> void:
 	print("[ui][control panel] vector direction selected: %s"%VECTOR_DIRECTIONS[id_pressed])
