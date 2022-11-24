@@ -37,6 +37,8 @@ var RESOLUTIONS = [
 	["2k (2048 x 2048)", Vector2(2048, 2048)],
 	["4k (4096 x 4096)", Vector2(4096, 4096)]
 ]
+var _previous_resolution_id := 1
+
 var seed_number : SpinBox
 
 var vector_direction_menu_button : MenuButton
@@ -160,12 +162,14 @@ func _on_display_colour_channel_display_mode_changed(new_mode) -> void:
 
 # control panel ----------------------------------------------------------------
 func _on_resolution_menu_button_item_pressed( id_pressed ) -> void:
-	print("[ui][control panel] resolution selected: %s"%RESOLUTIONS[id_pressed][0])
-	resolution_menu_button.set_text(RESOLUTIONS[id_pressed][0])
-	Global.resolution = RESOLUTIONS[id_pressed][1]
-	(viewport as Viewport).size = Global.resolution
-	viewport_step_update()
-
+	print("[ui][control panel] resolution selected: %s"%RESOLUTIONS[id_pressed][0] )
+	if id_pressed != _previous_resolution_id:
+		resolution_menu_button.set_text(RESOLUTIONS[id_pressed][0])
+		Global.resolution = RESOLUTIONS[id_pressed][1]
+		(viewport as Viewport).size = Global.resolution
+		_previous_resolution_id = id_pressed
+		viewport_step_update()
+		
 
 func _on_vector_direction_menu_button_item_pressed( id_pressed ) -> void:
 	print("[ui][control panel] vector direction selected: %s"%VECTOR_DIRECTIONS[id_pressed])

@@ -11,7 +11,7 @@ var _dirty := false
 signal dirty(state)
 
 export var n_lines := 300  #10000
-export var line_points := 300  
+export var line_points := 300
 export var local_seed := 1  
 
 # [layerManager] ##### {class_name:, hint:0, hint_string:, name:thickness_min, type:3, usage:7} 
