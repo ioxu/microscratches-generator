@@ -53,6 +53,7 @@ var VECTOR_DIRECTIONS = [
 	"tangent",
 	"bitangent"
 ]
+var _previous_vector_direction_id = 1
 
 var _texture_chooser_chosen_index : int
 
@@ -185,9 +186,12 @@ func _on_seed_number_value_changed( _new_value ) -> void:
 
 
 func _on_vector_direction_menu_button_item_pressed( id_pressed ) -> void:
-	print("[ui][control panel] vector direction selected: %s"%VECTOR_DIRECTIONS[id_pressed])
-	vector_direction_menu_button.set_text( VECTOR_DIRECTIONS[id_pressed] )
-	Global.vector_direction = VECTOR_DIRECTIONS[id_pressed]
+	if id_pressed != _previous_vector_direction_id:
+		print("[ui][control panel] vector direction selected: %s"%VECTOR_DIRECTIONS[id_pressed])
+		vector_direction_menu_button.set_text( VECTOR_DIRECTIONS[id_pressed] )
+		Global.vector_direction = VECTOR_DIRECTIONS[id_pressed]
+		_previous_vector_direction_id = id_pressed
+		emit_signal("dirtied_by_ui")
 
 
 func viewport_step_update() -> void:
