@@ -163,7 +163,7 @@ func connect_layer_signals(layer)->void:
 	layer.connect( "deselected", self, "_on_layer_deselected" )
 	layer.connect( "layer_visiblity_toggled", ui_root, "_on_layer_visibility_toggle") # TODO : ugh, this is horrible.
 	layer.texture_scene.connect( "dirty", layer,  "_on_texture_scene_dirty" )
-	ui_root.connect( "resolution_changed_ui", layer.texture_scene, "_on_set_dirty" )
+	ui_root.connect( "dirtied_by_ui", layer.texture_scene, "_on_set_dirty" )
 
 
 func layer_is_generator( layer : Layer) -> bool:

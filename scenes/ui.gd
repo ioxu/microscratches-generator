@@ -21,6 +21,12 @@ var file_export_ProgressBar : ProgressBar
 
 var layerListContainer : VBoxContainer
 
+# signal for the UI to set all layers as dirty
+# for when a setting has changed taht will
+# need all generator layers to be re-generated
+signal dirtied_by_ui
+
+
 const COLOUR_CHANNEL_DISPLAY_MODES_NAMES = [
 	"RGB",
 	"ALPHA",
@@ -38,9 +44,9 @@ var RESOLUTIONS = [
 	["4k (4096 x 4096)", Vector2(4096, 4096)]
 ]
 var _previous_resolution_id := 1
-signal resolution_changed_ui
 
 var seed_number : SpinBox
+
 
 var vector_direction_menu_button : MenuButton
 var VECTOR_DIRECTIONS = [
@@ -79,6 +85,7 @@ func _ready() -> void:
 	resolution_menu_button_popup.connect("id_pressed", self, "_on_resolution_menu_button_item_pressed")
 
 	seed_number = self.find_node("seed")
+	seed_number.connect("value_changed", self, "_on_seed_number_value_changed")
 
 	generation_timing_label = self.find_node("generation_timing_label")
 	
@@ -170,7 +177,11 @@ func _on_resolution_menu_button_item_pressed( id_pressed ) -> void:
 		(viewport as Viewport).size = Global.resolution
 		_previous_resolution_id = id_pressed
 		viewport_step_update()
-		emit_signal("resolution_changed_ui")
+		emit_signal("dirtied_by_ui")
+
+
+func _on_seed_number_value_changed( _new_value ) -> void:
+	emit_signal("dirtied_by_ui")
 
 
 func _on_vector_direction_menu_button_item_pressed( id_pressed ) -> void:
