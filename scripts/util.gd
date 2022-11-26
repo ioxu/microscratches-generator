@@ -45,6 +45,14 @@ func vec2_to_encoded_colour( vec : Vector2 ) -> Color:
 	return Color(ev.x, ev.y, 0.0, 1.0)
 
 
+func copyOffset_PoolVector2Array( pva: PoolVector2Array, offset : Vector2 ) -> PoolVector2Array:
+	# offset the vector2s in 'pva' by 'offset' and return a new PoolVector2Array
+	var output = PoolVector2Array()
+	for p in pva:
+		output.append(p + offset)
+	return output
+
+
 # import -----------------------------------------------------------------------
 func get_texture_scenes_list(paths : Array) -> String:
 	var files = []

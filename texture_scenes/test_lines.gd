@@ -10,6 +10,7 @@ var _prev_property_dict : Dictionary
 var _dirty := false
 signal dirty(state)
 
+export var do_tiling := true
 export var n_lines := 300  #10000
 export var line_points := 300
 export var local_seed := 1  
@@ -96,12 +97,43 @@ func generate() -> void:
 			var line = line_simple_simplex( startp, endp, _l)
 			
 			lines.append(line)
+			if do_tiling:
+				lines.append( Util.copyOffset_PoolVector2Array( line, Vector2( idim , 0.0 )  ) )
+				lines.append( Util.copyOffset_PoolVector2Array( line, Vector2( -idim , 0.0 )  ) )
+				lines.append( Util.copyOffset_PoolVector2Array( line, Vector2( idim , idim )  ) )
+				lines.append( Util.copyOffset_PoolVector2Array( line, Vector2( -idim , idim )  ) )
+				lines.append( Util.copyOffset_PoolVector2Array( line, Vector2( idim , -idim )  ) )
+				lines.append( Util.copyOffset_PoolVector2Array( line, Vector2( -idim , -idim )  ) )
+				lines.append( Util.copyOffset_PoolVector2Array( line, Vector2( 0.0 , idim )  ) )
+				lines.append( Util.copyOffset_PoolVector2Array( line, Vector2( 0.0 , -idim )  ) )
+
+			var vc : PoolColorArray
 			if Global.vector_direction == "tangent":
-				lines_colours.append( vcolours_simple(line, 0.0) )
+				vc = vcolours_simple(line, 0.0)
 			else:
-				lines_colours.append( vcolours_simple(line) )
+				vc = vcolours_simple(line)
+			lines_colours.append( vc )
+			if do_tiling:
+				lines_colours.append( vc )
+				lines_colours.append( vc )
+				lines_colours.append( vc )
+				lines_colours.append( vc )
+				lines_colours.append( vc )
+				lines_colours.append( vc )
+				lines_colours.append( vc )
+				lines_colours.append( vc )
 			
-			lines_widths.append( Util.randf_range(thickness_max, thickness_min) )
+			var vw = Util.randf_range(thickness_max, thickness_min)
+			lines_widths.append( vw )
+			if do_tiling:
+				lines_widths.append( vw )
+				lines_widths.append( vw )
+				lines_widths.append( vw )
+				lines_widths.append( vw )
+				lines_widths.append( vw )
+				lines_widths.append( vw )
+				lines_widths.append( vw )
+				lines_widths.append( vw )
 			
 		DRAWN = false
 		update()
