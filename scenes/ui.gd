@@ -216,21 +216,21 @@ func viewport_step_update() -> void:
 
 func _on_generate_button_pressed() -> void:
 	# resolution
-
 	Util.set_rng_seed( int(seed_number.get_value()) )
 	Global.report()
 
 	var time_now = OS.get_system_time_msecs() 
-	
 	Util.set_rng_seed( int(seed_number.get_value()) )
 
-	for l in $layerManager.layers:
-		l = (l as Layer)
-		if l.is_generator():
-			l.generate()
+	$layerManager.generate_layers()
 
-	viewport_step_update()
+	#viewport_step_update()
 	generation_timing_label.text =  milliseconds_to_pretty_time( OS.get_system_time_msecs()  - time_now )
+
+
+func _on_layerManager_all_layers_completed_generation() -> void:
+	print("[ui][layers][generate] all layers completed")
+	viewport_step_update()
 
 
 func _on_file_export_FileDialog_about_to_show() -> void:

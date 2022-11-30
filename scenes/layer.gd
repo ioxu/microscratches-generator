@@ -9,6 +9,7 @@ export var border_colour_selected := Color(0.56, 0.15, 0.89, 0.64)
 
 export var background_colour := Color(0.435294, 0.211765, 0.505882, 0.109804)
 export var background_colour_hilight := Color(0.435294, 0.211765, 0.505882, 0.109804)
+export var background_colour_generating := Color(0.945313, 0.702984, 0.324951, 0.8)
 
 var selected = false
 var hilighted = false
@@ -33,6 +34,7 @@ var texture_scene : CanvasItem #: Node2D # stores a reference for the texture sc
 signal selected( selected_layer, append_select )
 signal deselected( deselected_layer, append_select )
 
+signal layer_completed_generation( layer )
 
 func _ready() -> void:
 	set("custom_styles/panel", get("custom_styles/panel").duplicate() )
@@ -75,7 +77,22 @@ func generate() -> void:
 	if generator:
 		pprint("[generate] %s (%s)"%[self.get_name(), self.texture_scene.get_name()])
 		self.texture_scene.generate()
-		update_tooltip()
+
+
+func set_display(mode:String) -> void:
+	match mode:
+		"generating":
+			style_panel.bg_color = background_colour_generating
+		"normal":
+			if selected:
+				style_panel.bg_color = background_colour_hilight
+			else:
+				style_panel.bg_color = background_colour
+
+
+func _on_completed_generation() -> void:
+	update_tooltip()
+	emit_signal("layer_completed_generation", self)
 
 
 func set_layer_name(new_name) -> void:

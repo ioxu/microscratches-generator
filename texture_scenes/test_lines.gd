@@ -9,13 +9,12 @@ var _prev_property_dict : Dictionary
 
 var _dirty := false
 signal dirty(state)
+signal completed_generation
 
 export var do_tiling := true
 export var n_lines := 300  #10000
 export var line_points := 300
 export var local_seed := 1  
-
-# [layerManager] ##### {class_name:, hint:0, hint_string:, name:thickness_min, type:3, usage:7} 
 
 export var thickness_min := 0.1 
 export var thickness_max := 3.5 
@@ -24,8 +23,8 @@ export var thickness_max := 3.5
 var idim = 1024
 var mdim = idim * 3
 
-var DRAW_ONCE = true
-var DRAWN = false
+
+onready var thread_o = preload("res://texture_scenes/test_lines_generator_thread.gd")
 
 
 func _ready() -> void:
@@ -79,67 +78,36 @@ func is_dirty() -> bool:
 
 
 func generate() -> void:
-	print("[test_lines] generate")
-
-	pprint( "[generate] dirty: %s"%self._dirty )
+	self.lines.clear()
+	self.lines_colours.clear()
+	self.lines_widths.clear()
+	
 	if self._dirty:
-		idim = int(Global.resolution.x)
-		mdim = int(idim * 3)
+		var r = thread_o.new(
+			{"n_lines": n_lines,
+			"idim": int(Global.resolution.x),
+			"do_tiling": self.do_tiling,
+			"thickness_max": self.thickness_max,
+			"thickness_min": self.thickness_min,
+			"n_points": self.line_points,
+			"vector_direction": Global.vector_direction,
+			"local_seed": self.local_seed,
+			})
+		self.add_child( r )
+		r.connect( "work_completed", self, "_on_work_completed" )
+		r.start()
+		print("thread started: %s"%r)
 
-		lines = []
-		lines_colours = []
-		lines_widths = []
-		for _l in range(n_lines):
-			var startp = Vector2(_rdomain(), _rdomain())
-			var endp = Vector2(_rdomain(), _rdomain())
 
-			#var line = line_simple( startp, endp )
-			var line = line_simple_simplex( startp, endp, _l)
-			
-			lines.append(line)
-			if do_tiling:
-				lines.append( Util.copyOffset_PoolVector2Array( line, Vector2( idim , 0.0 )  ) )
-				lines.append( Util.copyOffset_PoolVector2Array( line, Vector2( -idim , 0.0 )  ) )
-				lines.append( Util.copyOffset_PoolVector2Array( line, Vector2( idim , idim )  ) )
-				lines.append( Util.copyOffset_PoolVector2Array( line, Vector2( -idim , idim )  ) )
-				lines.append( Util.copyOffset_PoolVector2Array( line, Vector2( idim , -idim )  ) )
-				lines.append( Util.copyOffset_PoolVector2Array( line, Vector2( -idim , -idim )  ) )
-				lines.append( Util.copyOffset_PoolVector2Array( line, Vector2( 0.0 , idim )  ) )
-				lines.append( Util.copyOffset_PoolVector2Array( line, Vector2( 0.0 , -idim )  ) )
-
-			var vc : PoolColorArray
-			if Global.vector_direction == "tangent":
-				vc = vcolours_simple(line, 0.0)
-			else:
-				vc = vcolours_simple(line)
-			lines_colours.append( vc )
-			if do_tiling:
-				lines_colours.append( vc )
-				lines_colours.append( vc )
-				lines_colours.append( vc )
-				lines_colours.append( vc )
-				lines_colours.append( vc )
-				lines_colours.append( vc )
-				lines_colours.append( vc )
-				lines_colours.append( vc )
-			
-			var vw = Util.randf_range(thickness_max, thickness_min)
-			lines_widths.append( vw )
-			if do_tiling:
-				lines_widths.append( vw )
-				lines_widths.append( vw )
-				lines_widths.append( vw )
-				lines_widths.append( vw )
-				lines_widths.append( vw )
-				lines_widths.append( vw )
-				lines_widths.append( vw )
-				lines_widths.append( vw )
-			
-		DRAWN = false
-		update()
-		
-		self._dirty = false
-		emit_signal("dirty", self._dirty)
+func _on_work_completed( thread_node : Node, data : Array ) -> void:
+	self.lines = data[0].duplicate()
+	self.lines_colours = data[1].duplicate()
+	self.lines_widths = data[2].duplicate()
+	thread_node.queue_free()
+	update()
+	self._dirty = false
+	emit_signal("dirty", self._dirty)
+	emit_signal("completed_generation")
 
 
 func _rdomain() -> int:
@@ -147,15 +115,8 @@ func _rdomain() -> int:
 
 
 func _draw() -> void:
-#	if DRAW_ONCE and not DRAWN:
-#		#print("[test_lines] drawing once DRAW_ONCE %s DRAWN %s"%[DRAW_ONCE, DRAWN])
-#		for i in lines.size():
-#			draw_polyline_colors( lines[i], lines_colours[i], Util.randf_range(0.35, 2.0), false)
-#		DRAWN = true
-
 	for i in lines.size():
 		draw_polyline_colors( lines[i], lines_colours[i], lines_widths[i], false)
-
 
 
 #-------------------------------------------------------------------------------

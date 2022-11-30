@@ -6,6 +6,7 @@ export(NodePath) onready var render_scene_root = get_node( render_scene_root )
 
 var layers : Array
 var selected_layers : Array
+var layers_to_generate : Array
 var layerListContainer : VBoxContainer
 var layerParametersListContainer : VBoxContainer
 var layerNameParameter : LineEdit
@@ -21,6 +22,8 @@ const ui_layer : PackedScene = preload("res://scenes/layer.tscn")
 
 # parameters
 const transient_parameter_script = preload("res://scenes/transient_parameter.gd")
+
+signal all_layers_completed_generation
 
 
 func _ready() -> void:
@@ -54,7 +57,9 @@ func add_layer(new_texture_node : Node = null, select_new : bool = true) -> Laye
 		# generator
 		if layer_is_generator( l ):
 			l.set_generator( true )
-
+			l.texture_scene.connect("completed_generation", l, "_on_completed_generation")
+			l.connect("layer_completed_generation", self, "_on_layer_completed_generation" )
+			
 	if select_new:
 		# select only the new layer
 		selected_layers.clear()
@@ -63,6 +68,29 @@ func add_layer(new_texture_node : Node = null, select_new : bool = true) -> Laye
 	sync_layers_from_ui()
 	refresh_layers()
 	return l
+
+
+func generate_layers() -> void:
+	pprint("generater_layers()")
+	layers_to_generate = []
+	for l in self.layers:
+		l = (l as Layer)
+		
+		if l.is_generator() and l.texture_scene.is_dirty():
+			l.set_display( "generating" )
+			layers_to_generate.append(l)
+	
+	pprint("layers_to_generate %s"%[layers_to_generate])
+	for l in layers_to_generate:
+		l.generate()
+
+
+func _on_layer_completed_generation( layer : Layer ) -> void:
+	layer.set_display("normal")
+	layers_to_generate.remove( layers_to_generate.find( layer ) )
+	pprint("layers_to_generate %s"%[layers_to_generate])
+	if layers_to_generate.size() == 0:
+		emit_signal( "all_layers_completed_generation" )
 
 
 func remove_selected_layers() -> void:
