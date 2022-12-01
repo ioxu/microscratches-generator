@@ -9,10 +9,24 @@ script/source = "extends Node2D
 export var setting_A := true
 export var setting_B := 15.23
 
+# warning-ignore:unused_signal
+signal completed_generation
+# warning-ignore:unused_signal
+signal dirty
+
 func _ready() -> void:
 	pass
 
+
 func generate() -> void:
+	pass
+
+
+func is_dirty() -> bool:
+	return false
+
+
+func _on_set_dirty() ->void:
 	pass
 "
 
